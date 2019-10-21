@@ -1,68 +1,104 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# site-search-sdk-js
+## 以下內容從 cupid 複製，待更新
 
-## Available Scripts
+[![npm (tag)](https://img.shields.io/npm/v/@awootaiwan/cupid-sdk-js/latest?color=red)](https://www.npmjs.com/package/@awootaiwan/cupid-sdk-js) [![cdn](https://img.shields.io/badge/cdn-latest-orange)](https://api.awoo.org/libs/cupid-sdk-latest.min.js) ![GitHub issues](https://img.shields.io/github/issues/awootaiwan/cupid-sdk-js) ![GitHub pull requests](https://img.shields.io/github/issues-pr/awootaiwan/cupid-sdk-js)
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+#### In a browser
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```javascript
+<script>
+  window.cupid={init:function(t){var e,n,o;document.getElementById("cupid-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/cupid-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  cupid.init(() => {
+    const cupidSDK = new CupidSDK('id');
 
-### `npm test`
+    /*頁面商品顯示數量設定*/
+    cupidSDK.setLimit(12);
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    /*頁面渲染範例*/
+    cupidSDK.renderSuggestionTag();
+    cupidSDK.renderProductList();
 
-### `npm run build`
+    /*資料存取範例*/
+    (async() => {
+      console.log(await cupidSDK.getContentAll('日本,面膜'));
+    })();
+  });
+</script>
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Node Usage
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+$ npm i @awootaiwan/cupid-sdk-js
+or
+$ yarn add @awootaiwan/cupid-sdk-js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Node Example
 
-### `npm run eject`
+```javascript
+import CupidSDK from "@awootaiwan/cupid-sdk-js";
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const cupidSDK = new CupidSDK("id");
+(async () => {
+  console.log(await cupidSDK.getContentAll("日本,面膜"));
+})();
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Develop
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Installing
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+$ git clone https://github.com/awootaiwan/cupid-sdk-js.git
+$ cd cupid-sdk-js
+$ npm install
+$ vim .env
+```
 
-## Learn More
+內容如下
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+NUNUNI_ID=xxxxxx   #請輸入nununiId
+NUNUNI_DOMAIN=http://example.com #請輸入 api網址
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+開發上如果有需要用到 api 網址可使用如下的程式碼
 
-### Code Splitting
+```
+const api = `${process.env.NUNUNI_DOMAIN}/nununi/latest/${process.env.NUNUNI_ID}/content`;
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Dev
 
-### Analyzing the Bundle Size
+```
+$ npm start
+$ open http://localhost:3000
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Build
 
-### Making a Progressive Web App
+```
+$ npm run build:app
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Build by your self.
 
-### Advanced Configuration
+Update `.env` to your dev / personal endpoint.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Update `demo/index.html` content, js replace from
 
-### Deployment
+```
+window.cupid={init:function(t){var e,n,o;document.getElementById("cupid-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"localhost:9080/cupid-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Tips: `npm install -g static-server`
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+npm run build:app
+open demo/index.html
+cd production && static-server
+```
