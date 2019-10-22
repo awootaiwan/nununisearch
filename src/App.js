@@ -1,26 +1,101 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from 'react-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = props => (
+  <React.Fragment>
+    {props.errcode === 0 ? (
+      props.children
+    ) : (
+      <ErrorAlert errmsg={props.errmsg} />
+    )}
+  </React.Fragment>
+);
+
+class SiteSearchSDK {
+  constructor(id = process.env.NUNUNI_ID) {
+    if (!id || id.length < 1) {
+      throw new Error('nununi id is not setting');
+    }
+    this.id = id;
+    this.contentApiVer = 'latest';
+    this.productsApiVer = 'latest';
+    this.limit = 10;
+  }
+
+  setContentAPIVersion(apiVer) {
+    this.contentApiVer = apiVer;
+  }
+
+  setProductsAPIVersion(apiVer) {
+    this.productsApiVer = apiVer;
+  }
+
+  setLimit(limit) {
+    if (typeof limit != 'number') {
+      throw Error('setLimit is not number.');
+    }
+
+    if (limit < 1) {
+      throw Error('limit need to be greater than 0.');
+    }
+    this.limit = limit;
+  }
+/* 參考用
+  getClassify(productIdArray) {
+    if (productIdArray.length < 1) {
+      throw new Error('傳入商品id陣列為空陣列');
+    }
+    return getClassifyApiData(this.id, this.productsApiVer, {
+      productIds: productIdArray
+    });
+  }*/
+  
+/* 參考用
+  async renderClassify(productId) {
+    const CupidClassify = document.getElementById('cupid-classify');
+    if (!CupidClassify || CupidClassify.length < 1) {
+      throw new Error('請先加入 <div id="cupid-classify"></div> HTML標籤');
+    }
+
+    if (productId === undefined) {
+      const idDom = [
+        ...document.querySelectorAll(
+          'div[data-cupid-product-id], a[data-cupid-product-id], span[data-cupid-product-id]'
+        )
+      ];
+      if (!idDom) {
+        throw new Error(
+          '請在div或a或span標籤內增加data-cupid-product-id屬性，並指定商品id'
+        );
+      }
+      let productIdArray = idDom.map(item => {
+        return item.dataset.cupidProductId;
+      });
+      productId = productIdArray;
+    }
+
+    const data = await this.getClassify(productId);
+
+    const { result, errcode, errmsg } = data;
+    ReactDOM.render(
+      <App errcode={errcode} errmsg={errmsg}>
+        <ProductTag ProductTag={result.tags} />
+      </App>,
+      CupidClassify
+    );
+  }*/
 }
 
-export default App;
+/** Detect free variable `global` from Node.js. */
+const freeGlobal =
+  typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+const freeSelf =
+  typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+const root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root.SiteSearchSDK = SiteSearchSDK;
+
