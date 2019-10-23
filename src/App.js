@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ErrorAlert from "./components/erroralert/ErrorAlert";
+// import Suggestion from "./components/suggestion/suggestion";
+// import ProductList from "./components/product/ProductList";
+// import ProductTag from "./components/productTag/productTag";
 
 const App = props => (
   <React.Fragment>
@@ -10,6 +14,16 @@ const App = props => (
     )}
   </React.Fragment>
 );
+
+// for demo test
+ReactDOM.render(
+  <App errcode={1} errmsg={'test err msg'}>
+    <h1>hihi</h1>
+  </App>,
+  document.getElementById('siteSearch')
+);
+
+
 
 class SiteSearchSDK {
   constructor(id = process.env.NUNUNI_ID) {
@@ -49,7 +63,7 @@ class SiteSearchSDK {
       productIds: productIdArray
     });
   }*/
-  
+
 /* 參考用
   async renderClassify(productId) {
     const CupidClassify = document.getElementById('cupid-classify');
@@ -98,4 +112,3 @@ const freeSelf =
 const root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root.SiteSearchSDK = SiteSearchSDK;
-
