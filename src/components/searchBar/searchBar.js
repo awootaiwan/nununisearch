@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import Autosuggest from 'react-autosuggest';
 import debounce from 'lodash/debounce';
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled, { keyframes } from 'styled-components';
-
-const spinner = <FontAwesomeIcon icon={faSpinner} />
 
 const rotate = keyframes`
   to {
@@ -201,12 +200,7 @@ class SearchBar extends React.Component {
 
     return (
       <SearchBarContainer>
-        <Spinner
-          className="fas fa-spinner spinner"
-          isLoading={isLoading}>
-        </Spinner>
-        <FontAwesomeIcon icon="spinner"/>
-
+        <FontAwesomeIcon icon={faSpinner}/>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

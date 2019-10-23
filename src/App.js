@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 
-/*
 const App = props => (
   <React.Fragment>
     {props.errcode === 0 ? (
@@ -12,15 +11,17 @@ const App = props => (
       <ErrorAlert errmsg={props.errmsg} />
     )}
   </React.Fragment>
-);*/
+);
 
 // for demo test
-ReactDOM.render(
-  <App errcode={1} errmsg={'test err msg'}>
-    <h1>hihi</h1>
-  </App>,
-  document.getElementById('siteSearch')
-);
+/*const App = props => (
+  ReactDOM.render(
+    <App errcode={1} errmsg={'test err msg'}>
+      <h1>hihi</h1>
+    </App>,
+    document.getElementById('siteSearch')
+  )
+);*/
 
 class nununiSDK {
   // constructor(id = process.env.NUNUNI_ID) {
@@ -102,11 +103,11 @@ class nununiSDK {
       throw new Error('請先加入 <div id="nununi-searchbar"></div> HTML標籤');
     }
     const NununiSiteSearchBar = (
-      <App errcode={errcode} errmsg={errmsg}>
+      <App errcode={0}>
         <SearchBar/>
       </App>
     );
-    ReactDOM.render( NunuiSiteSearchBar, root);
+    ReactDOM.render( NununiSiteSearchBar, root);
     /* 得到資料後，帶入
     const data = await this.getSuggestion();
     const { result, errcode, errmsg } = data;
