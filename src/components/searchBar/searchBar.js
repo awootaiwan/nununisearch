@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import Autosuggest from 'react-autosuggest';
 import debounce from 'lodash/debounce';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
