@@ -12,12 +12,11 @@ const rotate = keyframes`
   }
 `;
 
-const Spinner = styled.i`
+const SpinnerWrapper = styled.div`
   position: absolute;
   top: 35%;
   right: 10%;
   z-index: 2;
-  display: ${({ isLoading }) => (isLoading ? 'block' : 'none')};
   animation: ${rotate} 1s linear infinite;
 `;
 
@@ -200,7 +199,9 @@ class SearchBar extends React.Component {
 
     return (
       <SearchBarContainer>
-        <FontAwesomeIcon icon={faSpinner}/>
+        <SpinnerWrapper>
+          <FontAwesomeIcon icon={faSpinner}/>
+        </SpinnerWrapper>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
