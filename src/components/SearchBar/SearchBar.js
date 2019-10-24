@@ -1,27 +1,32 @@
 import React from 'react';
-// import ReactDOM from 'react-dom'
 import Autosuggest from 'react-autosuggest';
 import debounce from 'lodash/debounce';
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
+
+import SearchCondition from './SearchCondition';
+
 
 const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
 `;
-
-const SpinnerWrapper = styled.div`
+const IconWrapper = styled.div`
   position: absolute;
-  top: 35%;
-  right: 10%;
+  top: calc(50% - 11px);
+  right: 10px;
   z-index: 2;
+`;
+const SpinnerWrapper = styled(IconWrapper)`
   animation: ${rotate} 1s linear infinite;
 `;
 
-const SearchBarContainer = styled.div`
-  display: inline-block;
+const SearchInput = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
   position: relative;
 `;
 
@@ -31,8 +36,8 @@ const theme = {
     position: 'relative',
   },
   input: {
-    width: '240px',
-    height: '30px',
+    maxWidth: '300px',
+    height: '20px',
     padding: '10px 20px',
     fontFamily: 'Helvetica, sans-serif',
     fontWeight: 300,
@@ -53,8 +58,8 @@ const theme = {
   suggestionsContainerOpen: {
     display: 'block',
     position: 'absolute',
-    top: '51px',
-    width: '280px',
+    top: '100%',
+    width: '100%',
     border: '1px solid #aaa',
     backgroundColor: '#fff',
     fontFamily: 'Helvetica, sans-serif',
@@ -198,22 +203,33 @@ class SearchBar extends React.Component {
     };
 
     return (
-      <SearchBarContainer>
-        <SpinnerWrapper>
-          <FontAwesomeIcon icon={faSpinner}/>
-        </SpinnerWrapper>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          onSuggestionSelected={this.onSuggestionSelected}
-          getSuggestionValue={this.getSuggestionValue}
-          renderSuggestion={this.renderSuggestion}
-          inputProps={inputProps}
-          highlightFirstSuggestion={true}
-          theme={theme}
-        />
-      </SearchBarContainer>
+      <React.Fragment>
+        <SearchInput>
+          {isLoading ? (
+            <SpinnerWrapper>
+              <FontAwesomeIcon icon={faSpinner}/>
+            </SpinnerWrapper>
+          ) : (
+            <IconWrapper>
+              <FontAwesomeIcon icon={faSearch}/>
+            </IconWrapper>
+          )}
+
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            onSuggestionSelected={this.onSuggestionSelected}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps}
+            highlightFirstSuggestion={true}
+            theme={theme}
+          />
+        </SearchInput>
+
+        <SearchCondition></SearchCondition>
+      </React.Fragment>
     );
   }
 }

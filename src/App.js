@@ -97,12 +97,12 @@ class nununiSDK {
     const data = await this.getSuggestion();
     const { result, errcode, errmsg } = data;
     */
-    const NununiSiteSearchBar = (
+    ReactDOM.render(
       <App errcode={0}>
         <SearchBar />
-      </App>
+      </App>,
+      target
     );
-    ReactDOM.render( NununiSiteSearchBar, target);
   }
 }
 
