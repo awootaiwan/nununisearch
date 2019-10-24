@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 
+
 const App = props => (
   <React.Fragment>
     {props.errcode === 0 ? (
@@ -127,4 +128,3 @@ const freeSelf =
 const root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root.nununiSDK = nununiSDK;
-
