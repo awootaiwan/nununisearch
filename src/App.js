@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
+import ProductList from '/components/ProductList/ProductList';
 
 
 import theme from './theme/colors';
@@ -106,6 +107,20 @@ class nununiSDK {
       </App>,
       target
     );
+  }
+
+  renderProductList() {
+    const target = document.getElementById('nununi-productlist');
+    if (!target || target.length < 1) {
+      throw new Error('請先加入 <div id="nununi-productlist"></div> HTML標籤');
+    }
+    const numberArray = [1,2,3,4,5,6];
+    const NununiProductList = (
+      <App errcode={0}>
+        <ProductList numbers={numberArray} />
+      </App>
+    );
+    ReactDOM.render( NununiProductList, target);
   }
 }
 
