@@ -114,13 +114,55 @@ class nununiSDK {
     if (!target || target.length < 1) {
       throw new Error('請先加入 <div id="nununi-productlist"></div> HTML標籤');
     }
-    const numberArray = [1,2,3,4,5,6];
-    const NununiProductList = (
-      <App errcode={0}>
-        <ProductList numbers={numberArray} />
-      </App>
-    );
-    ReactDOM.render( NununiProductList, target);
+
+    const data = [
+      {
+        name: '秋氛滾邊設計微透針織上衣-女',
+        price: '12200',
+        specialPrice: '999',
+        imgSrc: 'tmp',
+        link: 'https://www.awoo.com.tw/',
+      },
+      {
+        name: 'Spring Wide 厚實感西裝外套-女',
+        price: '22200',
+        specialPrice: '1199',
+        imgSrc: 'tmp',
+        link: 'https://www.awoo.com.tw/',
+      },
+      {
+        name: '細緻小格紋五分西裝褲-女',
+        price: '22200',
+        specialPrice: '1199',
+        imgSrc: 'tmp',
+        link: 'https://www.awoo.com.tw/',
+      },
+      {
+        name: 'MAGNANIMITY法文字母印花上衣-中',
+        price: '23000',
+        specialPrice: '10099',
+        imgSrc: 'tmp',
+        link: 'https://www.awoo.com.tw/',
+      },
+      {
+        name: '質感垂墜親膚滑料圓領上衣-女',
+        price: '12060',
+        specialPrice: '19900',
+        imgSrc: 'tmp',
+        link: 'https://www.awoo.com.tw/',
+      }
+    ];
+
+    // const NununiProductList = (
+    //   <App errcode={0}>
+    //     <ProductList productList={data} />
+    //   </App>
+    // );
+    // ReactDOM.render( NununiProductList, target);
+    ReactDOM.render(
+    <App errcode={0}>
+      <ProductList productList={data} />
+    </App>, target);
   }
 }
 
