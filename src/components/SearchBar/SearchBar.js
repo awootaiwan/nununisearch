@@ -236,6 +236,7 @@ class SearchBar extends React.Component {
           />
         </SearchInput>
 
+
         <SearchCondition></SearchCondition>
       </React.Fragment>
     );
