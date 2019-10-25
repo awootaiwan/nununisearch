@@ -23,11 +23,11 @@ const SpinnerWrapper = styled(IconWrapper)`
   animation: ${rotate} 1s linear infinite;
 `;
 const SearchWrapper = styled(IconWrapper)`
-  color: #999;
+  color: ${props => props.theme.colorGrey};
   cursor: pointer;
 
   &:hover {
-    color: #000;
+    color: ${props => props.theme.colorBlack};
   }
 `;
 
@@ -50,7 +50,7 @@ const theme = {
     fontFamily: 'Helvetica, sans-serif',
     fontWeight: 300,
     fontSize: '16px',
-    border: '1px solid #aaa',
+    border: '1px solid #999',
     borderRadius: '4px',
   },
   inputFocused: {
@@ -68,7 +68,7 @@ const theme = {
     position: 'absolute',
     top: '100%',
     width: '100%',
-    border: '1px solid #aaa',
+    border: '1px solid #999',
     backgroundColor: '#fff',
     fontFamily: 'Helvetica, sans-serif',
     fontWeight: 300,

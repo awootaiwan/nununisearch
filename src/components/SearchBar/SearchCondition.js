@@ -55,21 +55,21 @@ const PriceInput = styled.input`
   outline: none;
 
   &:placeholder-shown {
-    color: #999;
+    color: ${props => props.theme.colorGrey};
   }
 `;
 const PriceSubmitBtn = styled.button`
   padding: 3px 7px;
   cursor: pointer;
-  color: #999;
+  color: ${props => props.theme.colorGrey};
   background-color: transparent;
   border-radius: 3px;
-  border-color: #999;
+  border-color: ${props => props.theme.colorGrey};
   outline: none;
 
   &:hover {
-    color: #000;
-    border-color: #000;
+    color: ${props => props.theme.colorBlack};
+    border-color: ${props => props.theme.colorBlack};
   }
 `;
 

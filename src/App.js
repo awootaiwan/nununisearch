@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-components';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 
+
+import theme from './theme/colors';
 const App = props => (
-  <React.Fragment>
+  <ThemeProvider theme={theme}>
     {props.errcode === 0 ? (
       props.children
     ) : (
       <ErrorAlert errmsg={props.errmsg} />
     )}
-  </React.Fragment>
+  </ThemeProvider>
 );
 
 class nununiSDK {
