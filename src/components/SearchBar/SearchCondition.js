@@ -13,19 +13,28 @@ const SearchConditionContainer = styled.div`
   align-items: flex-end;
   margin: 10px 0;
 
-  @media(max-width: 600px) {
+  @media(max-width: 991px) {
     display: initial;
+  }
+
+  @media(max-width: 600px) {
+    font-size: 14px;
   }
 `;
 
 const LeftBlock = styled.div`
+  flex-shrink: 0;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 
-  @media(max-width: 600px) {
-    justify-content: space-between;
+  @media(max-width: 991px) {
+    justify-content: flex-start;
     margin: 10px 0;
+  }
+
+  @media(max-width: 600px) {
+    justify-content: center;
   }
 `;
 
