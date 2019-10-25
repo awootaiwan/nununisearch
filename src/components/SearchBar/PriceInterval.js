@@ -2,9 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PriceInput = styled.input`
+  box-sizing: border-box;
   margin: 0 10px;
-  width: 5em;
+  padding: 5px;
+  width: 6em;
+  height: 35px;
   border: 1px solid;
+  border-radius: 4px;
   outline: none;
 
   &:placeholder-shown {
@@ -13,17 +17,19 @@ const PriceInput = styled.input`
 `;
 
 const PriceSubmitBtn = styled.button`
-  padding: 3px 7px;
+  box-sizing: border-box;
+  padding: 5px 11px;
+  height: 35px;
   cursor: pointer;
-  color: ${props => props.theme.colorGrey};
-  background-color: transparent;
-  border-radius: 3px;
+  color: ${props => props.theme.colorWhite};
+  background-color: ${props => props.theme.colorGrey};
+  border-radius: 4px;
   border-color: ${props => props.theme.colorGrey};
   outline: none;
 
   &:hover {
-    color: ${props => props.theme.colorBlack};
-    border-color: ${props => props.theme.colorBlack};
+    color: ${props => props.theme.colorWhite};
+    background-color: ${props => props.theme.colorBlack};
   }
 `;
 

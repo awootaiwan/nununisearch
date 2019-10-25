@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Sorting from './Sorting';
 import PriceInterval from './PriceInterval';
+import Sorting from './Sorting';
 import DisplayMode from './DisplayMode';
 import DisplayAmount from './DisplayAmount';
 
@@ -21,7 +21,7 @@ const SearchConditionContainer = styled.div`
 const LeftBlock = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  align-items: stretch;
+  align-items: center;
 
   @media(max-width: 600px) {
     justify-content: space-between;

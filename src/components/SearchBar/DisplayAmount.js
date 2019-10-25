@@ -13,7 +13,13 @@ const DisplayAmountContainer = styled.div`
 `;
 
 const selectorStyle = {
-  control: styles => ({ ...styles, width: '200px' })
+  control: styles => ({
+    ...styles,
+    boxSizing: 'border-box',
+    width: '180px',
+    height: '35px',
+    borderRadius: '4px'
+  })
 }
 
 const sortOptions = [
