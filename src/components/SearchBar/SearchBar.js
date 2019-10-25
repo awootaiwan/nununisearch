@@ -22,6 +22,14 @@ const IconWrapper = styled.div`
 const SpinnerWrapper = styled(IconWrapper)`
   animation: ${rotate} 1s linear infinite;
 `;
+const SearchWrapper = styled(IconWrapper)`
+  color: #999;
+  cursor: pointer;
+
+  &:hover {
+    color: #000;
+  }
+`;
 
 const SearchInput = styled.div`
   display: flex;
@@ -210,9 +218,9 @@ class SearchBar extends React.Component {
               <FontAwesomeIcon icon={faSpinner}/>
             </SpinnerWrapper>
           ) : (
-            <IconWrapper>
+            <SearchWrapper>
               <FontAwesomeIcon icon={faSearch}/>
-            </IconWrapper>
+            </SearchWrapper>
           )}
 
           <Autosuggest
