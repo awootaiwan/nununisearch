@@ -23,8 +23,8 @@ const PriceSubmitBtn = styled.button`
   cursor: pointer;
   color: ${props => props.theme.colorWhite};
   background-color: ${props => props.theme.colorGrey};
+  border: none;
   border-radius: 4px;
-  border-color: ${props => props.theme.colorGrey};
   outline: none;
 
   &:hover {

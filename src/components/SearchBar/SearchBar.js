@@ -56,10 +56,6 @@ const theme = {
   inputFocused: {
     outline: 'none',
   },
-  inputOpen: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-  },
   suggestionsContainer: {
     display: 'none',
   },
@@ -235,7 +231,6 @@ class SearchBar extends React.Component {
             theme={theme}
           />
         </SearchInput>
-
 
         <SearchCondition></SearchCondition>
       </React.Fragment>
