@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
-import beef from './beef.jpg';
-import { tsConstructorType } from 'types';
+import LazyLoad from 'react-lazyload';
 
 const ProductItem = styled.div`
   position: relative;
@@ -158,7 +157,9 @@ const ProductBlock = ({product}) => {
             <OutofStock>{outOfStock}</OutofStock>:
             null
           }
-          <img src={product.productImageUrl}></img>
+          <LazyLoad height={200} offset={100}>
+            <img src={product.productImageUrl}></img>
+          </LazyLoad>
         </a>
         <div className="product__detail">
           <div className="product__name">{product.productName}</div>
