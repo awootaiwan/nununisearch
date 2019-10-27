@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
 import ProductBlock from './ProductBlock';
+import Pagination from "./Pagination"
 
 const ProductWrapper = styled.div`
   padding: 15px;
@@ -10,12 +11,20 @@ const ProductWrapper = styled.div`
   }
 `
 
-const ProductList = ({productList}) => {
-  const productBlocks = productList.map(item => 
+const ProductList = ({data, urlInfo}) => {
+  const {products, paging, sorting} = data;
+  const productBlocks = products.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>
     )
   return (
-    <ProductWrapper>{productBlocks}</ProductWrapper>
+    <React.Fragment>
+      <ProductWrapper sorting={sorting}>
+      {productBlocks}
+    </ProductWrapper>
+      {
+        (products && products.length > 0 ? <Pagination products={products} paging={paging} urlInfo={urlInfo}/> : "")
+      }
+    </React.Fragment>
   )
 }
  

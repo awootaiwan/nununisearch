@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import PriceInterval from './PriceInterval';
 import Sorting from './Sorting';
 import DisplayMode from './DisplayMode';
 import DisplayAmount from './DisplayAmount';
 
-const SearchConditionContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: flex-start;
@@ -51,9 +50,9 @@ const RightBlock = styled.div`
   }
 `;
 
-function SearchCondition({ priceInterval, displayMode, sorting }) {
+function ControlSet({ priceInterval, displayMode, sorting }) {
   return  (
-    <SearchConditionContainer>
+    <Container>
       <LeftBlock>
         <PriceInterval></PriceInterval>
       </LeftBlock>
@@ -63,8 +62,8 @@ function SearchCondition({ priceInterval, displayMode, sorting }) {
         <DisplayMode></DisplayMode>
         <DisplayAmount></DisplayAmount>
       </RightBlock>
-    </SearchConditionContainer>
+    </Container>
   );
 }
 
-export default SearchCondition;
+export default ControlSet;

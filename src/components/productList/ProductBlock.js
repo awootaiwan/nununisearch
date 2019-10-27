@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
 import beef from './beef.jpg';
-import { tsConstructorType } from '@babel/types';
+import { tsConstructorType } from 'types';
 
 const ProductItem = styled.div`
   position: relative;

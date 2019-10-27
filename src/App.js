@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductList from '/components/ProductList/ProductList';
+import ControlSet from '/components/ControlSet/ControlSet';
 
 
 import theme from './theme/colors';
@@ -45,6 +46,32 @@ class nununiSDK {
       throw Error('limit need to be greater than 0.');
     }
     this.limit = limit;
+  }
+
+  _getUrlParms() {
+    const url = new URL(window.location.href);
+    const text = url.searchParams.get('text');
+    let priceRange = url.searchParams.get('priceRange');
+    let page = url.searchParams.get('page');
+    let sort = url.searchParams.get('sort');
+    let limit = url.searchParams.get('limit');
+
+    if (page === null) {
+      page = 1;
+    }
+    if (sort === null || sort === '') {
+      sort = 0;
+    }
+    if (limit === null) {
+      limit = this.limit;
+    }
+    return {
+      text,
+      priceRange,
+      page,
+      limit,
+      sort
+    };
   }
 /* 參考用
   getClassify(productIdArray) {
@@ -115,74 +142,82 @@ class nununiSDK {
       throw new Error('請先加入 <div id="nununi-productlist"></div> HTML標籤');
     }
 
-    const data = [
-      {
-        "productId": "G4022103950205",
-        "productName": "GENQUO 率性翻領雙排釦風衣外套",
-        "url": "https://www.genquo.com/detail/G400003950205",
-        "productImageUrl": "https://image.genquo.tw/product/G4000039502/G40000395-11.jpg",
-        "productPrice": 1680,
-        "productPriceCurrency": "TWD",
-        "productAvailability": true,
-        "productSalePrice": 1480,
-        "productSalePriceCurrency": "TWD"
-      },
-      {
-        "productId": "G40002560102",
-        "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
-        "url": "https://www.genquo.com/detail/G400004560102",
-        "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
-        "productPrice": 1590,
-        "productPriceCurrency": "TWD",
-        "productAvailability": true,
-        "productSalePrice": null,
-        "productSalePriceCurrency": null
-      },
-      {
-        "productId": "G4110003950205",
-        "productName": "GENQUO 率性翻領雙排釦風衣外套",
-        "url": "https://www.genquo.com/detail/G400003950205",
-        "productImageUrl": "https://image.genquo.tw/product/G4000039502/G40000395-11.jpg",
-        "productPrice": 1680,
-        "productPriceCurrency": "TWD",
-        "productAvailability": true,
-        "productSalePrice": 1480,
-        "productSalePriceCurrency": "TWD"
-      },
-      {
-        "productId": "G4030004560102",
-        "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
-        "url": "https://www.genquo.com/detail/G400004560102",
-        "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
-        "productPrice": 1590,
-        "productPriceCurrency": "TWD",
-        "productAvailability": true,
-        "productSalePrice": null,
-        "productSalePriceCurrency": null
-      },
-      {
-        "productId": "G420003950205",
-        "productName": "GENQUO 率性翻領雙排釦風衣外套",
-        "url": "https://www.genquo.com/detail/G400003950205",
-        "productImageUrl": "https://image.genquo.tw/product/G4000039502/G40000395-11.jpg",
-        "productPrice": 1680,
-        "productPriceCurrency": "TWD",
-        "productAvailability": false,
-        "productSalePrice": 1080,
-        "productSalePriceCurrency": "TWD"
-      },
-      {
-        "productId": "G410004560102",
-        "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
-        "url": "https://www.genquo.com/detail/G400004560102",
-        "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
-        "productPrice": 1590,
-        "productPriceCurrency": "TWD",
-        "productAvailability": true,
-        "productSalePrice": null,
-        "productSalePriceCurrency": null
+   const data = {
+      "errcode": 0,
+      "errmsg": "ACK",
+      "result": {
+        "products": [
+          {
+            "productId": "G400003950205",
+            "productName": "GENQUO 率性翻領雙排釦風衣外套",
+            "url": "https://www.genquo.com/detail/G400003950205",
+            "productImageUrl": "https://image.genquo.tw/product/G4000039502/G40000395-11.jpg",
+            "productPrice": 1680,
+            "productPriceCurrency": "TWD",
+            "productAvailability": true,
+            "productSalePrice": 1480,
+            "productSalePriceCurrency": "TWD"
+          },
+          {
+            "productId": "G400004560102",
+            "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
+            "url": "https://www.genquo.com/detail/G400004560102",
+            "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
+            "productPrice": 1590,
+            "productPriceCurrency": "TWD",
+            "productAvailability": true,
+            "productSalePrice": null,
+            "productSalePriceCurrency": null
+          },
+          {
+            "productId": "G100004560102",
+            "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
+            "url": "https://www.genquo.com/detail/G400004560102",
+            "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
+            "productPrice": 1590,
+            "productPriceCurrency": "TWD",
+            "productAvailability": true,
+            "productSalePrice": null,
+            "productSalePriceCurrency": null
+          },
+          {
+            "productId": "G400004060102",
+            "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
+            "url": "https://www.genquo.com/detail/G400004560102",
+            "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
+            "productPrice": 1590,
+            "productPriceCurrency": "TWD",
+            "productAvailability": false,
+            "productSalePrice": null,
+            "productSalePriceCurrency": null
+          },
+          {
+            "productId": "G4000040102",
+            "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
+            "url": "https://www.genquo.com/detail/G400004560102",
+            "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
+            "productPrice": 1590,
+            "productPriceCurrency": "TWD",
+            "productAvailability": true,
+            "productSalePrice": null,
+            "productSalePriceCurrency": null
+          },
+        ],
+        "paging": {
+          "limit": 5,
+          "currentPage": 1,
+          "totalPages": 3,
+          "first": "http://minerva.chase.awoo.org/search/v1/1177060613/products?text=外套&priceRange=0-5000&sort=0&page=1&limit=20",
+          "previous": null,
+          "next": "http://minerva.chase.awoo.org/search/v1/1177060613/products?text=外套&priceRange=0-5000&sort=0&page=2&limit=20",
+          "last": "http://minerva.chase.awoo.org/search/v1/1177060613/products?text=外套&priceRange=0-5000&sort=0&page=5&limit=20"
+        },
+        "sorting": {
+          "currentType": "0",
+          "availableTypes": ["0", "1", "2"]
+        }
       }
-    ];
+    };
 
     // const NununiProductList = (
     //   <App errcode={0}>
@@ -190,9 +225,14 @@ class nununiSDK {
     //   </App>
     // );
     // ReactDOM.render( NununiProductList, target);
+    const urlInfo = this._getUrlParms();
+
+    const { errcode, errmsg, result } = data;
+
     ReactDOM.render(
-    <App errcode={0}>
-      <ProductList productList={data} />
+    <App errcode={errcode} errmsg={errmsg}>
+      <ControlSet sorting={result.sorting}></ControlSet>
+      <ProductList data={result} urlInfo={urlInfo}/>
     </App>, target);
   }
 }
