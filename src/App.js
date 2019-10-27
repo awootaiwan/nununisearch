@@ -142,12 +142,12 @@ class nununiSDK {
       throw new Error('請先加入 <div id="nununi-productlist"></div> HTML標籤');
     }
 
-   const data = {
+  const data = {
       "errcode": 0,
       "errmsg": "ACK",
       "result": {
         "products": [
-          {
+         /* {
             "productId": "G400003950205",
             "productName": "GENQUO 率性翻領雙排釦風衣外套",
             "url": "https://www.genquo.com/detail/G400003950205",
@@ -201,7 +201,7 @@ class nununiSDK {
             "productAvailability": true,
             "productSalePrice": null,
             "productSalePriceCurrency": null
-          },
+          },*/
         ],
         "paging": {
           "limit": 5,
