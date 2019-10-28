@@ -7,11 +7,11 @@ const BodyPagination = styled.div`
   text-align: center;
 
   > ul {
-    list-style-type: disc;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+    list-style-type: disc;
     list-style: none;
     display: inline-flex;
     flex-flow: row wrap;
@@ -21,39 +21,39 @@ const BodyPagination = styled.div`
     > li {
       margin: 0;
       padding: 0;
+      width: 36px;
+      height: 38px;
       cursor: default;
       text-align: center;
-      width: 36px;
       line-height: 38px;
-      height: 38px;
       font-size: 13px;
       > a {
-        text-decoration: none;
-        transition: 0.3s;
-        background: #fff;
-        color: #383838;
-        border-color: #ccc;
         display: block;
         width: 100%;
         height: 100%;
         border-width: 1px;
         border-style: solid;
         cursor: pointer;
+        background-color: ${props => props.theme.colorPaginationBg};
+        color: ${props => props.theme.colorPaginationText};
+        border-color: ${props => props.theme.colorPaginationBorder};
+        text-decoration: none;
+        transition: 0.3s;
       }
   
       > a:hover {
-        color: #f63577;
+        color: ${props => props.theme.colorPaginationHoverText};
       }
   
-      .disabled {
+      .active {
         cursor: default;
-        background: #f63577;
-        border-color: #f63577;
-        color: #fff;
+        background: ${props => props.theme.colorPaginationActiveBg};
+        border-color: ${props => props.theme.colorPaginationActiveBg};
+        color: ${props => props.theme.colorPaginationActiveText};
       }
   
-      .disabled:hover {
-        color: #fff;
+      .active:hover {
+        color: ${props => props.theme.colorPaginationActiveText};
       }
     }
   }
@@ -142,7 +142,7 @@ const Pagination = ({ products, paging, urlInfo }) => {
         {
           setPageList(products, limit).map((list) => {
             return <li key={list}>
-              {!isNaN(list) ? <a className={currentPage == list ? 'disabled' : ""}
+              {!isNaN(list) ? <a className={currentPage == list ? 'active' : ""}
                 href={currentPage != list ? `${baseUrl}&page=${list}` : "#"}>{list}</a> : list}
             </li>
           })

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import LazyLoad from 'react-lazyload';
 
 const ProductItem = styled.div`
@@ -30,8 +30,8 @@ const ProductItem = styled.div`
     margin: 5px;
     padding: 10px;
     height: 100%;
-    background-color: white;
-    box-shadow: 1px 1px 3px #ccc;
+    color: ${props => props.theme.colorBlockBg};
+    box-shadow: 1px 1px 3px ${props => props.theme.colorBlockShadow};
     border-radius: 5px;
   }
 
@@ -58,7 +58,7 @@ const ProductItem = styled.div`
     }
 
     div:last-child {
-      color: red;
+      color: ${props => props.theme.colorSalePrice};
       font-weight: bold;
       font-size: larger;
       letter-spacing: .1em;
@@ -134,14 +134,14 @@ const ProductItem = styled.div`
 `
 
 const OutofStock = styled.div`
- position: absolute;
- padding: 3px;
- width: 60px;
- border-radius: 5px;
- text-align: center;
- color: #fff;
- background-color: #ccc;
- z-index: 1;
+  position: absolute;
+  padding: 3px;
+  width: 60px;
+  border-radius: 5px;
+  text-align: center;
+  color: ${props => props.theme.colorBadgeText};
+  background-color: ${props => props.theme.colorBadgeBg};
+  z-index: 1;
 `
 
 const ProductBlock = ({product}) => {
