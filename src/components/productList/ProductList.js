@@ -18,17 +18,17 @@ const ProductNoData = styled.div`
 
 const ProductList = ({data, urlInfo}) => {
   const noData = '查無資料';
-  const {products, paging, sorting} = data;
-  const productBlocks = products.map(item =>
+  const {items, paging, sorting} = data;
+  const productBlocks = items.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>
     )
   return (
     <React.Fragment>
       {
-        (!products || products.length <= 0)?<ProductNoData>{noData}</ProductNoData>:<ProductWrapper sorting={sorting}>{productBlocks}</ProductWrapper>
+        (!items || items.length <= 0)?<ProductNoData>{noData}</ProductNoData>:<ProductWrapper sorting={sorting}>{productBlocks}</ProductWrapper>
       }
       {
-        (products && products.length > 0 ? <Pagination products={products} paging={paging} urlInfo={urlInfo}/> : "")
+        (items && items.length > 0 ? <Pagination products={items} paging={paging} urlInfo={urlInfo}/> : "")
       }
     </React.Fragment>
   )

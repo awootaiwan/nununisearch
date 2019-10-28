@@ -142,12 +142,12 @@ class nununiSDK {
       throw new Error('請先加入 <div id="nununi-productlist"></div> HTML標籤');
     }
 
-  const data = {
+    const data = {
       "errcode": 0,
       "errmsg": "ACK",
       "result": {
-        "products": [
-         {
+        "items": [
+          {
             "productId": "G400003950205",
             "productName": "GENQUO 率性翻領雙排釦風衣外套",
             "url": "https://www.genquo.com/detail/G400003950205",
@@ -188,8 +188,8 @@ class nununiSDK {
             "productPrice": 1590,
             "productPriceCurrency": "TWD",
             "productAvailability": true,
-            "productSalePrice": null,
-            "productSalePriceCurrency": null
+            "productSalePrice": 550,
+            "productSalePriceCurrency": "TWD"
           },
           {
             "productId": "G400004060102",
@@ -218,10 +218,10 @@ class nununiSDK {
             "productName": "GENQUO 率性翻領雙排釦風衣外套",
             "url": "https://www.genquo.com/detail/G400003950205",
             "productImageUrl": "https://image.genquo.tw/product/G4000039502/G40000395-11.jpg",
-            "productPrice": 10680,
+            "productPrice": 7680,
             "productPriceCurrency": "TWD",
             "productAvailability": false,
-            "productSalePrice": 10080,
+            "productSalePrice": 1080,
             "productSalePriceCurrency": "TWD"
           },
           {
@@ -229,7 +229,7 @@ class nununiSDK {
             "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
             "url": "https://www.genquo.com/detail/G400004560102",
             "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
-            "productPrice": 1590,
+            "productPrice": 990,
             "productPriceCurrency": "TWD",
             "productAvailability": true,
             "productSalePrice": null,
@@ -240,10 +240,10 @@ class nununiSDK {
             "productName": "GENQUO 率性翻領雙排釦風衣外套",
             "url": "https://www.genquo.com/detail/G400003950205",
             "productImageUrl": "https://image.genquo.tw/product/G4000039502/G40000395-11.jpg",
-            "productPrice": 10680,
+            "productPrice": 680,
             "productPriceCurrency": "TWD",
             "productAvailability": false,
-            "productSalePrice": 10080,
+            "productSalePrice": 580,
             "productSalePriceCurrency": "TWD"
           },
           {
@@ -251,7 +251,7 @@ class nununiSDK {
             "productName": "GENQUO 時髦短版厚實鋪棉外套-女",
             "url": "https://www.genquo.com/detail/G400004560102",
             "productImageUrl": "https://image.genquo.tw/product/G4000045601/G40000456-21.jpg",
-            "productPrice": 1590,
+            "productPrice": 590,
             "productPriceCurrency": "TWD",
             "productAvailability": true,
             "productSalePrice": null,

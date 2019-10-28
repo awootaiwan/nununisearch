@@ -6,7 +6,6 @@ const ProductItem = styled.div`
   position: relative;
   width: 20%;
   display: inline-block;
-  letter-spacing: .05em;
   vertical-align: top;
 
   @media(max-width:1200px) {
@@ -35,68 +34,81 @@ const ProductItem = styled.div`
     border-radius: 5px;
   }
 
-  .product__img {
-    overflow: hidden;
-    position: relative;
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-  }
+  .product {
 
-  .product__price {
-    margin-top: 14px;
-    
-    div {
-      display: inline-block;
-      height: 20px;
-      width:50%;
-      @media(max-width:1200px) {
+    &__img {
+      overflow: hidden;
+      position: relative;
+      img {
+        display: block;
         width: 100%;
+        height: auto;
       }
     }
 
-    div:last-child {
-      color: ${props => props.theme.colorSalePrice};
-      font-weight: bold;
-      font-size: larger;
-      letter-spacing: .1em;
-      text-align: right;
-  
-      @media(max-width: 600px) {
-        float: none;
-        margin-top: 5px;
+    &__price {
+      div {
+        display: inline-block;
+        height: 16px;
+        width:50%;
+        color: ${props => props.theme.colorPrice};
+        font-size: 14px;
+        @media(max-width:1200px) {
+          width: 100%;
+        }
       }
-    }
   
-    @media(max-width: 350px) {
-      span {
-        display:block
+      div:last-child {
+        color: ${props => props.theme.colorSalePrice};
+        font-weight: bold;
+        font-size: 16px;
+        text-align: right;
+    
+        @media(max-width: 600px) {
+          float: none;
+          margin-top: 5px;
+        }
+      }
+    
+      @media(max-width: 350px) {
+        span {
+          display:block
+        }
+      }
+  
+      .onSale {
+        text-decoration:line-through;
       }
     }
 
-    .onSale {
-      text-decoration:line-through;
-    }
-  }
-  .product__name {
-    margin-top: 8px;
-    display: inline-block;
-    overflow: hidden;
-    width: 100%;
-    height: 32px;
-    line-height: 16px;
-    text-overflow: ellipsis;
-  
-    @media(max-width: 600px) {
-      height: 48px;
-      word-wrap: nowrap;
+    &__name {
+      margin-top: 12px;
+      display: inline-block;
+      overflow: hidden;
+      width: 100%;
+      height: 32px;
+      line-height: 16px;
+      letter-spacing: .05em;
       text-overflow: ellipsis;
+       a {
+        color: ${props => props.theme.colorBlockText};
+        :hover {
+          text-decoration: underline;
+        }
+       }
+    
+      @media(max-width: 600px) {
+        height: 48px;
+        word-wrap: nowrap;
+        text-overflow: ellipsis;
+      }
     }
+
+
   }
-  &.barStyle {
+  &.bar-style {
     width: 100%;
+    overflow: hidden;
     @media(max-width: 600px) {
       height: 120px;
     }
@@ -127,7 +139,9 @@ const ProductItem = styled.div`
         }
       }
       &__price {
-        margin-top: 24px;
+        div:last-child {
+          text-align: left;
+        }
       }
     }
   }
@@ -149,27 +163,35 @@ const ProductBlock = ({product}) => {
   const outOfStock = '缺貨中';
 
   return (
-    <ProductItem>
+    <ProductItem className={'bar-style'}>
       <div>
-        <a className="product__img" href={product.url}>
+        <a className="product__img" href={product.url} title={product.productName}>
           {
             !product.productAvailability?
             <OutofStock>{outOfStock}</OutofStock>:
             null
           }
           <LazyLoad height={200} offset={100}>
-            <img src={product.productImageUrl}></img>
+            <img src={product.productImageUrl} alt={product.productName}></img>
           </LazyLoad>
         </a>
         <div className="product__detail">
-          <div className="product__name">{product.productName}</div>
+          <div className="product__name">
+            <a href={product.url} title={product.productName}>
+              {product.productName}
+            </a>
+          </div>
           <div className="product__price">
             {
               product.productSalePrice ?
-              <div className="onSale">{product.productPriceCurrency} {product.productPrice}</div>:
-              <div >{product.productPriceCurrency} {product.productPrice}</div>
+              <div className="onSale">{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>:
+              <div >{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>
             }
-            <div>{product.productSalePriceCurrency} {product.productSalePrice}</div>
+            {
+              product.productSalePrice ?
+              <div>{product.productSalePriceCurrency} {product.productSalePrice.toLocaleString('en-US')}</div>:
+              <div></div>
+            }
           </div>
         </div>
       </div>
