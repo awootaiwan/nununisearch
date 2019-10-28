@@ -9,7 +9,7 @@ const theme = {
   colorBadgeBg: '#99999950',
   colorBadgeText: '#fff',
   colorBlockShadow: '#ccc',
-  colorBlockBg: '#000',
+  colorBlockBg: '#fff',
   colorBlockText: '#000',
   colorPaginationBg: '#fff',
   colorPaginationText: '#383838',
