@@ -171,7 +171,7 @@ function ProductBlock({product}){
   const outOfStock = '缺貨中';
 
   return (
-    <ProductItem className={"bar-style"}>
+    <ProductItem>
       <div>
         <a className="product__img" href={product.url} title={product.productName}>
           {
