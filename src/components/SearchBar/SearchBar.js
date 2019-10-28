@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
 
-import SearchCondition from './SearchCondition';
-
 
 const rotate = keyframes`
   to {
@@ -231,8 +229,6 @@ class SearchBar extends React.Component {
             theme={theme}
           />
         </SearchInput>
-
-        <SearchCondition></SearchCondition>
       </React.Fragment>
     );
   }
