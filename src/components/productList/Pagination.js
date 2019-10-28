@@ -93,7 +93,7 @@ const setPageList = (products, pageAmount, limit) => {
 
   pageList.push(1);
 
-  pageNumber.map(function (value, index) {
+  pageNumber.forEach(function (value, index) {
     if (parseInt(value) != 1 && parseInt(value) != pageAmount) {
       if (index + 1 == 1 && parseInt(value) - 1 != 1) {
         pageList.push('..');
@@ -103,8 +103,8 @@ const setPageList = (products, pageAmount, limit) => {
         pageList.push('...');
       }
     }
-
   });
+
   if (pageAmount != 1) {
     pageList.push(pageAmount);
   }
@@ -113,7 +113,7 @@ const setPageList = (products, pageAmount, limit) => {
   )
 }
 
-const Pagination = ({ products, paging, urlInfo }) => {
+function Pagination ({ products, paging, urlInfo }){
   currentPage = paging.currentPage;
   const { totalPages } = paging;
   const { limit } = paging || 10;

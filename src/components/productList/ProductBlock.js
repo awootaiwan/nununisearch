@@ -65,7 +65,6 @@ const ProductItem = styled.div`
         text-align: right;
     
         @media(max-width: 600px) {
-          float: none;
           margin-top: 5px;
         }
       }
@@ -108,37 +107,46 @@ const ProductItem = styled.div`
   }
   &.bar-style {
     width: 100%;
+    height: 120px;
     overflow: hidden;
-    @media(max-width: 600px) {
-      height: 120px;
-    }
+    padding: 5px 0;
+    border-top: 1px solid #ccc;
+    border-radius: 0;
+
     > div {
       margin: 0;
-      padding: 5px;
+      padding: 0;
       box-shadow: none;
     }
     .product {
       &__img {
         display: inline-block;
-        width: 10%;
+        width: auto;
         height: 100%;
-        @media(max-width: 600px) {
-          width: 30%;
+
+        img {
+          width: auto;
+          height: 100%;
         }
       }
       &__detail {
-        width: 90%;
         height: 100%;
         display: inline-block;
         padding-left: 20px;
-        vertical-align: baseline;
+        vertical-align: top;
         box-sizing: border-box;
-        @media(max-width: 600px) {
-          width: 70%;
-          vertical-align: top;
+
+        @media(max-width: 400px) {
+          width:60%;
         }
       }
+
       &__price {
+        box-sizing: border-box;
+        padding-bottom: 10px;
+        div {
+          width: 100%;
+        }
         div:last-child {
           text-align: left;
         }
@@ -158,12 +166,12 @@ const OutofStock = styled.div`
   z-index: 1;
 `
 
-const ProductBlock = ({product}) => {
+function ProductBlock({product}){
   
   const outOfStock = '缺貨中';
 
   return (
-    <ProductItem className={'bar-style'}>
+    <ProductItem className={"bar-style"}>
       <div>
         <a className="product__img" href={product.url} title={product.productName}>
           {

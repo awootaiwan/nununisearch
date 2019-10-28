@@ -16,7 +16,7 @@ const ProductNoData = styled.div`
   text-align: center;
 `
 
-const ProductList = ({data, urlInfo}) => {
+function ProductList({data, urlInfo}){
   const noData = '查無資料';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
