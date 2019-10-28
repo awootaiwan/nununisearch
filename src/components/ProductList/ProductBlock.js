@@ -20,21 +20,22 @@ const ProductItem = styled.div`
     width: 50%;
   }
 
-  a {
-    text-decoration: none;
-    cursor: pointer;
-  }
-
   > div {
     margin: 5px;
     padding: 10px;
     height: 100%;
-    color: ${props => props.theme.colorBlockBg};
+    background-color: ${props => props.theme.colorBlockBg};
     box-shadow: 1px 1px 3px ${props => props.theme.colorBlockShadow};
     border-radius: 5px;
   }
 
   .product {
+
+    &__href {
+      text-decoration: none;
+      cursor: pointer;
+      color: ${props => props.theme.colorBlockText};
+    }
 
     &__img {
       overflow: hidden;
@@ -47,9 +48,9 @@ const ProductItem = styled.div`
     }
 
     &__price {
+      min-height: 50px;
       div {
         display: inline-block;
-        height: 16px;
         width:50%;
         color: ${props => props.theme.colorPrice};
         font-size: 14px;
@@ -57,8 +58,12 @@ const ProductItem = styled.div`
           width: 100%;
         }
       }
+
+      .on-sale {
+        text-decoration: line-through;
+      }
   
-      div:last-child {
+      .sale-price {
         color: ${props => props.theme.colorSalePrice};
         font-weight: bold;
         font-size: 16px;
@@ -74,10 +79,6 @@ const ProductItem = styled.div`
           display:block
         }
       }
-  
-      .onSale {
-        text-decoration:line-through;
-      }
     }
 
     &__name {
@@ -89,9 +90,7 @@ const ProductItem = styled.div`
       line-height: 16px;
       letter-spacing: .05em;
       text-overflow: ellipsis;
-       a {
-        color: ${props => props.theme.colorBlockText};
-        :hover {
+        &:hover {
           text-decoration: underline;
         }
        }
@@ -113,6 +112,16 @@ const ProductItem = styled.div`
     border-top: 1px solid #ccc;
     border-radius: 0;
 
+    &:last-child {
+      border-bottom: 1px solid #ccc;
+    }
+
+    > a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
     > div {
       margin: 0;
       padding: 0;
@@ -130,8 +139,9 @@ const ProductItem = styled.div`
         }
       }
       &__detail {
-        height: 100%;
+        position: relative;
         display: inline-block;
+        height: 100%;
         padding-left: 20px;
         vertical-align: top;
         box-sizing: border-box;
@@ -142,8 +152,9 @@ const ProductItem = styled.div`
       }
 
       &__price {
+        position: absolute;
+        bottom: 0;
         box-sizing: border-box;
-        padding-bottom: 10px;
         div {
           width: 100%;
         }
@@ -173,35 +184,37 @@ function ProductBlock({product}){
   return (
     <ProductItem>
       <div>
-        <a className="product__img" href={product.url} title={product.productName}>
-          {
-            !product.productAvailability?
-            <OutofStock>{outOfStock}</OutofStock>:
-            null
-          }
-          <LazyLoad height={200} offset={100}>
-            <img src={product.productImageUrl} alt={product.productName}></img>
-          </LazyLoad>
+        <a className="product__href" href={product.url} title={product.productName}>
+          <div className="product__img">
+            {
+              !product.productAvailability?
+              <OutofStock>{outOfStock}</OutofStock>:
+              null
+            }
+            <LazyLoad height={200} offset={100}>
+              <img src={product.productImageUrl} alt={product.productName}></img>
+            </LazyLoad>
+          </div>
+          <div className="product__detail">
+            <div className="product__name">
+              <div>
+                {product.productName}
+              </div>
+            </div>
+            <div className="product__price">
+              {
+                product.productSalePrice ?
+                <div className="on-sale">{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>:
+                <div >{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>
+              }
+              {
+                product.productSalePrice ?
+                <div className="sale-price">{product.productSalePriceCurrency} {product.productSalePrice.toLocaleString('en-US')}</div>:
+                ''
+              }
+            </div>
+          </div>
         </a>
-        <div className="product__detail">
-          <div className="product__name">
-            <a href={product.url} title={product.productName}>
-              {product.productName}
-            </a>
-          </div>
-          <div className="product__price">
-            {
-              product.productSalePrice ?
-              <div className="onSale">{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>:
-              <div >{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>
-            }
-            {
-              product.productSalePrice ?
-              <div>{product.productSalePriceCurrency} {product.productSalePrice.toLocaleString('en-US')}</div>:
-              <div></div>
-            }
-          </div>
-        </div>
       </div>
     </ProductItem>
   )
