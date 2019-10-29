@@ -28,17 +28,12 @@ class nununiSDK {
       throw new Error('nununi id is not setting');
     }
     this.id = id;
-    this.contentApiVer = 'latest'; // could be set
     this.productsApiVer = 'latest'; // could be set
 
     this.text = '';
     this.priceRange = '';
     this.limit = 32; // could be set
     this.sort = 1; // could be set
-  }
-
-  setContentAPIVersion(apiVer) {
-    this.contentApiVer = apiVer;
   }
 
   setProductsAPIVersion(apiVer) {
@@ -61,7 +56,7 @@ class nununiSDK {
       throw Error('setSort is not number.');
     }
 
-    if (sort !== 1 || sort !== 2 || sort !== 11) {
+    if (sort !== 1 && sort !== 2 && sort !== 11) {
       throw Error('Sort type is not in [1, 2, 11].');
     }
     this.sort = sort;
@@ -87,7 +82,7 @@ class nununiSDK {
   getProducts(text, priceRange, sort, page, limit) {
     return getSiteSearchApiData(
       this.id,
-      this.contentApiVer,
+      this.productsApiVer,
       {
         text,
         priceRange,
@@ -119,8 +114,6 @@ class nununiSDK {
       </App>,
       target
     );
-
-    this.getProducts();
   }
 
   async renderProductList() {
@@ -137,8 +130,6 @@ class nununiSDK {
       urlInfo.page,
       urlInfo.limit
     );
-
-    console.log(urlInfo);
 
     ReactDOM.render(
       <App errcode={errcode} errmsg={errmsg}>
