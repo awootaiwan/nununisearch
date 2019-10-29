@@ -38,13 +38,16 @@ const ProductItem = styled.div`
     }
 
     &__img {
-      overflow: hidden;
+      display: block;
       position: relative;
-      img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
+      width: 100%;
+      padding-bottom: 100%;
+      cursor: pointer;
+      background-image: url('${props => props.imageUrl}');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #fff;
+      background-size: 100%;
     }
 
     &__price {
@@ -182,19 +185,21 @@ function ProductBlock({product}){
   const outOfStock = '缺貨中';
 
   return (
-    <ProductItem className='default-style'>
+    <ProductItem className='default-style' imageUrl={product.productImageUrl}>
       <div>
         <a className="product__href" href={product.url} title={product.productName}>
+        <LazyLoad height={200} offset={100}>
+
           <div className="product__img">
             {
               !product.productAvailability?
               <OutofStock>{outOfStock}</OutofStock>:
               null
             }
-            <LazyLoad height={200} offset={100}>
-              <img src={product.productImageUrl} alt={product.productName}></img>
-            </LazyLoad>
+              {/* <img src={product.productImageUrl} alt={product.productName}></img> */}
+
           </div>
+          </LazyLoad>
           <div className="product__detail">
             <div className="product__name">
               <div>
