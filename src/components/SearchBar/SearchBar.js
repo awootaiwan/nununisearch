@@ -85,6 +85,7 @@ const theme = {
   },
 };
 
+// TODO: 串接 suggestion api
 // 假資料
 const options = [
   {
@@ -136,14 +137,23 @@ function escapeRegexCharacters(str) {
 }
 
 class SearchBar extends React.Component {
-  state = {
-    value: '',
-    suggestions: [],
-    isLoading: false,
-  };
+  constructor({ text }) {
+    super();
+    this.loadSuggestions = this.loadSuggestions.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSearch = this.onSearch.bind(this);
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 
-  // Return a new debounced function
-  debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
+    // Return a new debounced function
+    this.debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
+
+    this.state = {
+      value: text,
+      suggestions: [],
+      isLoading: false,
+    };
+  }
 
   loadSuggestions(value) {
     this.setState({
@@ -169,11 +179,19 @@ class SearchBar extends React.Component {
   }
 
   // input 的 onChange屬性
-  onChange = (event, { newValue }) => {
+  onChange(event, { newValue }) {
     this.setState({
       value: newValue,
     });
   };
+
+  onSearch() {
+    const url = new URL(window.location.href);
+    const text = this.state.value;
+
+    url.searchParams.set('text', text);
+    window.location = url.href;
+  }
 
   // 如何渲染 suggestions
   renderSuggestion = (suggestion) => <span>{suggestion.name}</span>;
@@ -182,13 +200,13 @@ class SearchBar extends React.Component {
   getSuggestionValue = (suggestion) => suggestion.name;
 
   // 輸入內容後,找尋Suggestions
-  onSuggestionsFetchRequested = ({ value }) => {
+  onSuggestionsFetchRequested({ value }) {
     if (this.state.suggestions) {
       this.debouncedLoadSuggestions(value);
     }
   };
 
-  onSuggestionsClearRequested = () => {
+  onSuggestionsClearRequested() {
     this.setState({
       suggestions: [],
     });
@@ -209,11 +227,11 @@ class SearchBar extends React.Component {
         <SearchInput>
           {isLoading ? (
             <SpinnerWrapper>
-              <FontAwesomeIcon icon={faSpinner}/>
+              <FontAwesomeIcon icon={faSpinner} />
             </SpinnerWrapper>
           ) : (
             <SearchWrapper>
-              <FontAwesomeIcon icon={faSearch}/>
+              <FontAwesomeIcon icon={faSearch} onClick={this.onSearch} />
             </SearchWrapper>
           )}
 

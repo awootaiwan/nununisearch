@@ -50,17 +50,17 @@ const RightBlock = styled.div`
   }
 `;
 
-function ControlSet({ priceInterval, displayMode, sorting }) {
+function ControlSet({ priceInterval, displayMode, sorting, limit }) {
   return  (
     <Container>
       <LeftBlock>
-        <PriceInterval></PriceInterval>
+        <PriceInterval interval={priceInterval} />
       </LeftBlock>
 
       <RightBlock>
-        <Sorting></Sorting>
-        <DisplayMode></DisplayMode>
-        <DisplayAmount></DisplayAmount>
+        <Sorting sorting={sorting} />
+        <DisplayMode />
+        <DisplayAmount limit={limit} />
       </RightBlock>
     </Container>
   );

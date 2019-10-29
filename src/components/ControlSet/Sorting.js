@@ -28,20 +28,37 @@ const selectorStyle = {
 const sortOptions = [
   { value: '1', label: '價格由低到高' },
   { value: '2', label: '價格由高到低' },
-  { value: '3', label: '最新上架' }
+  { value: '11', label: '最新上架' }
 ]
 
-function Sorting({ priceInterval, displayMode, sorting }) {
-  return  (
-    <SortingContainer>
-      <span>排序</span>
-      <Select
-        options={sortOptions}
-        defaultValue={sortOptions[0]}
-        styles={selectorStyle}
-      />
-    </SortingContainer>
-  );
+class Sorting extends React.Component {
+  constructor({ sorting }) {
+    super();
+    this.onChange = this.onChange.bind(this);
+
+    this.sorting = sorting;
+  }
+
+  onChange(option) {
+    const url = new URL(window.location.href);
+
+    url.searchParams.set('sort', option.value);
+    window.location = url.href;
+  }
+
+  render() {
+    return  (
+      <SortingContainer>
+        <span>排序</span>
+        <Select
+          options={sortOptions}
+          defaultValue={sortOptions.filter(option => option.value === this.sorting.toString())}
+          onChange={this.onChange}
+          styles={selectorStyle}
+        />
+      </SortingContainer>
+    );
+  }
 }
 
 export default Sorting;

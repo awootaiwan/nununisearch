@@ -23,22 +23,39 @@ const selectorStyle = {
 }
 
 const sortOptions = [
-  { value: '1', label: '一頁32個商品' },
-  { value: '2', label: '一頁64個商品' },
-  { value: '3', label: '一頁80個商品' }
+  { value: '32', label: '一頁32個商品' },
+  { value: '64', label: '一頁64個商品' },
+  { value: '80', label: '一頁80個商品' }
 ]
 
-function DisplayAmount({ priceInterval, displayMode, sorting }) {
-  return  (
-    <DisplayAmountContainer>
-      <span>顯示</span>
-      <Select
-        options={sortOptions}
-        defaultValue={sortOptions[0]}
-        styles={selectorStyle}
-      />
-    </DisplayAmountContainer>
-  );
+class DisplayAmount extends React.Component {
+  constructor({ limit }) {
+    super();
+    this.onChange = this.onChange.bind(this);
+
+    this.limit = limit;
+  }
+
+  onChange(option) {
+    const url = new URL(window.location.href);
+
+    url.searchParams.set('limit', option.value);
+    window.location = url.href;
+  }
+
+  render() {
+    return  (
+      <DisplayAmountContainer>
+        <span>顯示</span>
+        <Select
+          options={sortOptions}
+          defaultValue={sortOptions.filter(option => option.value === this.limit.toString())}
+          onChange={this.onChange}
+          styles={selectorStyle}
+        />
+      </DisplayAmountContainer>
+    );
+  }
 }
 
 export default DisplayAmount;

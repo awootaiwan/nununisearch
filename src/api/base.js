@@ -1,4 +1,5 @@
-import API from './config';
+// import API from './config';
+import axios from 'axios';
 
 const ERROR_NONE = 0;
 const ERROR_REQUEST_FAILED = 10000;
@@ -18,17 +19,21 @@ function getPayload(errCode = ERROR_NONE, errMsg = '', result = '') {
   };
 }
 
-/* 參考用之後可刪
-const getClassifyApiData = async (
+const getSiteSearchApiData = async (
   id = process.env.NUNUNI_ID,
   version,
-  productIds
+  params,
 ) => {
+  // const url = `${process.env.NUNUNI_DOMAIN}/search/${version}/${id}/products`;
+  const url = 'http://minerva.chase.awoo.org/search/v1/1177060613/products';
+  // const headers = {
+  //   "Content-Type": "application/json",
+  //   Authorization: 'Bearer 0999491db0588353958f204479ee5237a74f786b'
+  // };
+
   try {
-    const { status, data: response } = await API.post(
-      `/${version}/${id}/products/classify`,
-      productIds
-    );
+    const { status, data: response } = await axios.get(url, { params });
+
     if (status !== 200) {
       return getPayload(status, response.error_description, response);
     }
@@ -36,6 +41,6 @@ const getClassifyApiData = async (
   } catch (e) {
     return getPayload(ERROR_REQUEST_FAILED);
   }
-};*/
+};
 
-export { getClassifyApiData };
+export { getSiteSearchApiData };
