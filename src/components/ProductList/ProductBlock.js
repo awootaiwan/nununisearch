@@ -182,7 +182,7 @@ function ProductBlock({product}){
   const outOfStock = '缺貨中';
 
   return (
-    <ProductItem>
+    <ProductItem className='default-style'>
       <div>
         <a className="product__href" href={product.url} title={product.productName}>
           <div className="product__img">

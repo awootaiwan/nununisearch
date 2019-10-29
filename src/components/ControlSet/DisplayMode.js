@@ -31,13 +31,34 @@ const DisplayModeContainer = styled.div`
   justify-content: flex-end;
 `;
 
-function DisplayMode({ priceInterval, displayMode, sorting }) {
+
+
+function DisplayMode() {
+
+
+  function changeToBarMode(){
+    const itemBlock = document.querySelector('.default-style');
+    const itemBlockAll = document.querySelectorAll('.default-style');  
+    if (!itemBlock.classList.contains('bar-style')){
+      itemBlockAll.forEach(item=>item.classList.add('bar-style'));
+    }
+  }
+
+  function changeToBlockMode(){
+    const itemBlock = document.querySelector('.default-style');
+    const itemBlockAll = document.querySelectorAll('.default-style');
+  
+    if (itemBlock.classList.contains('bar-style')){
+      itemBlockAll.forEach(item=>item.classList.remove('bar-style'));
+    }
+  }
+
   return  (
     <DisplayModeContainer>
-      <IconWrapper>
+      <IconWrapper onClick={changeToBlockMode}>
         <FontAwesomeIcon icon={faThLarge} />
       </IconWrapper>
-      <IconWrapper>
+      <IconWrapper onClick={changeToBarMode}>
         <FontAwesomeIcon icon={faBars} />
       </IconWrapper>
     </DisplayModeContainer>
