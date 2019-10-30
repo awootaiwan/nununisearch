@@ -12,20 +12,33 @@ const rotate = keyframes`
   }
 `;
 const IconWrapper = styled.div`
+  width: 10%;
+  height: 100%;
+  box-sizing: border-box;
   position: absolute;
-  top: calc(50% - 11px);
-  right: 10px;
+  border: 1px solid ${props => props.theme.colorBorder};
+  border-radius: 0 5px 5px 0;
+  background-color: ${props => props.theme.colorBtnBg};
   z-index: 2;
-`;
-const SpinnerWrapper = styled(IconWrapper)`
-  animation: ${rotate} 1s linear infinite;
-`;
-const SearchWrapper = styled(IconWrapper)`
-  color: ${props => props.theme.colorGrey};
-  cursor: pointer;
 
   &:hover {
-    color: ${props => props.theme.colorBlack};
+    background-color: ${props => props.theme.colorBtnBg_hover};
+    border-color: ${props => props.theme.colorBtnBg_hover};
+  }
+
+  div {
+    position: absolute;
+    right: 10px;
+    top: calc(100% - 32px)
+  }
+
+  .spinner-wrapper {
+    color: ${props => props.theme.colorBtnText};
+    animation: ${rotate} 1s linear infinite;
+  }
+  .search-wrapper {
+    color: ${props => props.theme.colorBtnText};
+    cursor: pointer;
   }
 `;
 
@@ -220,15 +233,17 @@ class SearchBar extends React.Component {
     return (
       <React.Fragment>
         <SearchInput>
+          <IconWrapper>
           {isLoading ? (
-            <SpinnerWrapper>
+            <div className="spinner-wrapper">
               <FontAwesomeIcon icon={faSpinner} />
-            </SpinnerWrapper>
+            </div>
           ) : (
-            <SearchWrapper>
+            <div className="search-wrapper">
               <FontAwesomeIcon icon={faSearch} onClick={this.onSearch} />
-            </SearchWrapper>
+            </div>
           )}
+          </IconWrapper>
 
           <Autosuggest
             suggestions={suggestions}
