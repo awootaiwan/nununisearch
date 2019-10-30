@@ -21,9 +21,7 @@ const App = props => (
 );
 
 class nununiSDK {
-  // TODO: delete
-  // constructor(id = process.env.NUNUNI_ID) {
-  constructor(id = 1177060613) {
+  constructor(id = process.env.NUNUNI_ID) {
     if (!id || id.length < 1) {
       throw new Error('nununi id is not setting');
     }
