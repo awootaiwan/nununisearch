@@ -139,11 +139,6 @@ function escapeRegexCharacters(str) {
 class SearchBar extends React.Component {
   constructor({ text }) {
     super();
-    this.loadSuggestions = this.loadSuggestions.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onSearch = this.onSearch.bind(this);
-    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
 
     // Return a new debounced function
     this.debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
@@ -155,7 +150,7 @@ class SearchBar extends React.Component {
     };
   }
 
-  loadSuggestions(value) {
+  loadSuggestions = (value) => {
     this.setState({
       isLoading: true,
     });
@@ -179,13 +174,13 @@ class SearchBar extends React.Component {
   }
 
   // input 的 onChange屬性
-  onChange(event, { newValue }) {
+  onChange = (event, { newValue }) => {
     this.setState({
       value: newValue,
     });
   };
 
-  onSearch() {
+  onSearch = () => {
     const url = new URL(window.location.href);
     const text = this.state.value;
 
@@ -200,13 +195,13 @@ class SearchBar extends React.Component {
   getSuggestionValue = (suggestion) => suggestion.name;
 
   // 輸入內容後,找尋Suggestions
-  onSuggestionsFetchRequested({ value }) {
+  onSuggestionsFetchRequested = ({ value }) => {
     if (this.state.suggestions) {
       this.debouncedLoadSuggestions(value);
     }
   };
 
-  onSuggestionsClearRequested() {
+  onSuggestionsClearRequested = () => {
     this.setState({
       suggestions: [],
     });

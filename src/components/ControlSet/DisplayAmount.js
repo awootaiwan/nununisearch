@@ -31,12 +31,10 @@ const sortOptions = [
 class DisplayAmount extends React.Component {
   constructor({ limit }) {
     super();
-    this.onChange = this.onChange.bind(this);
-
     this.limit = limit;
   }
 
-  onChange(option) {
+  onChange = (option) => {
     const url = new URL(window.location.href);
 
     url.searchParams.set('limit', option.value);

@@ -36,18 +36,13 @@ const PriceSubmitBtn = styled.button`
 class PriceInterval extends React.Component {
   constructor({ interval }) {
     super();
-    this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
-    this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
-    this.onSearch = this.onSearch.bind(this);
-    this.getPrice = this.getPrice.bind(this);
-
     this.state = {
       minPrice: this.getPrice(interval).minPrice,
       maxPrice: this.getPrice(interval).maxPrice
     };
   }
 
-  getPrice(interval) {
+  getPrice = (interval) => {
     const intervalStr = `${interval}-`.split('-'); // 確保空字串也能被解析
 
     return {
@@ -56,15 +51,15 @@ class PriceInterval extends React.Component {
     }
   }
 
-  handleMinPriceChange(event) {
+  handleMinPriceChange = (event) => {
     this.setState({ minPrice: event.target.value });
   }
 
-  handleMaxPriceChange(event) {
+  handleMaxPriceChange = (event) => {
     this.setState({ maxPrice: event.target.value });
   }
 
-  onSearch() {
+  onSearch = () => {
     const url = new URL(window.location.href);
     const priceRange = `${this.state.minPrice}-${this.state.maxPrice}`
 
