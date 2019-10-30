@@ -33,16 +33,51 @@ const PriceSubmitBtn = styled.button`
   }
 `;
 
-function PriceInterval({ priceInterval, displayMode, sorting }) {
-  return  (
-    <React.Fragment>
-      <span>價格區間</span>
-      <PriceInput type='number' placeholder='$最低' />
-      <span> - </span>
-      <PriceInput type='number' placeholder='$最高' />
-      <PriceSubmitBtn>搜尋</PriceSubmitBtn>
-    </React.Fragment>
-  );
+class PriceInterval extends React.Component {
+  constructor({ interval }) {
+    super();
+    this.state = {
+      minPrice: this.getPrice(interval).minPrice,
+      maxPrice: this.getPrice(interval).maxPrice
+    };
+  }
+
+  getPrice = (interval) => {
+    const intervalStr = `${interval}-`.split('-'); // 確保空字串也能被解析
+
+    return {
+      minPrice: intervalStr[0],
+      maxPrice: intervalStr[1]
+    }
+  }
+
+  handleMinPriceChange = (event) => {
+    this.setState({ minPrice: event.target.value });
+  }
+
+  handleMaxPriceChange = (event) => {
+    this.setState({ maxPrice: event.target.value });
+  }
+
+  onSearch = () => {
+    const url = new URL(window.location.href);
+    const priceRange = `${this.state.minPrice}-${this.state.maxPrice}`
+
+    url.searchParams.set('priceRange', priceRange);
+    window.location = url.href;
+  }
+
+  render() {
+    return  (
+      <React.Fragment>
+        <span>價格區間</span>
+        <PriceInput type='number' placeholder='$最低' value={this.state.minPrice} onChange={this.handleMinPriceChange} />
+        <span> - </span>
+        <PriceInput type='number' placeholder='$最高' value={this.state.maxPrice} onChange={this.handleMaxPriceChange} />
+        <PriceSubmitBtn onClick={this.onSearch}>搜尋</PriceSubmitBtn>
+      </React.Fragment>
+    );
+  }
 }
 
 export default PriceInterval;

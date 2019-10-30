@@ -85,6 +85,7 @@ const theme = {
   },
 };
 
+// TODO: 串接 suggestion api
 // 假資料
 const options = [
   {
@@ -136,16 +137,20 @@ function escapeRegexCharacters(str) {
 }
 
 class SearchBar extends React.Component {
-  state = {
-    value: '',
-    suggestions: [],
-    isLoading: false,
-  };
+  constructor({ text }) {
+    super();
 
-  // Return a new debounced function
-  debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
+    // Return a new debounced function
+    this.debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
 
-  loadSuggestions(value) {
+    this.state = {
+      value: text,
+      suggestions: [],
+      isLoading: false,
+    };
+  }
+
+  loadSuggestions = (value) => {
     this.setState({
       isLoading: true,
     });
@@ -174,6 +179,14 @@ class SearchBar extends React.Component {
       value: newValue,
     });
   };
+
+  onSearch = () => {
+    const url = new URL(window.location.href);
+    const text = this.state.value;
+
+    url.searchParams.set('text', text);
+    window.location = url.href;
+  }
 
   // 如何渲染 suggestions
   renderSuggestion = (suggestion) => <span>{suggestion.name}</span>;
@@ -209,11 +222,11 @@ class SearchBar extends React.Component {
         <SearchInput>
           {isLoading ? (
             <SpinnerWrapper>
-              <FontAwesomeIcon icon={faSpinner}/>
+              <FontAwesomeIcon icon={faSpinner} />
             </SpinnerWrapper>
           ) : (
             <SearchWrapper>
-              <FontAwesomeIcon icon={faSearch}/>
+              <FontAwesomeIcon icon={faSearch} onClick={this.onSearch} />
             </SearchWrapper>
           )}
 

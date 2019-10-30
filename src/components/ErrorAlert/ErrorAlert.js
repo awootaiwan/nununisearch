@@ -10,7 +10,8 @@ const Div = styled.div`
   padding: .75rem 1.25rem;
   border-radius: .25rem;
 `;
-function ErrorAlert(data){
+
+function ErrorAlert(data) {
   return (
     <Div role="alert">
       {data.errmsg}  (請與管理者聯絡)
@@ -19,5 +20,3 @@ function ErrorAlert(data){
 }
 
 export default ErrorAlert
-
-  
