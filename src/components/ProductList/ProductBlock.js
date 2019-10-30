@@ -109,7 +109,7 @@ const ProductItem = styled.div`
   }
   &.bar-style {
     width: 100%;
-    height: 120px;
+    height: 130px;
     overflow: hidden;
     padding: 5px 0;
     border-top: 1px solid #ccc;
@@ -133,7 +133,9 @@ const ProductItem = styled.div`
     .product {
       &__img {
         display: inline-block;
-        width: auto;
+        padding-bottom: 0;
+        padding-right: 5%;
+        width: 80px;
         height: 100%;
 
         img {
@@ -149,7 +151,7 @@ const ProductItem = styled.div`
         vertical-align: top;
         box-sizing: border-box;
 
-        @media(max-width: 400px) {
+        @media(max-width: 450px) {
           width:60%;
         }
       }
