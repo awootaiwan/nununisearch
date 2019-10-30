@@ -16,16 +16,17 @@ const ProductNoData = styled.div`
   text-align: center;
 `
 
-function ProductList({data, urlInfo}){
-  const noData = '查無資料';
+function ProductList({data, urlInfo}) {
+  const noData = urlInfo.text !== '' ? '查無資料' : '';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>
-    )
+  )
+
   return (
     <React.Fragment>
       {
-        (!items || items.length <= 0)?<ProductNoData>{noData}</ProductNoData>:<ProductWrapper sorting={sorting}>{productBlocks}</ProductWrapper>
+        (!items || items.length <= 0) ? <ProductNoData>{noData}</ProductNoData> : <ProductWrapper sorting={sorting}>{productBlocks}</ProductWrapper>
       }
       {
         (items && items.length > 0 ? <Pagination products={items} paging={paging} urlInfo={urlInfo}/> : "")
@@ -33,5 +34,5 @@ function ProductList({data, urlInfo}){
     </React.Fragment>
   )
 }
- 
+
 export default ProductList;
