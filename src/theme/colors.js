@@ -14,9 +14,13 @@ const theme = {
   colorPaginationBg: '#fff',
   colorPaginationText: '#383838',
   colorPaginationBorder: '#ccc',
-  colorPaginationActiveBg: '#f63577',
-  colorPaginationHoverText: '#f63577',
-  colorPaginationActiveText: '#fff',
+  colorPaginationBg_active: '#f63577',
+  colorPaginationText_hover: '#f63577',
+  colorPaginationText_active: '#fff',
+  colorBorder: '#999',
+  colorBtnBg: '#999',
+  colorBtnBg_hover: '#000',
+  colorBtnText: '#fff',
 }
 
 export default theme;

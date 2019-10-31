@@ -38,13 +38,15 @@ const ProductItem = styled.div`
     }
 
     &__img {
-      overflow: hidden;
+      display: block;
       position: relative;
-      img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
+      width: 100%;
+      padding-bottom: 100%;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #fff;
+      background-size: 100%;
     }
 
     &__price {
@@ -101,12 +103,10 @@ const ProductItem = styled.div`
         text-overflow: ellipsis;
       }
     }
-
-
   }
   &.bar-style {
     width: 100%;
-    height: 120px;
+    height: 130px;
     overflow: hidden;
     padding: 5px 0;
     border-top: 1px solid #ccc;
@@ -130,7 +130,9 @@ const ProductItem = styled.div`
     .product {
       &__img {
         display: inline-block;
-        width: auto;
+        padding-bottom: 0;
+        padding-right: 5%;
+        width: 80px;
         height: 100%;
 
         img {
@@ -146,7 +148,7 @@ const ProductItem = styled.div`
         vertical-align: top;
         box-sizing: border-box;
 
-        @media(max-width: 400px) {
+        @media(max-width: 450px) {
           width:60%;
         }
       }
@@ -163,38 +165,42 @@ const ProductItem = styled.div`
         }
       }
     }
+    .outofStock {
+      position: absolute;
+      padding: 3px;
+      width: 60px;
+      border-radius: 5px;
+      text-align: center;
+      color: ${props => props.theme.colorBadgeText};
+      background-color: ${props => props.theme.colorBadgeBg};
+      z-index: 1;
+    }
   }
-`
-
-const OutofStock = styled.div`
-  position: absolute;
-  padding: 3px;
-  width: 60px;
-  border-radius: 5px;
-  text-align: center;
-  color: ${props => props.theme.colorBadgeText};
-  background-color: ${props => props.theme.colorBadgeBg};
-  z-index: 1;
 `
 
 function ProductBlock({product}){
   
   const outOfStock = '缺貨中';
+  const backgroundProductImg = {
+    backgroundImage: 'url('+`${product.productImageUrl}`+')'
+  }
 
   return (
-    <ProductItem>
+    <ProductItem className='default-style' imageUrl={product.productImageUrl}>
       <div>
         <a className="product__href" href={product.url} title={product.productName}>
-          <div className="product__img">
+        <LazyLoad height={200} offset={100}>
+
+          <div className="product__img" style={backgroundProductImg}>
             {
               !product.productAvailability?
-              <OutofStock>{outOfStock}</OutofStock>:
+              <div className='outofStock'>{outOfStock}</div>:
               null
             }
-            <LazyLoad height={200} offset={100}>
-              <img src={product.productImageUrl} alt={product.productName}></img>
-            </LazyLoad>
+              {/* <img src={product.productImageUrl} alt={product.productName}></img> */}
+
           </div>
+          </LazyLoad>
           <div className="product__detail">
             <div className="product__name">
               <div>

@@ -97,18 +97,47 @@ class nununiSDK {
       throw new Error('請先加入 <div id="nununi-searchbar"></div> HTML標籤');
     }
 
-    const urlInfo = this._getUrlParms();
+    /*const urlInfo = this._getUrlParms();
     const { errcode, errmsg, result } = await this.getProducts(
       urlInfo.text,
       urlInfo.priceRange,
       urlInfo.sort,
       urlInfo.page,
       urlInfo.limit
-    );
+    );*/
 
+    const data = {
+      "errcode": 0,
+      "errmsg": "ACK",
+      "result": {
+        "suggest": [
+            "浴室",
+            "浴室噴劑",
+            "浴室地板",
+            "浴室拖",
+            "浴室拖鞋",
+            "浴室排水口強效清洗劑",
+            "浴室架",
+            "浴室清潔劑",
+            "浴室用強效清潔劑",
+            "浴室窗台矽利康強效型除霉劑",
+            "浴室 置物架",
+            "浴室 收納",
+            "浴室 防滑墊",
+            "浴室 防水",
+            "浴室 除黴",
+            "浴室 防潑水",
+            "浴室 止滑",
+            "浴室 清潔劑",
+            "浴室 除霉",
+            "浴室 拖鞋"
+        ]
+      }
+    };
+    const { errcode, errmsg, result } = data;
     ReactDOM.render(
       <App errcode={errcode} errmsg={errmsg}>
-        <SearchBar data={result} text={urlInfo.text} />
+        <SearchBar data={result.suggest}/>
       </App>,
       target
     );

@@ -42,13 +42,13 @@ const BodyPagination = styled.div`
       }
   
       > a:hover {
-        color: ${props => props.theme.colorPaginationHoverText};
+        color: ${props => props.theme.colorPaginationText_hover};
       }
   
       .active {
         cursor: default;
-        background: ${props => props.theme.colorPaginationActiveBg};
-        border-color: ${props => props.theme.colorPaginationActiveBg};
+        background: ${props => props.theme.colorPaginationBg_active};
+        border-color: ${props => props.theme.colorPaginationBg_active};
         color: ${props => props.theme.colorPaginationActiveText};
       }
   
