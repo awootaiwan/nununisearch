@@ -24,11 +24,10 @@ const getSiteSearchApiData = async (
   version,
   params,
 ) => {
-  // const url = `${process.env.NUNUNI_DOMAIN}/search/${version}/${id}/products`;
-  const url = `http://minerva.chase.awoo.org/search/${version}/${id}/products`;
+  const url = `${process.env.NUNUNI_DOMAIN}/search/${version}/${id}/products`;
   // const headers = {
   //   "Content-Type": "application/json",
-  //   Authorization: 'Bearer 0999491db0588353958f204479ee5237a74f786b'
+  //   Authorization: 'Bearer ${process.env.NUNUNI_TOKEN}'
   // };
 
   try {

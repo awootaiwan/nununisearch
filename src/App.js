@@ -97,15 +97,6 @@ class nununiSDK {
       throw new Error('請先加入 <div id="nununi-searchbar"></div> HTML標籤');
     }
 
-    /*const urlInfo = this._getUrlParms();
-    const { errcode, errmsg, result } = await this.getProducts(
-      urlInfo.text,
-      urlInfo.priceRange,
-      urlInfo.sort,
-      urlInfo.page,
-      urlInfo.limit
-    );*/
-
     const data = {
       "errcode": 0,
       "errmsg": "ACK",
@@ -135,9 +126,10 @@ class nununiSDK {
       }
     };
     const { errcode, errmsg, result } = data;
+
     ReactDOM.render(
       <App errcode={errcode} errmsg={errmsg}>
-        <SearchBar data={result.suggest}/>
+        <SearchBar data={result.suggest} />
       </App>,
       target
     );
