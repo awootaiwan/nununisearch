@@ -11,42 +11,45 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `;
-const IconWrapper = styled.div`
-  box-sizing: border-box;
-  position: absolute;
-  width: 40px;
-  height: 100%;
-  border: 1px solid ${props => props.theme.colorBorder};
-  border-radius: 0 5px 5px 0;
-  background-color: ${props => props.theme.colorBtnBg};
-  z-index: 2;
-
-  &:hover {
-    background-color: ${props => props.theme.colorBtnBg_hover};
-    border-color: ${props => props.theme.colorBtnBg_hover};
-  }
-
-  div {
-    position: absolute;
-    right: 10px;
-    top: calc(100% - 32px)
-  }
-
-  .spinner-wrapper {
-    color: ${props => props.theme.colorBtnText};
-    animation: ${rotate} 1s linear infinite;
-  }
-  .search-wrapper {
-    color: ${props => props.theme.colorBtnText};
-    cursor: pointer;
-  }
-`;
 
 const SearchInput = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
   position: relative;
+
+  .icon-wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    width: 40px;
+    height: 100%;
+    border: 1px solid ${props => props.theme.colorBorder};
+    border-radius: 0 5px 5px 0;
+    background-color: ${props => props.theme.colorBtnBg};
+    z-index: 2;
+  
+    &:hover {
+      background-color: ${props => props.theme.colorBtnBg_hover};
+      border-color: ${props => props.theme.colorBtnBg_hover};
+    }
+  
+    div {
+      position: absolute;
+      top: calc(100% - 32px);
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+  
+    .spinner-wrapper {
+      color: ${props => props.theme.colorBtnText};
+      animation: ${rotate} 1s linear infinite;
+    }
+    .search-wrapper {
+      color: ${props => props.theme.colorBtnText};
+      cursor: pointer;
+    }
+  }
 `;
 
 // Autosuggest 樣式
@@ -200,7 +203,7 @@ class SearchBar extends React.Component {
     return (
       <React.Fragment>
         <SearchInput>
-          <IconWrapper>
+          <div className='icon-wrapper'>
           {isLoading ? (
             <div className="spinner-wrapper">
               <FontAwesomeIcon icon={faSpinner} />
@@ -210,7 +213,7 @@ class SearchBar extends React.Component {
               <FontAwesomeIcon icon={faSearch} onClick={this.onSearch} />
             </div>
           )}
-          </IconWrapper>
+          </div>
 
           <Autosuggest
             suggestions={suggestions}

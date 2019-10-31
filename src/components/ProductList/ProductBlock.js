@@ -43,7 +43,6 @@ const ProductItem = styled.div`
       width: 100%;
       padding-bottom: 100%;
       cursor: pointer;
-      background-image: url('${props => props.imageUrl}');
       background-repeat: no-repeat;
       background-position: center;
       background-color: #fff;
@@ -104,8 +103,6 @@ const ProductItem = styled.div`
         text-overflow: ellipsis;
       }
     }
-
-
   }
   &.bar-style {
     width: 100%;
@@ -168,23 +165,25 @@ const ProductItem = styled.div`
         }
       }
     }
+    .outofStock {
+      position: absolute;
+      padding: 3px;
+      width: 60px;
+      border-radius: 5px;
+      text-align: center;
+      color: ${props => props.theme.colorBadgeText};
+      background-color: ${props => props.theme.colorBadgeBg};
+      z-index: 1;
+    }
   }
-`
-
-const OutofStock = styled.div`
-  position: absolute;
-  padding: 3px;
-  width: 60px;
-  border-radius: 5px;
-  text-align: center;
-  color: ${props => props.theme.colorBadgeText};
-  background-color: ${props => props.theme.colorBadgeBg};
-  z-index: 1;
 `
 
 function ProductBlock({product}){
   
   const outOfStock = '缺貨中';
+  const backgroundProductImg = {
+    backgroundImage: url(`${product.productImageUrl}`)
+  }
 
   return (
     <ProductItem className='default-style' imageUrl={product.productImageUrl}>
@@ -192,10 +191,10 @@ function ProductBlock({product}){
         <a className="product__href" href={product.url} title={product.productName}>
         <LazyLoad height={200} offset={100}>
 
-          <div className="product__img">
+          <div className="product__img" style={backgroundProductImg}>
             {
               !product.productAvailability?
-              <OutofStock>{outOfStock}</OutofStock>:
+              <div className='outofStock'>{outOfStock}</div>:
               null
             }
               {/* <img src={product.productImageUrl} alt={product.productName}></img> */}
