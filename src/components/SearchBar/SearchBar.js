@@ -36,18 +36,19 @@ const SearchInput = styled.div`
     div {
       position: absolute;
       top: calc(100% - 32px);
-      width: 100%;
-      height: 100%;
       text-align: center;
     }
   
     .spinner-wrapper {
       color: ${props => props.theme.colorBtnText};
       animation: ${rotate} 1s linear infinite;
+      right: 10px;
     }
     .search-wrapper {
       color: ${props => props.theme.colorBtnText};
       cursor: pointer;
+      width: 100%;
+      height: 100%;
     }
   }
 `;

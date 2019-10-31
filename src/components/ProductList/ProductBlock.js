@@ -182,7 +182,7 @@ function ProductBlock({product}){
   
   const outOfStock = '缺貨中';
   const backgroundProductImg = {
-    backgroundImage: url(`${product.productImageUrl}`)
+    backgroundImage: 'url('+`${product.productImageUrl}`+')'
   }
 
   return (
