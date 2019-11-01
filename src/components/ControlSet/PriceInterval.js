@@ -34,11 +34,11 @@ const PriceSubmitBtn = styled.button`
 `;
 
 class PriceInterval extends React.Component {
-  constructor({ interval }) {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      minPrice: this.getPrice(interval).minPrice,
-      maxPrice: this.getPrice(interval).maxPrice
+      minPrice: this.getPrice(props.interval).minPrice,
+      maxPrice: this.getPrice(props.interval).maxPrice
     };
   }
 
@@ -60,11 +60,7 @@ class PriceInterval extends React.Component {
   }
 
   onSearch = () => {
-    const url = new URL(window.location.href);
-    const priceRange = `${this.state.minPrice}-${this.state.maxPrice}`
-
-    url.searchParams.set('priceRange', priceRange);
-    window.location = url.href;
+    this.props.setSearchCondition('priceRange', `${this.state.minPrice}-${this.state.maxPrice}`);
   }
 
   render() {

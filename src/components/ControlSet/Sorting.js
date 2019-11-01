@@ -32,18 +32,13 @@ const sortOptions = [
 ]
 
 class Sorting extends React.Component {
-  constructor({ sorting }) {
-    super();
+  constructor(props) {
+    super(props);
     this.onChange = this.onChange.bind(this);
-
-    this.sorting = sorting;
   }
 
   onChange(option) {
-    const url = new URL(window.location.href);
-
-    url.searchParams.set('sort', option.value);
-    window.location = url.href;
+    this.props.setSearchCondition('sort', option.value);
   }
 
   render() {
@@ -52,7 +47,7 @@ class Sorting extends React.Component {
         <span>排序</span>
         <Select
           options={sortOptions}
-          defaultValue={sortOptions.filter(option => option.value === this.sorting.toString())}
+          defaultValue={sortOptions.filter(option => option.value === this.props.sorting.toString())}
           onChange={this.onChange}
           styles={selectorStyle}
         />
