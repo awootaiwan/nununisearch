@@ -51,6 +51,7 @@ const ProductListWrapper = (props) => {
       sorting: {}
     }
   });
+  const [isLoading, setLoadingState] = useState(false);
 
   // 修改 urlInfo 內的搜尋條件
   const setSearchCondition = (key, value) => {
@@ -59,6 +60,7 @@ const ProductListWrapper = (props) => {
       [key]: value
     };
     setUrlInfo(conditions);
+    setLoadingState(true);
   }
 
   // 監聽值改變時重新抓取商品
@@ -73,8 +75,9 @@ const ProductListWrapper = (props) => {
         urlInfo.page,
         urlInfo.limit
       );
-      
+
       setResponse(res);
+      setLoadingState(false);
     })();
   }, [thisId, thisApiVer, urlInfo]); // 監聽值
 
@@ -86,7 +89,7 @@ const ProductListWrapper = (props) => {
         limit={props.initCondition.limit}
         setSearchCondition={setSearchCondition}
       />
-      <ProductList data={response.result} urlInfo={urlInfo}/>
+      <ProductList data={response.result} urlInfo={urlInfo} isLoading={isLoading} />
     </App>
   );
 }

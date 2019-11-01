@@ -4,6 +4,7 @@ import ProductBlock from './ProductBlock';
 import Pagination from "./Pagination"
 
 const ProductWrapper = styled.div`
+  position: relative;
   padding: 15px;
 
   @media(max-width: 480px) {
@@ -16,8 +17,18 @@ const ProductNoData = styled.div`
   text-align: center;
 `
 
-function ProductList({data, urlInfo}) {
-  const noData = urlInfo.text !== '' ? '查無資料' : '';
+const LoadingMask = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(35, 24, 21, .4);
+`;
+
+function ProductList({data, urlInfo, isLoading}) {
+  const noData = (urlInfo.text !== '' && isLoading) ? '查無資料' : '';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>
@@ -26,7 +37,12 @@ function ProductList({data, urlInfo}) {
   return (
     <React.Fragment>
       {
-        (!items || items.length <= 0) ? <ProductNoData>{noData}</ProductNoData> : <ProductWrapper sorting={sorting}>{productBlocks}</ProductWrapper>
+        (!items || items.length <= 0) ?
+          <ProductNoData>{noData}</ProductNoData> :
+          <ProductWrapper sorting={sorting}>
+            {(isLoading) ? <LoadingMask /> : ''}
+            {productBlocks}
+          </ProductWrapper>
       }
       {
         (items && items.length > 0 ? <Pagination products={items} paging={paging} urlInfo={urlInfo}/> : "")
