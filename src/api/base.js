@@ -1,5 +1,6 @@
 // import API from './config';
 import axios from 'axios';
+import API from './config';
 
 const ERROR_NONE = 0;
 const ERROR_REQUEST_FAILED = 10000;
@@ -19,19 +20,34 @@ function getPayload(errCode = ERROR_NONE, errMsg = '', result = '') {
   };
 }
 
+const getSuggestionApiData = async (
+  id = process.env.NUNUNI_ID,
+  version,
+  params,
+) => {
+  // TODO version 無法設定，必須 hard code
+  const url = `http://minerva.micpan.awoo.org/search/v1/${id}/termSuggestions`;
+
+  try {
+    const { status, data: response } = await axios.get(url, { params });
+    if (status !== 200) {
+      return getPayload(status, response.error_description, response);
+    }
+    return response;
+  } catch (e) {
+    return getPayload(ERROR_REQUEST_FAILED);
+  }
+};
+
 const getSiteSearchApiData = async (
   id = process.env.NUNUNI_ID,
   version,
   params,
 ) => {
-  const url = `${process.env.NUNUNI_DOMAIN}/search/${version}/${id}/products`;
-  // const headers = {
-  //   "Content-Type": "application/json",
-  //   Authorization: 'Bearer ${process.env.NUNUNI_TOKEN}'
-  // };
+  const url = `/search/${version}/${id}/products`;
 
   try {
-    const { status, data: response } = await axios.get(url, { params });
+    const { status, data: response } = await API.get(url, { params });
 
     if (status !== 200) {
       return getPayload(status, response.error_description, response);
@@ -42,4 +58,4 @@ const getSiteSearchApiData = async (
   }
 };
 
-export { getSiteSearchApiData };
+export { getSiteSearchApiData, getSuggestionApiData };

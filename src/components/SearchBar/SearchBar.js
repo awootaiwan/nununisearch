@@ -4,6 +4,7 @@ import debounce from 'lodash/debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
+import { type } from 'os';
 
 
 const rotate = keyframes`
@@ -103,63 +104,37 @@ const theme = {
 };
 
 const INPUT_PLACEHOLD = '請輸入搜尋關鍵字';
-// how long the API debounced
-const API_DEBOUNCED = 1000;
-
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-
-    // Return a new debounced function 
-    // TODO 接上api 後應該要刪除
-    this.debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
-
     this.state = {
       value: '',
       suggestions: [],
-      isLoading: false,
+      isLoading: false
     };
   }
 
-  loadSuggestions = (value) => {
-    this.setState({
-      isLoading: true,
-    });
-
-    // Fake an AJAX call
-    // TODO 接上api後需要改寫
-    setTimeout(() => {
-      const suggestions = this.getMatchingOptions(value);
-
-      if (value === this.state.value) {
-        this.setState({
-          isLoading: false,
-          suggestions,
-        });
-      } else {
-        // Ignore suggestions if input value changed
-        this.setState({
-          isLoading: false,
-        });
-      }
-    }, 1000);
-  }
-
-  // input value and data 的比對，生成匹配suggestion 元素
-  getMatchingOptions = (value) => {
+  // 呼叫 api
+  getMatchingOptions = async (value) => {
     const escapedValue = value.trim();
-    if (escapedValue === '') {
-      return [];
-    }
-    const regex = new RegExp(escapedValue, 'i');
-    return this.props.data.filter((dataItem) => regex.test(dataItem));
-  }
+    const { result } = await this.props.getSuggestion(escapedValue);
+    const { suggest } = result;
 
+    if (escapedValue === '' || !suggest || suggest.length === 0 ) {
+      this.setState({ isLoading: false });
+      return [];
+    } else if (suggest.length > 0) {
+      const suggestArray = Array.from(suggest);
+      console.log(suggestArray);
+      this.setState({ isLoading: false });
+    return suggestArray;
+    }
+  }
   // input 的 onChange屬性
-  // 有可能在這裡要發送 request 給 suggestion
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue,
+      isLoading: true,
     });
   };
 
@@ -175,19 +150,24 @@ class SearchBar extends React.Component {
   renderSuggestion = (suggestion) => <span>{suggestion}</span>;
 
   // 設定當suggestion 被點擊時, 什麼資料設為input value
-  getSuggestionValue = (suggestion) => suggestion;
+  getSuggestionValue = (suggestion) => {
+    this.setState({ isLoading: false });
+    return suggestion
+  };
 
   // 輸入內容後,找尋Suggestions
   // TODO 接上api 後應該要改寫
-  onSuggestionsFetchRequested = ({ value }) => {
-    if (this.state.suggestions) {
-      this.debouncedLoadSuggestions(value);
-    }
+  onSuggestionsFetchRequested = async ({ value }) => {
+    this.setState({
+      suggestions: await this.getMatchingOptions(value),
+      loading: false,
+    });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
       suggestions: [],
+      isLoading: false,
     });
   };
 
