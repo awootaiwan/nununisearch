@@ -118,10 +118,10 @@ class nununiSDK {
       id: this.id,
       productsApiVer: this.productsApiVer,
       text: urlInfo.text,
-      priceRange: this.priceRange,
-      limit: this.limit,
-      sort: this.sort,
-      page: this.page,
+      priceRange: urlInfo.priceRange,
+      limit: urlInfo.limit,
+      sort: urlInfo.sort,
+      page: urlInfo.page,
     }
 
     ReactDOM.render(

@@ -50,7 +50,7 @@ const RightBlock = styled.div`
   }
 `;
 
-function ControlSet({ priceInterval, displayMode, sorting, limit, setSearchCondition }) {
+function ControlSet({ priceInterval, sorting, limit, setSearchCondition }) {
   return  (
     <Container>
       <LeftBlock>

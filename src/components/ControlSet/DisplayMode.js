@@ -12,16 +12,16 @@ const DisplayModeContainer = styled.div`
     margin: 0 10px;
     opacity: .4;
     cursor: pointer;
-  
+
     &:hover {
       opacity: 1;
     }
-  
+
     .svg-inline--fa {
       width: 2em;
       height: 2em;
     }
-  
+
     @media(max-width: 600px) {
       .svg-inline--fa {
         width: 1.5em;
@@ -31,14 +31,10 @@ const DisplayModeContainer = styled.div`
   }
 `;
 
-
-
 function DisplayMode() {
-
-
   function changeToBarMode(){
     const itemBlock = document.querySelector('.default-style');
-    const itemBlockAll = document.querySelectorAll('.default-style');  
+    const itemBlockAll = document.querySelectorAll('.default-style');
     if (!itemBlock.classList.contains('bar-style')){
       itemBlockAll.forEach(item=>item.classList.add('bar-style'));
     }
@@ -47,7 +43,7 @@ function DisplayMode() {
   function changeToBlockMode(){
     const itemBlock = document.querySelector('.default-style');
     const itemBlockAll = document.querySelectorAll('.default-style');
-  
+
     if (itemBlock.classList.contains('bar-style')){
       itemBlockAll.forEach(item=>item.classList.remove('bar-style'));
     }

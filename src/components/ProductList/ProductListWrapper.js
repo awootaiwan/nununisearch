@@ -16,17 +16,11 @@ const App = props => (
   </ThemeProvider>
 );
 
-const getProducts = (id, productsApiVer, text, priceRange, sort, page, limit) => {
+const getProducts = (id, productsApiVer, urlInfo) => {
   return getSiteSearchApiData(
     id,
     productsApiVer,
-    {
-      text,
-      priceRange,
-      sort,
-      page,
-      limit
-    }
+    urlInfo,
   );
 }
 
@@ -61,6 +55,10 @@ const ProductListWrapper = (props) => {
     };
     setUrlInfo(conditions);
     setLoadingState(true);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(`${key}`, value);
+    window.history.pushState(conditions, null, url.search);
   }
 
   // 監聽值改變時重新抓取商品
@@ -69,11 +67,7 @@ const ProductListWrapper = (props) => {
       const res = await getProducts(
         thisId,
         thisApiVer,
-        urlInfo.text,
-        urlInfo.priceRange,
-        urlInfo.sort,
-        urlInfo.page,
-        urlInfo.limit
+        urlInfo,
       );
 
       setResponse(res);
@@ -81,12 +75,25 @@ const ProductListWrapper = (props) => {
     })();
   }, [thisId, thisApiVer, urlInfo]); // 監聽值
 
+  window.onpopstate = (e) => {
+    if (e.state) {
+      const url = new URL(window.location.href);
+      Object.keys(e.state).forEach((key) => {
+        url.searchParams.set(`${key}`, e.state[key]);
+      })
+      window.location.href = url.href;
+
+      // setUrlInfo(e.state);
+      // setLoadingState(true);
+    }
+  }
+
   return (
     <App errcode={response.errcode} errmsg={response.errmsg}>
       <ControlSet
-        priceInterval={props.initCondition.priceRange}
-        sorting={props.initCondition.sort}
-        limit={props.initCondition.limit}
+        priceInterval={urlInfo.priceRange}
+        sorting={urlInfo.sort}
+        limit={urlInfo.limit}
         setSearchCondition={setSearchCondition}
       />
       <ProductList data={response.result} urlInfo={urlInfo} isLoading={isLoading} />
