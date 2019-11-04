@@ -28,7 +28,7 @@ const LoadingMask = styled.div`
 `;
 
 function ProductList({data, urlInfo, isLoading}) {
-  const noData = (urlInfo.text !== '' && isLoading) ? '查無資料' : '';
+  const noData = (urlInfo.text !== '' && !isLoading) ? '查無資料' : '';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>
