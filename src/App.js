@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductListWrapper from './components/ProductList/ProductListWrapper';
-import { getSuggestionApiData } from '/api/base';
+import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
 
 import theme from './theme/colors';
 
@@ -104,6 +104,20 @@ class nununiSDK {
         />
       </App>,
       target
+    );
+  }
+
+  getProducts(text, priceRange, sort, page, limit) {
+    return getSiteSearchApiData(
+      this.id,
+      this.productsApiVer,
+      {
+        text,
+        priceRange,
+        sort,
+        page,
+        limit
+      }
     );
   }
 
