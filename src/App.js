@@ -97,10 +97,11 @@ class nununiSDK {
     );
   }
 
-  getSuggestions(keyword){
+  getSuggestions(version, keyword){
     return getSuggestionApiData(
       this.id,
-      this.suggestionApiVer, {keyword}
+      version,
+      {keyword}
     );
   }
 
@@ -119,7 +120,11 @@ class nununiSDK {
 
     ReactDOM.render(
       <App errcode={0} errmsg={0}>
-        <SearchBar renderSuggestions={this.renderSuggestions} getSuggestion={this.getSuggestions} />
+        <SearchBar
+          renderSuggestions={this.renderSuggestions} 
+          getSuggestion={this.getSuggestions} 
+          version={this.suggestionApiVer}
+        />
       </App>,
       target
     );

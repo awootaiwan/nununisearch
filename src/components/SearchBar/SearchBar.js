@@ -117,7 +117,7 @@ class SearchBar extends React.Component {
   // 呼叫 api
   getMatchingOptions = async (value) => {
     const escapedValue = value.trim();
-    const { result } = await this.props.getSuggestion(escapedValue);
+    const { result } = await this.props.getSuggestion(this.props.version, escapedValue);
     const { suggest } = result;
 
     if (escapedValue === '' || !suggest || suggest.length === 0 ) {
@@ -125,7 +125,6 @@ class SearchBar extends React.Component {
       return [];
     } else if (suggest.length > 0) {
       const suggestArray = Array.from(suggest);
-      console.log(suggestArray);
       this.setState({ isLoading: false });
     return suggestArray;
     }
@@ -146,8 +145,12 @@ class SearchBar extends React.Component {
     window.location = url.href;
   }
 
+  // onSuggestionClick = () => {
+  //   const li = document.querySelector('#nununi-searchbar div[role]=combobox li');
+  // }
+
   // 渲染 suggestions
-  renderSuggestion = (suggestion) => <span>{suggestion}</span>;
+  renderSuggestion = (suggestion) => <div>{suggestion}</div>;
 
   // 設定當suggestion 被點擊時, 什麼資料設為input value
   getSuggestionValue = (suggestion) => {

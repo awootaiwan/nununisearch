@@ -26,10 +26,10 @@ const getSuggestionApiData = async (
   params,
 ) => {
   // TODO version 無法設定，必須 hard code
-  const url = `http://minerva.micpan.awoo.org/search/v1/${id}/termSuggestions`;
+  const url = `/search/${version}/${id}/termSuggestions`;
 
   try {
-    const { status, data: response } = await axios.get(url, { params });
+    const { status, data: response } = await API.get(url, { params });
     if (status !== 200) {
       return getPayload(status, response.error_description, response);
     }
