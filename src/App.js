@@ -5,11 +5,9 @@ import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductList from '/components/ProductList/ProductList';
 import ControlSet from '/components/ControlSet/ControlSet';
-
-import { getSiteSearchApiData } from '/api/base';
-
-
+import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
 import theme from './theme/colors';
+
 const App = props => (
   <ThemeProvider theme={theme}>
     {props.errcode === 0 ? (
@@ -27,6 +25,7 @@ class nununiSDK {
     }
     this.id = id;
     this.productsApiVer = 'latest'; // could be set
+    this.suggestionApiVer = 'latest'; // could be set
 
     this.text = '';
     this.priceRange = '';
@@ -36,6 +35,9 @@ class nununiSDK {
 
   setProductsAPIVersion(apiVer) {
     this.productsApiVer = apiVer;
+  }
+  setSuggestionAPIVersion(apiVer) {
+    this.suggestionApiVer = apiVer;
   }
 
   setLimit(limit) {
@@ -63,6 +65,7 @@ class nununiSDK {
   _getUrlParms() {
     const url = new URL(window.location.href);
     const text = url.searchParams.get('text') || this.text;
+    const keyword = url.searchParams.get('keyword') || this.keyword;
     const priceRange = url.searchParams.get('priceRange') || this.priceRange;
     const page = url.searchParams.get('page') || 1;
     const limit = url.searchParams.get('limit') || this.limit;
@@ -70,6 +73,7 @@ class nununiSDK {
 
     return {
       text,
+      keyword,
       priceRange,
       page,
       limit,
@@ -91,45 +95,34 @@ class nununiSDK {
     );
   }
 
+  getSuggestions(version, keyword){
+    return getSuggestionApiData(
+      this.id,
+      version,
+      {keyword}
+    );
+  }
+
+  renderSuggestions = async () => {
+    const url = new URL(window.location.href);
+    const keyword = url.searchParams.get('keyword');
+    const { errmsg, result } = await this.getSuggestions(keyword);
+    return result;
+  }
+
   async renderSearchBar() {
     const target = document.getElementById('nununi-searchbar');
     if (!target || target.length < 1) {
       throw new Error('請先加入 <div id="nununi-searchbar"></div> HTML標籤');
     }
 
-    const data = {
-      "errcode": 0,
-      "errmsg": "ACK",
-      "result": {
-        "suggest": [
-            "浴室",
-            "浴室噴劑",
-            "浴室地板",
-            "浴室拖",
-            "浴室拖鞋",
-            "浴室排水口強效清洗劑",
-            "浴室架",
-            "浴室清潔劑",
-            "浴室用強效清潔劑",
-            "浴室窗台矽利康強效型除霉劑",
-            "浴室 置物架",
-            "浴室 收納",
-            "浴室 防滑墊",
-            "浴室 防水",
-            "浴室 除黴",
-            "浴室 防潑水",
-            "浴室 止滑",
-            "浴室 清潔劑",
-            "浴室 除霉",
-            "浴室 拖鞋"
-        ]
-      }
-    };
-    const { errcode, errmsg, result } = data;
-
     ReactDOM.render(
-      <App errcode={errcode} errmsg={errmsg}>
-        <SearchBar data={result.suggest} />
+      <App errcode={0} errmsg={0}>
+        <SearchBar
+          renderSuggestions={this.renderSuggestions} 
+          getSuggestion={this.getSuggestions} 
+          version={this.suggestionApiVer}
+        />
       </App>,
       target
     );

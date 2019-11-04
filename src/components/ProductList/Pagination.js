@@ -53,7 +53,7 @@ const BodyPagination = styled.div`
       }
   
       .active:hover {
-        color: ${props => props.theme.colorPaginationActiveText};
+        color: ${props => props.theme.colorPaginationText_active};
       }
     }
   }

@@ -1,10 +1,8 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import debounce from 'lodash/debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
-
 
 const rotate = keyframes`
   to {
@@ -90,7 +88,7 @@ const theme = {
   },
   suggestion: {
     cursor: 'pointer',
-    padding: '10px 20px',
+    padding: '0',
   },
   suggestionHighlighted: {
     backgroundColor: '#ddd',
@@ -102,92 +100,87 @@ const theme = {
   },
 };
 
-const INPUT_PLACEHOLD = '請輸入搜尋關鍵字';
-// how long the API debounced
-const API_DEBOUNCED = 1000;
+const suggestInlineStyle = {
+  padding: '10px 20px'
+}
 
+const INPUT_PLACEHOLD = '請輸入搜尋關鍵字';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-
-    // Return a new debounced function 
-    // TODO 接上api 後應該要刪除
-    this.debouncedLoadSuggestions = debounce(this.loadSuggestions, API_DEBOUNCED);
-
     this.state = {
       value: '',
       suggestions: [],
       isLoading: false,
+      errorcode: 0,
+      errmsg: 0
     };
   }
 
-  loadSuggestions = (value) => {
-    this.setState({
-      isLoading: true,
-    });
-
-    // Fake an AJAX call
-    // TODO 接上api後需要改寫
-    setTimeout(() => {
-      const suggestions = this.getMatchingOptions(value);
-
-      if (value === this.state.value) {
-        this.setState({
-          isLoading: false,
-          suggestions,
-        });
-      } else {
-        // Ignore suggestions if input value changed
-        this.setState({
-          isLoading: false,
-        });
-      }
-    }, 1000);
-  }
-
-  // input value and data 的比對，生成匹配suggestion 元素
-  getMatchingOptions = (value) => {
-    const escapedValue = value.trim();
-    if (escapedValue === '') {
-      return [];
+  checkError = () => {
+    if (this.state.errorcode != 0){
+      console.log(this.state.errmsg);
     }
-    const regex = new RegExp(escapedValue, 'i');
-    return this.props.data.filter((dataItem) => regex.test(dataItem));
   }
 
+  // 呼叫 api
+  getMatchingOptions = async (value) => {
+    const escapedValue = value.trim();
+    const { errorcode, errmsg, result } = await this.props.getSuggestion(this.props.version, escapedValue);
+    const { suggest } = result;
+
+    this.setState({errorcode: errorcode, errmsg: errmsg});
+    this.checkError();
+
+    if (escapedValue === '' || !suggest || suggest.length === 0 ) {
+      this.setState({ isLoading: false });
+      return [];
+    } else if (suggest.length > 0) {
+      const suggestArray = Array.from(suggest);
+      this.setState({ isLoading: false });
+    return suggestArray;
+    }
+  }
   // input 的 onChange屬性
-  // 有可能在這裡要發送 request 給 suggestion
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue,
+      isLoading: true,
     });
   };
 
-  onSearch = () => {
+  onSearch = (text) => {
     const url = new URL(window.location.href);
-    const text = this.state.value;
-
     url.searchParams.set('text', text);
     window.location = url.href;
   }
 
   // 渲染 suggestions
-  renderSuggestion = (suggestion) => <span>{suggestion}</span>;
+  renderSuggestion = (suggestion) => <div
+                                        style={suggestInlineStyle}
+                                        onClick={(event) => this.onSearch(event.target.textContent)}
+                                      >
+                                        {suggestion}
+                                      </div>;
 
   // 設定當suggestion 被點擊時, 什麼資料設為input value
-  getSuggestionValue = (suggestion) => suggestion;
+  getSuggestionValue = (suggestion) => {
+    this.setState({ isLoading: false });
+    return suggestion
+  };
 
   // 輸入內容後,找尋Suggestions
-  // TODO 接上api 後應該要改寫
-  onSuggestionsFetchRequested = ({ value }) => {
-    if (this.state.suggestions) {
-      this.debouncedLoadSuggestions(value);
-    }
+  onSuggestionsFetchRequested = async ({ value }) => {
+    this.setState({
+      suggestions: await this.getMatchingOptions(value),
+      loading: false,
+    });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
       suggestions: [],
+      isLoading: false,
     });
   };
 
@@ -205,15 +198,18 @@ class SearchBar extends React.Component {
       <React.Fragment>
         <SearchInput>
           <div className='icon-wrapper'>
-          {isLoading ? (
-            <div className="spinner-wrapper">
-              <FontAwesomeIcon icon={faSpinner} />
-            </div>
-          ) : (
-            <div className="search-wrapper">
-              <FontAwesomeIcon icon={faSearch} onClick={this.onSearch} />
-            </div>
-          )}
+            {isLoading ? (
+              <div className="spinner-wrapper">
+                <FontAwesomeIcon icon={faSpinner} />
+              </div>
+            ) : (
+              <div className="search-wrapper">
+                <FontAwesomeIcon 
+                  icon={faSearch} 
+                  onClick={() => this.onSearch(this.state.value)} 
+                />
+              </div>
+            )}
           </div>
 
           <Autosuggest
