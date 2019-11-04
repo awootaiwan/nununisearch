@@ -1,6 +1,5 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import debounce from 'lodash/debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
@@ -91,7 +90,7 @@ const theme = {
   },
   suggestion: {
     cursor: 'pointer',
-    padding: '10px 20px',
+    padding: '0',
   },
   suggestionHighlighted: {
     backgroundColor: '#ddd',
@@ -102,6 +101,10 @@ const theme = {
     listStyleType: 'none',
   },
 };
+
+const suggestInlineStyle = {
+  padding: '10px 20px'
+}
 
 const INPUT_PLACEHOLD = '請輸入搜尋關鍵字';
 class SearchBar extends React.Component {
@@ -137,20 +140,19 @@ class SearchBar extends React.Component {
     });
   };
 
-  onSearch = () => {
+  onSearch = (text) => {
     const url = new URL(window.location.href);
-    const text = this.state.value;
-
     url.searchParams.set('text', text);
     window.location = url.href;
   }
 
-  // onSuggestionClick = () => {
-  //   const li = document.querySelector('#nununi-searchbar div[role]=combobox li');
-  // }
-
   // 渲染 suggestions
-  renderSuggestion = (suggestion) => <div>{suggestion}</div>;
+  renderSuggestion = (suggestion) => <div
+                                        style={suggestInlineStyle}
+                                        onClick={() => this.onSearch(event.target.textContent)}
+                                      >
+                                        {suggestion}
+                                      </div>;
 
   // 設定當suggestion 被點擊時, 什麼資料設為input value
   getSuggestionValue = (suggestion) => {
@@ -159,7 +161,6 @@ class SearchBar extends React.Component {
   };
 
   // 輸入內容後,找尋Suggestions
-  // TODO 接上api 後應該要改寫
   onSuggestionsFetchRequested = async ({ value }) => {
     this.setState({
       suggestions: await this.getMatchingOptions(value),
@@ -194,7 +195,10 @@ class SearchBar extends React.Component {
             </div>
           ) : (
             <div className="search-wrapper">
-              <FontAwesomeIcon icon={faSearch} onClick={this.onSearch} />
+              <FontAwesomeIcon 
+                icon={faSearch} 
+                onClick={() => this.onSearch(this.state.value)} 
+              />
             </div>
           )}
           </div>
