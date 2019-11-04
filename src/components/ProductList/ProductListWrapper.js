@@ -77,14 +77,14 @@ const ProductListWrapper = (props) => {
 
   window.onpopstate = (e) => {
     if (e.state) {
-      const url = new URL(window.location.href);
-      Object.keys(e.state).forEach((key) => {
-        url.searchParams.set(`${key}`, e.state[key]);
-      })
-      window.location.href = url.href;
+      // const url = new URL(window.location.href);
+      // Object.keys(e.state).forEach((key) => {
+      //   url.searchParams.set(`${key}`, e.state[key]);
+      // })
+      // window.location.href = url.href;
 
-      // setUrlInfo(e.state);
-      // setLoadingState(true);
+      setUrlInfo(e.state);
+      setLoadingState(true);
     }
   }
 
