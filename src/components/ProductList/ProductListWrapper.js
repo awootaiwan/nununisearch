@@ -7,7 +7,7 @@ import { getSiteSearchApiData } from '../../api/base';
 
 
 import theme from '../../theme/colors';
-const App = props => (
+const WrapperApp = props => (
   <ThemeProvider theme={theme}>
     {props.errcode === 0 ? (
       props.children
@@ -103,7 +103,7 @@ const ProductListWrapper = (props) => {
   }
 
   return (
-    <App errcode={response.errcode} errmsg={response.errmsg}>
+    <WrapperApp errcode={response.errcode} errmsg={response.errmsg}>
       <ControlSet
         sorting={urlInfo.sort}
         limit={urlInfo.limit}
@@ -114,7 +114,7 @@ const ProductListWrapper = (props) => {
         setMaxPrice={setMaxPrice}
       />
       <ProductList data={response.result} urlInfo={urlInfo} isLoading={isLoading} />
-    </App>
+    </WrapperApp>
   );
 }
 
