@@ -1,0 +1,23 @@
+{
+  "productList": {
+    "noData": "查無資料"
+  },
+  "productBlock": {
+    "outofStock": "缺貨中"
+  },
+  "controlSet": {
+    "sort32": "一頁32個商品",
+    "sort64": "一頁64個商品",
+    "sort80": "一頁80個商品",
+    "sortPriceToHigh": "價格由低到高",
+    "sortPriceToLow": "價格由高到低",
+    "sortNew": "最新上架",
+    "display": "顯示",
+    "priceRange": "價格區間",
+    "search": "搜尋",
+    "lowest": "最低",
+    "highest": "最高"
+  },
+  "alert": "請與管理者聯絡",
+  "searchPlaceholder": "請輸入搜尋關鍵字"
+}
