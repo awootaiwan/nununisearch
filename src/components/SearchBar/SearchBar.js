@@ -3,8 +3,6 @@ import Autosuggest from 'react-autosuggest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
-import { type } from 'os';
-
 
 const rotate = keyframes`
   to {
@@ -132,7 +130,7 @@ class SearchBar extends React.Component {
     const { suggest } = result;
 
     this.setState({errorcode: errorcode, errmsg: errmsg});
-    checkError();
+    this.checkError();
 
     if (escapedValue === '' || !suggest || suggest.length === 0 ) {
       this.setState({ isLoading: false });
@@ -160,7 +158,7 @@ class SearchBar extends React.Component {
   // 渲染 suggestions
   renderSuggestion = (suggestion) => <div
                                         style={suggestInlineStyle}
-                                        onClick={() => this.onSearch(event.target.textContent)}
+                                        onClick={(event) => this.onSearch(event.target.textContent)}
                                       >
                                         {suggestion}
                                       </div>;
