@@ -113,15 +113,26 @@ class SearchBar extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
-      isLoading: false
+      isLoading: false,
+      errorcode: 0,
+      errmsg: 0
     };
+  }
+
+  checkError = () => {
+    if (this.state.errorcode != 0){
+      console.log(this.state.errmsg);
+    }
   }
 
   // 呼叫 api
   getMatchingOptions = async (value) => {
     const escapedValue = value.trim();
-    const { result } = await this.props.getSuggestion(this.props.version, escapedValue);
+    const { errorcode, errmsg, result } = await this.props.getSuggestion(this.props.version, escapedValue);
     const { suggest } = result;
+
+    this.setState({errorcode: errorcode, errmsg: errmsg});
+    checkError();
 
     if (escapedValue === '' || !suggest || suggest.length === 0 ) {
       this.setState({ isLoading: false });
@@ -189,18 +200,18 @@ class SearchBar extends React.Component {
       <React.Fragment>
         <SearchInput>
           <div className='icon-wrapper'>
-          {isLoading ? (
-            <div className="spinner-wrapper">
-              <FontAwesomeIcon icon={faSpinner} />
-            </div>
-          ) : (
-            <div className="search-wrapper">
-              <FontAwesomeIcon 
-                icon={faSearch} 
-                onClick={() => this.onSearch(this.state.value)} 
-              />
-            </div>
-          )}
+            {isLoading ? (
+              <div className="spinner-wrapper">
+                <FontAwesomeIcon icon={faSpinner} />
+              </div>
+            ) : (
+              <div className="search-wrapper">
+                <FontAwesomeIcon 
+                  icon={faSearch} 
+                  onClick={() => this.onSearch(this.state.value)} 
+                />
+              </div>
+            )}
           </div>
 
           <Autosuggest

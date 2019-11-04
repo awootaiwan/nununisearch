@@ -5,11 +5,9 @@ import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductList from '/components/ProductList/ProductList';
 import ControlSet from '/components/ControlSet/ControlSet';
-
 import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
-
-
 import theme from './theme/colors';
+
 const App = props => (
   <ThemeProvider theme={theme}>
     {props.errcode === 0 ? (

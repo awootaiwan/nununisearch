@@ -1,5 +1,3 @@
-// import API from './config';
-import axios from 'axios';
 import API from './config';
 
 const ERROR_NONE = 0;
@@ -25,7 +23,6 @@ const getSuggestionApiData = async (
   version,
   params,
 ) => {
-  // TODO version 無法設定，必須 hard code
   const url = `/search/${version}/${id}/termSuggestions`;
 
   try {
