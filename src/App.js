@@ -103,13 +103,6 @@ class nununiSDK {
     );
   }
 
-  renderSuggestions = async () => {
-    const url = new URL(window.location.href);
-    const keyword = url.searchParams.get('keyword');
-    const { errmsg, result } = await this.getSuggestions(keyword);
-    return result;
-  }
-
   async renderSearchBar() {
     const target = document.getElementById('nununi-searchbar');
     if (!target || target.length < 1) {
@@ -119,7 +112,6 @@ class nununiSDK {
     ReactDOM.render(
       <App errcode={0} errmsg={0}>
         <SearchBar
-          renderSuggestions={this.renderSuggestions} 
           getSuggestion={this.getSuggestions} 
           version={this.suggestionApiVer}
         />
