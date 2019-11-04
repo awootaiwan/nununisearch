@@ -36,40 +36,30 @@ const PriceSubmitBtn = styled.button`
 class PriceInterval extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      minPrice: this.getPrice(props.interval).minPrice,
-      maxPrice: this.getPrice(props.interval).maxPrice
-    };
-  }
-
-  getPrice = (interval) => {
-    const intervalStr = `${interval}-`.split('-'); // 確保空字串也能被解析
-
-    return {
-      minPrice: intervalStr[0],
-      maxPrice: intervalStr[1]
-    }
+    this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
+    this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   handleMinPriceChange = (event) => {
-    this.setState({ minPrice: event.target.value });
+    this.props.setMinPrice(event.target.value);
   }
 
   handleMaxPriceChange = (event) => {
-    this.setState({ maxPrice: event.target.value });
+    this.props.setMaxPrice(event.target.value);
   }
 
   onSearch = () => {
-    this.props.setSearchCondition('priceRange', `${this.state.minPrice}-${this.state.maxPrice}`);
+    this.props.setSearchCondition('priceRange', `${this.props.minPrice}-${this.props.maxPrice}`);
   }
 
   render() {
     return  (
       <React.Fragment>
         <span>價格區間</span>
-        <PriceInput type='number' placeholder='$最低' value={this.state.minPrice} onChange={this.handleMinPriceChange} />
+        <PriceInput type='number' placeholder='$最低' value={this.props.minPrice} onChange={this.handleMinPriceChange} />
         <span> - </span>
-        <PriceInput type='number' placeholder='$最高' value={this.state.maxPrice} onChange={this.handleMaxPriceChange} />
+        <PriceInput type='number' placeholder='$最高' value={this.props.maxPrice} onChange={this.handleMaxPriceChange} />
         <PriceSubmitBtn onClick={this.onSearch}>搜尋</PriceSubmitBtn>
       </React.Fragment>
     );

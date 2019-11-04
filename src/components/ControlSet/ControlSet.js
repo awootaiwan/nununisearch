@@ -50,11 +50,17 @@ const RightBlock = styled.div`
   }
 `;
 
-function ControlSet({ priceInterval, sorting, limit, setSearchCondition }) {
+function ControlSet({ sorting, limit, setSearchCondition, setMinPrice, setMaxPrice, minPrice, maxPrice }) {
   return  (
     <Container>
       <LeftBlock>
-        <PriceInterval interval={priceInterval} setSearchCondition={setSearchCondition} />
+        <PriceInterval
+          setSearchCondition={setSearchCondition}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+        />
       </LeftBlock>
 
       <RightBlock>

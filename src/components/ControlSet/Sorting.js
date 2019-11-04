@@ -47,7 +47,7 @@ class Sorting extends React.Component {
         <span>排序</span>
         <Select
           options={sortOptions}
-          defaultValue={sortOptions.filter(option => option.value === this.props.sorting.toString())}
+          value={sortOptions.filter(option => option.value === this.props.sorting.toString())}
           onChange={this.onChange}
           styles={selectorStyle}
         />

@@ -44,7 +44,7 @@ class DisplayAmount extends React.Component {
         <span>顯示</span>
         <Select
           options={sortOptions}
-          defaultValue={sortOptions.filter(option => option.value === this.props.limit.toString())}
+          value={sortOptions.filter(option => option.value === this.props.limit.toString())}
           onChange={this.onChange}
           styles={selectorStyle}
         />

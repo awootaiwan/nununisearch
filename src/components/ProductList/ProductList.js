@@ -40,7 +40,7 @@ function ProductList({data, urlInfo, isLoading}) {
         (!items || items.length <= 0) ?
           <ProductNoData>{noData}</ProductNoData> :
           <ProductWrapper sorting={sorting}>
-            {(isLoading) ? <LoadingMask /> : ''}
+            {isLoading && <LoadingMask />}
             {productBlocks}
           </ProductWrapper>
       }
