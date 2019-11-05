@@ -1,0 +1,30 @@
+#nununi-searchbar{
+  padding: 10px 20px;
+}
+
+#nununi-searchbar .icon-wrapper {
+  background-color:green;
+}
+
+#nununi-productlist .icon-wrapper {
+  color:green;
+}
+
+#nununi-productlist{
+  padding: 10px 20px;
+}
+#nununi-productlist span{
+  color: purple;
+}
+
+#nununi-productlist .nununi_controlset-priceinput {
+  color: red;
+}
+
+#nununi-productlist .nununi_controlset-price-submitbtn {
+  background-color: pink;
+}
+
+#nununi-productlist .nununi_controlset-selector {
+  color: yellow;
+}
