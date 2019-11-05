@@ -9,6 +9,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "axios": "^0.19.0",
+    "i18next": "^19.0.0",
     "parcel-bundler": "^1.12.4",
     "react": "^16.10.2",
     "react-autosuggest": "^9.4.3",
@@ -27,8 +28,7 @@
     "watch": "parcel watch src/index.html",
     "watch:app": "parcel watch src/App.js",
     "build:style": "parcel build demo/scss/*.scss --no-source-maps --out-dir demo/css",
-    "build:app": "parcel build src/App.js --out-dir production --out-file nununi-sdk-latest.min.js --no-source-maps",
-    "demo": "parcel src/index.html"
+    "build:app": "parcel build src/App.js --out-dir production --out-file nununi-sdk-latest.min.js --no-source-maps"
   },
   "eslintConfig": {
     "extends": "react-app"
