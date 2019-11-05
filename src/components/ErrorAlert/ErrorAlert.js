@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Div = styled.div`
   color: #721c24;
@@ -13,11 +13,12 @@ const Div = styled.div`
 `;
 
 function ErrorAlert(data) {
+  const { t } = useTranslation();
   return (
     <Div role="alert">
-      {data.errmsg}  {t('alert')}
+      {data.errmsg} {t('alert')}
     </Div>
   )
 }
 
-export default withTranslation()(ErrorAlert);
+export default ErrorAlert;
