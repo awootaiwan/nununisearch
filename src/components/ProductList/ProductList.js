@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import ProductBlock from './ProductBlock';
-import Pagination from "./Pagination"
+import Pagination from "./Pagination";
+import { withTranslation } from 'react-i18next';
 
 const ProductWrapper = styled.div`
   position: relative;
@@ -27,8 +28,8 @@ const LoadingMask = styled.div`
   background-color: rgba(35, 24, 21, .4);
 `;
 
-function ProductList({data, urlInfo, isLoading}) {
-  const noData = (urlInfo.text !== '' && !isLoading) ? '查無資料' : '';
+function ProductList({data, urlInfo, isLoading, t}) {
+  const noData = (urlInfo.text !== '' && !isLoading) ? t('productList.noData') : '';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>
@@ -51,4 +52,4 @@ function ProductList({data, urlInfo, isLoading}) {
   )
 }
 
-export default ProductList;
+export default withTranslation()(ProductList);

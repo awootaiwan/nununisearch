@@ -5,9 +5,7 @@ const ERROR_REQUEST_FAILED = 10000;
 const ERROR_NO_TAGS_PROVIDED = 10001;
 const errMap = new Map([
   [ERROR_NONE, 'Success'],
-  [ERROR_REQUEST_FAILED, 'Request to Site Search API failed.'],
-  // TODO 可能沒有tag 待確認
-  [ERROR_NO_TAGS_PROVIDED, 'No tags provided.']
+  [ERROR_REQUEST_FAILED, 'Request to Site Search API failed.']
 ]);
 
 function getPayload(errCode = ERROR_NONE, errMsg = '', result = '') {

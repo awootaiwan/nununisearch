@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withTranslation } from 'react-i18next';
 
 const PriceInput = styled.input`
   box-sizing: border-box;
@@ -56,14 +57,14 @@ class PriceInterval extends React.Component {
   render() {
     return  (
       <React.Fragment>
-        <span>價格區間</span>
-        <PriceInput type='number' placeholder='$最低' value={this.props.minPrice} onChange={this.handleMinPriceChange} />
+        <span>{this.props.t('controlSet.priceRange')}</span>
+        <PriceInput type='number' placeholder={this.props.t('controlSet.lowest')} value={this.props.minPrice} onChange={this.handleMinPriceChange} />
         <span> - </span>
-        <PriceInput type='number' placeholder='$最高' value={this.props.maxPrice} onChange={this.handleMaxPriceChange} />
-        <PriceSubmitBtn onClick={this.onSearch}>搜尋</PriceSubmitBtn>
+        <PriceInput type='number' placeholder={this.props.t('controlSet.highest')} value={this.props.maxPrice} onChange={this.handleMaxPriceChange} />
+        <PriceSubmitBtn onClick={this.onSearch}>{this.props.t('controlSet.search')}</PriceSubmitBtn>
       </React.Fragment>
     );
   }
 }
 
-export default PriceInterval;
+export default withTranslation()(PriceInterval);

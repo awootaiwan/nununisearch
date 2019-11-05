@@ -5,6 +5,8 @@ import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductListWrapper from './components/ProductList/ProductListWrapper';
 import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
+import i18next from 'i18next';
+import './i18n';
 
 import theme from './theme/colors';
 
@@ -21,7 +23,7 @@ const App = props => (
 class nununiSDK {
   constructor(id = process.env.NUNUNI_ID) {
     if (!id || id.length < 1) {
-      throw new Error('nununi id is not setting');
+      throw new Error(i18next.t('nununiError.id'));
     }
     this.id = id;
     this.productsApiVer = 'latest'; // could be set
@@ -43,22 +45,22 @@ class nununiSDK {
 
   setLimit(limit) {
     if (typeof limit != 'number') {
-      throw Error('setLimit is not number.');
+      throw Error(i18next.t('nununiError.limitNotNumber'));
     }
 
     if (limit < 1) {
-      throw Error('limit need to be greater than 0.');
+      throw Error(i18next.t('nununiError.limitTooSmall'));
     }
     this.limit = limit;
   }
 
   setSort(sort) {
     if (typeof sort != 'number') {
-      throw Error('setSort is not number.');
+      throw Error(i18next.t('nununiError.sortNotNumber'));
     }
 
     if (sort !== 1 && sort !== 2 && sort !== 11) {
-      throw Error('Sort type is not in [1, 2, 11].');
+      throw Error(i18next.t('nununiError.sortTypeErr'));
     }
     this.sort = sort;
   }
@@ -93,7 +95,7 @@ class nununiSDK {
   async renderSearchBar() {
     const target = document.getElementById('nununi-searchbar');
     if (!target || target.length < 1) {
-      throw new Error('請先加入 <div id="nununi-searchbar"></div> HTML標籤');
+      throw new Error(i18next.t('nununiError.searchBarTag'));
     }
 
     ReactDOM.render(
@@ -118,7 +120,7 @@ class nununiSDK {
   async renderProductList() {
     const target = document.getElementById('nununi-productlist');
     if (!target || target.length < 1) {
-      throw new Error('請先加入 <div id="nununi-productlist"></div> HTML標籤');
+      throw new Error(i18next.t('nununiError.productListTag'));
     }
 
     const urlInfo = this._getUrlParms();
@@ -150,4 +152,4 @@ const freeSelf =
 /** Used as a reference to the global object. */
 const root = freeGlobal || freeSelf || Function('return this')();
 
-module.exports = root.nununiSDK = nununiSDK;
+module.exports = root.nununiSDK = nununiSDK;  
