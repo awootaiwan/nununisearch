@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import LazyLoad from 'react-lazyload';
+import { withTranslation } from 'react-i18next';
 
 const ProductItem = styled.div`
   position: relative;
@@ -178,9 +179,9 @@ const ProductItem = styled.div`
   }
 `
 
-function ProductBlock({product}){
+function ProductBlock({product, t}){
   
-  const outOfStock = '缺貨中';
+  const outOfStock = t('productBlock.outofStock');
   const backgroundProductImg = {
     backgroundImage: 'url('+`${product.productImageUrl}`+')'
   }
@@ -226,4 +227,4 @@ function ProductBlock({product}){
   )
 }
 
-export default ProductBlock;
+export default withTranslation()(ProductBlock);

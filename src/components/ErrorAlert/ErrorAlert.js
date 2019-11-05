@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withTranslation } from 'react-i18next';
 
 const Div = styled.div`
   color: #721c24;
@@ -14,9 +15,9 @@ const Div = styled.div`
 function ErrorAlert(data) {
   return (
     <Div role="alert">
-      {data.errmsg}  (請與管理者聯絡)
+      {data.errmsg}  {t('alert')}
     </Div>
   )
 }
 
-export default ErrorAlert
+export default withTranslation()(ErrorAlert);

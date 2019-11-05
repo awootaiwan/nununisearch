@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
+import { withTranslation } from 'react-i18next';
 
 const DisplayAmountContainer = styled.div`
   display: flex;
@@ -22,12 +23,6 @@ const selectorStyle = {
   })
 }
 
-const sortOptions = [
-  { value: '32', label: '一頁32個商品' },
-  { value: '64', label: '一頁64個商品' },
-  { value: '80', label: '一頁80個商品' }
-]
-
 class DisplayAmount extends React.Component {
   constructor(props) {
     super(props);
@@ -39,9 +34,15 @@ class DisplayAmount extends React.Component {
   }
 
   render() {
+    const sortOptions = [
+      { value: '32', label: this.props.t('controlSet.sort32') },
+      { value: '64', label: this.props.t('controlSet.sort64') },
+      { value: '80', label: this.props.t('controlSet.sort80') }
+    ]
+
     return  (
       <DisplayAmountContainer>
-        <span>顯示</span>
+        <span>{this.props.t('controlSet.display')}</span>
         <Select
           options={sortOptions}
           value={sortOptions.filter(option => option.value === this.props.limit.toString())}
@@ -53,4 +54,4 @@ class DisplayAmount extends React.Component {
   }
 }
 
-export default DisplayAmount;
+export default withTranslation()(DisplayAmount);

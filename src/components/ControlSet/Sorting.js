@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
+import { withTranslation } from 'react-i18next';
 
 const SortingContainer = styled.div`
   display: flex;
@@ -25,12 +26,6 @@ const selectorStyle = {
   })
 }
 
-const sortOptions = [
-  { value: '1', label: '價格由低到高' },
-  { value: '2', label: '價格由高到低' },
-  { value: '11', label: '最新上架' }
-]
-
 class Sorting extends React.Component {
   constructor(props) {
     super(props);
@@ -42,9 +37,16 @@ class Sorting extends React.Component {
   }
 
   render() {
+
+    const sortOptions = [
+      { value: '1', label: this.props.t('controlSet.sortPriceToHigh') },
+      { value: '2', label: this.props.t('controlSet.sortPriceToLow') },
+      { value: '11', label: this.props.t('controlSet.sortNew') }
+    ]
+
     return  (
       <SortingContainer>
-        <span>排序</span>
+        <span>{this.props.t('controlSet.sort')}</span>
         <Select
           options={sortOptions}
           value={sortOptions.filter(option => option.value === this.props.sorting.toString())}
@@ -56,4 +58,4 @@ class Sorting extends React.Component {
   }
 }
 
-export default Sorting;
+export default withTranslation()(Sorting);

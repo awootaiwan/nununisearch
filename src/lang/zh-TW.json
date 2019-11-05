@@ -15,6 +15,7 @@
     "outofStock": "缺貨中"
   },
   "controlSet": {
+    "sort": "排序",
     "sort32": "一頁32個商品",
     "sort64": "一頁64個商品",
     "sort80": "一頁80個商品",
@@ -24,8 +25,8 @@
     "display": "顯示",
     "priceRange": "價格區間",
     "search": "搜尋",
-    "lowest": "最低",
-    "highest": "最高"
+    "lowest": "$最低",
+    "highest": "$最高"
   },
   "alert": "請與管理者聯絡",
   "searchPlaceholder": "請輸入搜尋關鍵字"

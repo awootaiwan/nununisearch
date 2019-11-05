@@ -5,6 +5,7 @@ import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductListWrapper from './components/ProductList/ProductListWrapper';
 import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
+import './i18n';
 
 import theme from './theme/colors';
 

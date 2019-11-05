@@ -3,6 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
+import { withTranslation } from 'react-i18next';
 
 const rotate = keyframes`
   to {
@@ -104,7 +105,6 @@ const suggestInlineStyle = {
   padding: '10px 20px'
 }
 
-const INPUT_PLACEHOLD = '請輸入搜尋關鍵字';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -188,6 +188,7 @@ class SearchBar extends React.Component {
 
   render() {
     const { value, suggestions, isLoading } = this.state;
+    const INPUT_PLACEHOLD = this.props.t('searchPlaceholder');
 
     // input 屬性的設定
     const inputProps = {
@@ -231,4 +232,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default withTranslation()(SearchBar);
