@@ -29,16 +29,13 @@ const sortOptions = [
 ]
 
 class DisplayAmount extends React.Component {
-  constructor({ limit }) {
-    super();
-    this.limit = limit;
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange = (option) => {
-    const url = new URL(window.location.href);
-
-    url.searchParams.set('limit', option.value);
-    window.location = url.href;
+    this.props.setSearchCondition('limit', option.value);
   }
 
   render() {
@@ -47,7 +44,7 @@ class DisplayAmount extends React.Component {
         <span>顯示</span>
         <Select
           options={sortOptions}
-          defaultValue={sortOptions.filter(option => option.value === this.limit.toString())}
+          value={sortOptions.filter(option => option.value === this.props.limit.toString())}
           onChange={this.onChange}
           styles={selectorStyle}
         />

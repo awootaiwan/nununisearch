@@ -25,18 +25,18 @@ const SearchInput = styled.div`
     border-radius: 0 5px 5px 0;
     background-color: ${props => props.theme.colorBtnBg};
     z-index: 2;
-  
+
     &:hover {
       background-color: ${props => props.theme.colorBtnBg_hover};
       border-color: ${props => props.theme.colorBtnBg_hover};
     }
-  
+
     div {
       position: absolute;
       top: calc(100% - 32px);
       text-align: center;
     }
-  
+
     .spinner-wrapper {
       color: ${props => props.theme.colorBtnText};
       animation: ${rotate} 1s linear infinite;
@@ -152,6 +152,8 @@ class SearchBar extends React.Component {
   onSearch = (text) => {
     const url = new URL(window.location.href);
     url.searchParams.set('text', text);
+    url.searchParams.set('page', 1);
+    url.searchParams.set('priceRange', '');
     window.location = url.href;
   }
 
@@ -204,9 +206,9 @@ class SearchBar extends React.Component {
               </div>
             ) : (
               <div className="search-wrapper">
-                <FontAwesomeIcon 
-                  icon={faSearch} 
-                  onClick={() => this.onSearch(this.state.value)} 
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  onClick={() => this.onSearch(this.state.value)}
                 />
               </div>
             )}

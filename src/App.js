@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
-import ProductList from '/components/ProductList/ProductList';
-import ControlSet from '/components/ControlSet/ControlSet';
+import ProductListWrapper from './components/ProductList/ProductListWrapper';
 import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
+
 import theme from './theme/colors';
 
 const App = props => (
@@ -29,6 +29,7 @@ class nununiSDK {
 
     this.text = '';
     this.priceRange = '';
+    this.page = 1;
     this.limit = 32; // could be set
     this.sort = 1; // could be set
   }
@@ -81,21 +82,7 @@ class nununiSDK {
     };
   }
 
-  getProducts(text, priceRange, sort, page, limit) {
-    return getSiteSearchApiData(
-      this.id,
-      this.productsApiVer,
-      {
-        text,
-        priceRange,
-        sort,
-        page,
-        limit
-      }
-    );
-  }
-
-  getSuggestions(version, keyword){
+  getSuggestions = (version, keyword) => {
     return getSuggestionApiData(
       this.id,
       version,
@@ -112,11 +99,19 @@ class nununiSDK {
     ReactDOM.render(
       <App errcode={0} errmsg={0}>
         <SearchBar
-          getSuggestion={this.getSuggestions} 
+          getSuggestion={this.getSuggestions}
           version={this.suggestionApiVer}
         />
       </App>,
       target
+    );
+  }
+
+  getProducts = (urlInfo) => {
+    return getSiteSearchApiData(
+      this.id,
+      this.productsApiVer,
+      urlInfo
     );
   }
 
@@ -127,23 +122,18 @@ class nununiSDK {
     }
 
     const urlInfo = this._getUrlParms();
-    const { errcode, errmsg, result } = await this.getProducts(
-      urlInfo.text,
-      urlInfo.priceRange,
-      urlInfo.sort,
-      urlInfo.page,
-      urlInfo.limit
-    );
+    const initCondition = {
+      id: this.id,
+      productsApiVer: this.productsApiVer,
+      text: urlInfo.text,
+      priceRange: urlInfo.priceRange,
+      limit: urlInfo.limit,
+      sort: urlInfo.sort,
+      page: urlInfo.page,
+    }
 
     ReactDOM.render(
-      <App errcode={errcode} errmsg={errmsg}>
-        <ControlSet
-          priceInterval={urlInfo.priceRange}
-          sorting={urlInfo.sort}
-          limit={urlInfo.limit}
-        />
-        <ProductList data={result} urlInfo={urlInfo}/>
-      </App>,
+      <ProductListWrapper initCondition={initCondition} getProducts={this.getProducts} />,
       target
     );
   }
