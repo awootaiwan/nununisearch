@@ -13,8 +13,6 @@ import theme from './theme/colors';
 import CupidSDK from "@awootaiwan/cupid-sdk-js";
 const cupidSDK = new CupidSDK(process.env.NUNUNI_ID);
 
-
-
 const App = props => (
   <ThemeProvider theme={theme}>
     {props.errcode === 0 ? (
@@ -155,6 +153,9 @@ class nununiSDK {
       page: urlInfo.page,
     }
 
+    const url = new URL(window.location.href);
+    window.history.replaceState(urlInfo, null, url.search);
+
     ReactDOM.render(
       <ProductListWrapper
         initCondition={initCondition}
@@ -178,4 +179,4 @@ const freeSelf =
 /** Used as a reference to the global object. */
 const root = freeGlobal || freeSelf || Function('return this')();
 
-module.exports = root.nununiSDK = nununiSDK;  
+module.exports = root.nununiSDK = nununiSDK;
