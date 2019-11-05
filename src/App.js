@@ -82,10 +82,10 @@ class nununiSDK {
     };
   }
 
-  getSuggestions = (version, keyword) => {
+  getSuggestions = (keyword) => {
     return getSuggestionApiData(
       this.id,
-      version,
+      this.suggestionApiVer,
       {keyword}
     );
   }
