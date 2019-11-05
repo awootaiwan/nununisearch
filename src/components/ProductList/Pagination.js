@@ -61,6 +61,10 @@ const BodyPagination = styled.div`
           color: ${props => props.theme.colorPaginationText_active};
         }
       }
+
+      &.disabledBtn {
+        display: none;
+      }
     }
   }
 `;
@@ -80,6 +84,7 @@ function Pagination ({ paging, setSearchCondition }) {
         nextLabel={'>'}
         onPageChange={onPageChange}
         forcePage={paging.currentPage - 1}
+        disabledClassName={'disabledBtn'}
       />
     </BodyPagination>
   )
