@@ -65,13 +65,23 @@ const ProductListWrapper = (props) => {
   useEffect(() => {
     (async () => {
       const res = await props.getProducts(urlInfo);
-
       setResponse(res);
-      setLoadingState(false);
+      if (res) setLoadingState(false);
 
       // for 價格區間input 顯示
       setMinPrice(getPrice(urlInfo.priceRange).minPrice);
       setMaxPrice(getPrice(urlInfo.priceRange).maxPrice);
+
+      // render Cupid Classify
+      if (props.initCondition.hasCupidClassify) {
+        const productsId = props.getProductsId(res.result.items)
+
+        if (productsId.length !== 0) {
+          props.renderClassify(productsId);
+        } else {
+          document.getElementById('cupid-classify').innerHTML = '';
+        }
+      }
     })();
   }, [props, urlInfo]); // 監聽值
 
@@ -83,6 +93,17 @@ const ProductListWrapper = (props) => {
       // for 價格區間input 顯示
       setMinPrice(getPrice(e.state.priceRange).minPrice);
       setMaxPrice(getPrice(e.state.priceRange).maxPrice);
+
+      // render Cupid Classify
+      if (props.initCondition.hasCupidClassify) {
+        const productsId = props.getProductsId(response.result.items)
+
+        if (productsId.length !== 0) {
+          props.renderClassify(productsId);
+        } else {
+          document.getElementById('cupid-classify').innerHTML = '';
+        }
+      }
     }
   }
 
@@ -97,7 +118,11 @@ const ProductListWrapper = (props) => {
         setMinPrice={setMinPrice}
         setMaxPrice={setMaxPrice}
       />
-      <ProductList data={response.result} urlInfo={urlInfo} isLoading={isLoading} />
+      <ProductList
+        data={response.result}
+        urlInfo={urlInfo}
+        isLoading={isLoading}
+      />
     </WrapperApp>
   );
 }
