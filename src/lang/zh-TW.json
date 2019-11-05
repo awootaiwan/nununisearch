@@ -1,4 +1,13 @@
 {
+  "nununiError": {
+    "id": "nununi id is not setting",
+    "limitNotNumber": "setLimit is not number",
+    "limitTooSmall": "limit have to bigger than zero.",
+    "sortNotNumber": "setSort is not number",
+    "sortTypeErr": "Sort type is not in [1, 2, 11].",
+    "searchBarTag": "請先加入 <div id='nununi-searchbar'></div> HTML標籤",
+    "productListTag": "請先加入 <div id='nununi-productlist'></div> HTML標籤"
+  },
   "productList": {
     "noData": "查無資料"
   },
