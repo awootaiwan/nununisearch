@@ -126,7 +126,7 @@ class SearchBar extends React.Component {
   // 呼叫 api
   getMatchingOptions = async (value) => {
     const escapedValue = value.trim();
-    const { errorcode, errmsg, result } = await this.props.getSuggestion(this.props.version, escapedValue);
+    const { errorcode, errmsg, result } = await this.props.getSuggestion(escapedValue);
     const { suggest } = result;
 
     this.setState({errorcode: errorcode, errmsg: errmsg});
