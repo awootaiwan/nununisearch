@@ -17,6 +17,7 @@
     "react-dom": "^16.10.2",
     "react-i18next": "^11.0.1",
     "react-lazyload": "^2.6.2",
+    "react-paginate": "^6.3.2",
     "react-scripts": "3.2.0",
     "react-select": "^3.0.8",
     "styled-components": "^4.4.0",

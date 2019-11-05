@@ -122,6 +122,7 @@ const ProductListWrapper = (props) => {
         data={response.result}
         urlInfo={urlInfo}
         isLoading={isLoading}
+        setSearchCondition={setSearchCondition}
       />
     </WrapperApp>
   );

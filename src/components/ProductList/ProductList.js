@@ -28,7 +28,7 @@ const LoadingMask = styled.div`
   background-color: rgba(35, 24, 21, .4);
 `;
 
-function ProductList({data, urlInfo, isLoading, t}) {
+function ProductList({data, urlInfo, isLoading, setSearchCondition, t}) {
   const noData = (urlInfo.text !== '' && !isLoading) ? t('productList.noData') : '';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
@@ -46,7 +46,7 @@ function ProductList({data, urlInfo, isLoading, t}) {
           </ProductWrapper>
       }
       {
-        (items && items.length > 0 ? <Pagination products={items} paging={paging} urlInfo={urlInfo}/> : "")
+        (items && items.length > 0 ? <Pagination paging={paging} setSearchCondition={setSearchCondition} /> : "")
       }
     </React.Fragment>
   )
