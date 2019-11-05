@@ -3,7 +3,6 @@ import { ThemeProvider } from 'styled-components';
 import ErrorAlert from '../ErrorAlert/ErrorAlert';
 import ProductList from './ProductList';
 import ControlSet from '../ControlSet/ControlSet';
-import { getSiteSearchApiData } from '../../api/base';
 
 
 import theme from '../../theme/colors';
@@ -17,14 +16,6 @@ const WrapperApp = props => (
   </ThemeProvider>
 );
 
-const getProducts = (id, productsApiVer, urlInfo) => {
-  return getSiteSearchApiData(
-    id,
-    productsApiVer,
-    urlInfo,
-  );
-}
-
 const getPrice = (interval) => {
   const intervalStr = `${interval}-`.split('-'); // 確保空字串也能被解析
 
@@ -35,9 +26,6 @@ const getPrice = (interval) => {
 }
 
 const ProductListWrapper = (props) => {
-  const thisId = props.initCondition.id;
-  const thisApiVer = props.initCondition.productsApiVer;
-
   /* 初始化 state */
   const [urlInfo, setUrlInfo] = useState({
     text: props.initCondition.text,
@@ -76,11 +64,7 @@ const ProductListWrapper = (props) => {
   // 監聽值改變時重新抓取商品
   useEffect(() => {
     (async () => {
-      const res = await getProducts(
-        thisId,
-        thisApiVer,
-        urlInfo,
-      );
+      const res = await props.getProducts(urlInfo);
 
       setResponse(res);
       setLoadingState(false);
@@ -89,7 +73,7 @@ const ProductListWrapper = (props) => {
       setMinPrice(getPrice(urlInfo.priceRange).minPrice);
       setMaxPrice(getPrice(urlInfo.priceRange).maxPrice);
     })();
-  }, [thisId, thisApiVer, urlInfo]); // 監聽值
+  }, [props, urlInfo]); // 監聽值
 
   window.onpopstate = (e) => {
     if (e.state) {

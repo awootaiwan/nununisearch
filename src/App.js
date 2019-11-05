@@ -82,7 +82,7 @@ class nununiSDK {
     };
   }
 
-  getSuggestions(version, keyword){
+  getSuggestions = (version, keyword) => {
     return getSuggestionApiData(
       this.id,
       version,
@@ -107,17 +107,11 @@ class nununiSDK {
     );
   }
 
-  getProducts(text, priceRange, sort, page, limit) {
+  getProducts = (urlInfo) => {
     return getSiteSearchApiData(
       this.id,
       this.productsApiVer,
-      {
-        text,
-        priceRange,
-        sort,
-        page,
-        limit
-      }
+      urlInfo
     );
   }
 
@@ -139,7 +133,7 @@ class nununiSDK {
     }
 
     ReactDOM.render(
-      <ProductListWrapper initCondition={initCondition} />,
+      <ProductListWrapper initCondition={initCondition} getProducts={this.getProducts} />,
       target
     );
   }
