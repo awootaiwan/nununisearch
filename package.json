@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@awootaiwan/cupid-sdk-js": "latest",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
@@ -16,10 +17,10 @@
     "react-dom": "^16.10.2",
     "react-i18next": "^11.0.1",
     "react-lazyload": "^2.6.2",
+    "react-paginate": "^6.3.2",
     "react-scripts": "3.2.0",
     "react-select": "^3.0.8",
-    "styled-components": "^4.4.0",
-    "types": "^0.1.1"
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "start": "parcel src/index.html --port 3000  --open",

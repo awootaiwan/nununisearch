@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
+import ReactPaginate from 'react-paginate';
 
 const BodyPagination = styled.div`
   flex-grow: 1;
@@ -27,7 +28,9 @@ const BodyPagination = styled.div`
       text-align: center;
       line-height: 38px;
       font-size: 13px;
+
       > a {
+        box-sizing: border-box;
         display: block;
         width: 100%;
         height: 100%;
@@ -39,116 +42,58 @@ const BodyPagination = styled.div`
         border-color: ${props => props.theme.colorPaginationBorder};
         text-decoration: none;
         transition: 0.3s;
+        outline: none;
+
+        &.breakLink {
+          pointer-events: none;
+          border-bottom: none;
+          border-top: none;
+        }
+
+        &:hover {
+          color: ${props => props.theme.colorPaginationText_hover};
+        }
       }
-  
-      > a:hover {
-        color: ${props => props.theme.colorPaginationText_hover};
+
+      &.selected {
+        > a {
+          background: ${props => props.theme.colorPaginationBg_active};
+          border-color: ${props => props.theme.colorPaginationBg_active};
+          color: ${props => props.theme.colorPaginationActiveText};
+
+          &:hover {
+            color: ${props => props.theme.colorPaginationText_active};
+
+          }
+        }
       }
-  
-      .active {
-        cursor: default;
-        background: ${props => props.theme.colorPaginationBg_active};
-        border-color: ${props => props.theme.colorPaginationBg_active};
-        color: ${props => props.theme.colorPaginationActiveText};
-      }
-  
-      .active:hover {
-        color: ${props => props.theme.colorPaginationText_active};
+
+      &.disabledBtn {
+        display: none;
       }
     }
   }
 `;
 
-const querystring = require('querystring');
-let totalPages;
-let currentPage;
-
-const setPageList = (products, pageAmount, limit) => {
-  const total = products.length;
-  const pageList = [];
-  const pageNumber = [];
-  const pageCount = 3;
-  for (let i = 1; pageNumber.length < pageCount; i++) {
-    
-    if (parseInt(currentPage) + i < pageAmount) {
-      pageNumber.push(parseInt(currentPage) + i);
-    }
-
-    if (parseInt(currentPage) - i > 1) {
-      pageNumber.push(parseInt(currentPage) - i);
-    }
-
-    if (pageNumber.indexOf(currentPage) < 0) {
-      pageNumber.push(currentPage)
-    }
-
-    if (pageAmount <= pageCount + 1) {
-      break;
-    }
- 
+function Pagination ({ paging, setSearchCondition }) {
+  const onPageChange = ({ selected }) => {
+    setSearchCondition('page', selected + 1);
   }
-  pageNumber.sort(function (a, b) {
-    return a - b
-  });
-
-  pageList.push(1);
-
-  pageNumber.forEach(function (value, index) {
-    if (parseInt(value) != 1 && parseInt(value) != pageAmount) {
-      if (index + 1 == 1 && parseInt(value) - 1 != 1) {
-        pageList.push('..');
-      }
-      pageList.push(value);
-      if (index + 1 == pageCount && parseInt(value) + 1 != pageAmount) {
-        pageList.push('...');
-      }
-    }
-  });
-
-  if (pageAmount != 1) {
-    pageList.push(pageAmount);
-  }
-  return (
-    pageList
-  )
-}
-
-function Pagination ({ products, paging, urlInfo }){
-  currentPage = paging.currentPage;
-  const { totalPages } = paging;
-  const { limit } = paging || 10;
-
-  const urlInfoData = {...urlInfo};
-
-	if (urlInfoData.page) {
-		delete urlInfoData.page;
-  }
-
-	const urlParams = querystring.stringify(urlInfoData);
-  const baseUrl = `${location.protocol}//${location.host}${location.pathname}?${urlParams}`;
 
   return (
     <BodyPagination>
-      <ul>
-        {
-          (currentPage != 1) ? 
-        <li>
-          <a href={paging.previous}>
-            {'<'}
-          </a>
-        </li> :
-        ''
-        }
-        {
-          setPageList(products, limit).map((list) => {
-            return <li key={list}>
-              {!isNaN(list) ? <a className={currentPage == list ? 'active' : ""}
-                href={currentPage != list ? `${baseUrl}&page=${list}` : "#"}>{list}</a> : list}
-            </li>
-          })
-        }
-        {(currentPage != totalPages) ? <li><a href={ paging.next }>{'>'}</a></li> : ""}
-      </ul>
+      <ReactPaginate
+        pageCount={paging.totalPages}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={onPageChange}
+        forcePage={paging.currentPage - 1}
+        containerClassName={'nununi-pagination'}
+        disabledClassName={'disabledBtn'}
+        breakLinkClassName={'breakLink'}
+      />
     </BodyPagination>
   )
 }

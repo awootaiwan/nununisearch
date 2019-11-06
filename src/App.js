@@ -10,6 +10,9 @@ import './i18n';
 
 import theme from './theme/colors';
 
+import CupidSDK from "@awootaiwan/cupid-sdk-js";
+const cupidSDK = new CupidSDK(process.env.NUNUNI_ID);
+
 const App = props => (
   <ThemeProvider theme={theme}>
     {props.errcode === 0 ? (
@@ -28,6 +31,7 @@ class nununiSDK {
     this.id = id;
     this.productsApiVer = 'latest'; // could be set
     this.suggestionApiVer = 'latest'; // could be set
+    this.hasCupidClassify = true;
 
     this.text = '';
     this.priceRange = '';
@@ -44,7 +48,7 @@ class nununiSDK {
   }
 
   setLimit(limit) {
-    if (typeof limit != 'number') {
+    if (typeof limit !== 'number') {
       throw Error(i18next.t('nununiError.limitNotNumber'));
     }
 
@@ -55,7 +59,7 @@ class nununiSDK {
   }
 
   setSort(sort) {
-    if (typeof sort != 'number') {
+    if (typeof sort !== 'number') {
       throw Error(i18next.t('nununiError.sortNotNumber'));
     }
 
@@ -63,6 +67,13 @@ class nununiSDK {
       throw Error(i18next.t('nununiError.sortTypeErr'));
     }
     this.sort = sort;
+  }
+
+  setCupidClassify(boolean) {
+    if (typeof boolean !== 'boolean') {
+      throw Error('setCupidClassify is not boolean.');
+    }
+    this.hasCupidClassify = boolean;
   }
 
   _getUrlParms() {
@@ -102,7 +113,6 @@ class nununiSDK {
       <App errcode={0} errmsg={0}>
         <SearchBar
           getSuggestion={this.getSuggestions}
-          version={this.suggestionApiVer}
         />
       </App>,
       target
@@ -117,6 +127,10 @@ class nununiSDK {
     );
   }
 
+  renderClassify = () => {
+    cupidSDK.renderClassify();
+  }
+
   async renderProductList() {
     const target = document.getElementById('nununi-productlist');
     if (!target || target.length < 1) {
@@ -127,6 +141,7 @@ class nununiSDK {
     const initCondition = {
       id: this.id,
       productsApiVer: this.productsApiVer,
+      hasCupidClassify: this.hasCupidClassify,
       text: urlInfo.text,
       priceRange: urlInfo.priceRange,
       limit: urlInfo.limit,
@@ -134,8 +149,15 @@ class nununiSDK {
       page: urlInfo.page,
     }
 
+    const url = new URL(window.location.href);
+    window.history.replaceState(urlInfo, null, url.search);
+
     ReactDOM.render(
-      <ProductListWrapper initCondition={initCondition} getProducts={this.getProducts} />,
+      <ProductListWrapper
+        initCondition={initCondition}
+        getProducts={this.getProducts}
+        renderClassify={this.renderClassify}
+      />,
       target
     );
   }
@@ -152,4 +174,4 @@ const freeSelf =
 /** Used as a reference to the global object. */
 const root = freeGlobal || freeSelf || Function('return this')();
 
-module.exports = root.nununiSDK = nununiSDK;  
+module.exports = root.nununiSDK = nununiSDK;

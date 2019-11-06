@@ -65,18 +65,18 @@ const ProductItem = styled.div`
       .on-sale {
         text-decoration: line-through;
       }
-  
+
       .sale-price {
         color: ${props => props.theme.colorSalePrice};
         font-weight: bold;
         font-size: 16px;
         text-align: right;
-    
+
         @media(max-width: 600px) {
           margin-top: 5px;
         }
       }
-    
+
       @media(max-width: 350px) {
         span {
           display:block
@@ -97,7 +97,7 @@ const ProductItem = styled.div`
           text-decoration: underline;
         }
        }
-    
+
       @media(max-width: 600px) {
         height: 48px;
         word-wrap: nowrap;
@@ -180,16 +180,15 @@ const ProductItem = styled.div`
 `
 
 function ProductBlock({product, t}){
-  
   const outOfStock = t('productBlock.outofStock');
   const backgroundProductImg = {
-    backgroundImage: 'url('+`${product.productImageUrl}`+')'
+    backgroundImage: `url('${product.productImageUrl}')`
   }
 
   return (
     <ProductItem className='default-style' imageUrl={product.productImageUrl}>
       <div>
-        <a className="product__href" href={product.url} title={product.productName}>
+        <a className="product__href" href={product.url} title={product.productName} data-cupid-product-id={product.productId}>
         <LazyLoad height={200} offset={100}>
 
           <div className="product__img" style={backgroundProductImg}>
@@ -198,8 +197,6 @@ function ProductBlock({product, t}){
               <div className='outofStock'>{outOfStock}</div>:
               null
             }
-              {/* <img src={product.productImageUrl} alt={product.productName}></img> */}
-
           </div>
           </LazyLoad>
           <div className="product__detail">

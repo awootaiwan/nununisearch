@@ -4,7 +4,6 @@ import ErrorAlert from '../ErrorAlert/ErrorAlert';
 import ProductList from './ProductList';
 import ControlSet from '../ControlSet/ControlSet';
 
-
 import theme from '../../theme/colors';
 const WrapperApp = props => (
   <ThemeProvider theme={theme}>
@@ -46,6 +45,7 @@ const ProductListWrapper = (props) => {
     }
   });
   const [isLoading, setLoadingState] = useState(false);
+  const [dataIsBack, setDataIsBack] = useState(false);
 
   // 修改 urlInfo 內的搜尋條件
   const setSearchCondition = (key, value) => {
@@ -55,6 +55,7 @@ const ProductListWrapper = (props) => {
     };
     setUrlInfo(conditions);
     setLoadingState(true);
+    setDataIsBack(false);
 
     const url = new URL(window.location.href);
     url.searchParams.set(`${key}`, value);
@@ -65,13 +66,24 @@ const ProductListWrapper = (props) => {
   useEffect(() => {
     (async () => {
       const res = await props.getProducts(urlInfo);
-
-      setResponse(res);
-      setLoadingState(false);
+      if (res) {
+        setResponse(res);
+        setLoadingState(false);
+        setDataIsBack(true);
+      }
 
       // for 價格區間input 顯示
       setMinPrice(getPrice(urlInfo.priceRange).minPrice);
       setMaxPrice(getPrice(urlInfo.priceRange).maxPrice);
+
+      // render Cupid Classify
+      if (props.initCondition.hasCupidClassify) {
+        if (res.result.items.length !== 0) {
+          props.renderClassify();
+        } else {
+          document.getElementById('cupid-classify').innerHTML = '';
+        }
+      }
     })();
   }, [props, urlInfo]); // 監聽值
 
@@ -79,10 +91,20 @@ const ProductListWrapper = (props) => {
     if (e.state) {
       setUrlInfo(e.state);
       setLoadingState(true);
+      setDataIsBack(false);
 
       // for 價格區間input 顯示
       setMinPrice(getPrice(e.state.priceRange).minPrice);
       setMaxPrice(getPrice(e.state.priceRange).maxPrice);
+
+      // render Cupid Classify
+      if (props.initCondition.hasCupidClassify) {
+        if (response.result.items.length !== 0) {
+          props.renderClassify();
+        } else {
+          document.getElementById('cupid-classify').innerHTML = '';
+        }
+      }
     }
   }
 
@@ -97,7 +119,13 @@ const ProductListWrapper = (props) => {
         setMinPrice={setMinPrice}
         setMaxPrice={setMaxPrice}
       />
-      <ProductList data={response.result} urlInfo={urlInfo} isLoading={isLoading} />
+      <ProductList
+        data={response.result}
+        urlInfo={urlInfo}
+        isLoading={isLoading}
+        setSearchCondition={setSearchCondition}
+        dataIsBack={dataIsBack}
+      />
     </WrapperApp>
   );
 }
