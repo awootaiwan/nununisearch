@@ -48,7 +48,7 @@ class nununiSDK {
   }
 
   setLimit(limit) {
-    if (typeof limit != 'number') {
+    if (typeof limit !== 'number') {
       throw Error(i18next.t('nununiError.limitNotNumber'));
     }
 
@@ -59,7 +59,7 @@ class nununiSDK {
   }
 
   setSort(sort) {
-    if (typeof sort != 'number') {
+    if (typeof sort !== 'number') {
       throw Error(i18next.t('nununiError.sortNotNumber'));
     }
 
@@ -70,7 +70,7 @@ class nununiSDK {
   }
 
   setCupidClassify(boolean) {
-    if (typeof boolean != 'boolean') {
+    if (typeof boolean !== 'boolean') {
       throw Error('setCupidClassify is not boolean.');
     }
     this.hasCupidClassify = boolean;
