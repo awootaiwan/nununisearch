@@ -31,34 +31,38 @@ const DisplayModeContainer = styled.div`
   }
 `;
 
-function DisplayMode() {
-  function changeToBarMode(){
-    const itemBlock = document.querySelector('.default-style');
-    const itemBlockAll = document.querySelectorAll('.default-style');
-    if (!itemBlock.classList.contains('bar-style')){
-      itemBlockAll.forEach(item=>item.classList.add('bar-style'));
-    }
+class DisplayMode extends React.Component{
+  state = {
+    barMode: false
   }
 
-  function changeToBlockMode(){
-    const itemBlock = document.querySelector('.default-style');
+  render() {
     const itemBlockAll = document.querySelectorAll('.default-style');
 
-    if (itemBlock.classList.contains('bar-style')){
-      itemBlockAll.forEach(item=>item.classList.remove('bar-style'));
-    }
-  }
+    const changeToBarMode = () => {
+        if (this.state.barMode === false){
+          itemBlockAll.forEach(item=>item.classList.add('bar-style'));
+        }
+        this.setState({barMode: true})
+      }
+    const changeToBlockMode = () => {
+        if (this.state.barMode === true){
+          itemBlockAll.forEach(item=>item.classList.remove('bar-style'));
+        }
+        this.setState({barMode: false})
+      }
 
-  return  (
-    <DisplayModeContainer>
-      <div className='icon-wrapper' onClick={changeToBlockMode}>
-        <FontAwesomeIcon icon={faThLarge} />
-      </div>
-      <div className='icon-wrapper' onClick={changeToBarMode}>
-        <FontAwesomeIcon icon={faBars} />
-      </div>
-    </DisplayModeContainer>
-  );
+    return  (
+      <DisplayModeContainer>
+        <div className='icon-wrapper' onClick={changeToBlockMode}>
+          <FontAwesomeIcon icon={faThLarge} />
+        </div>
+        <div className='icon-wrapper' onClick={changeToBarMode}>
+          <FontAwesomeIcon icon={faBars} />
+        </div>
+      </DisplayModeContainer>
+    );
+  }
 }
 
 export default DisplayMode;
