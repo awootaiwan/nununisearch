@@ -186,7 +186,7 @@ function ProductBlock({product, t, barMode}){
   }
 
   return (
-    <ProductItem className={'default-style' + `${barMode}`} imageUrl={product.productImageUrl}>
+    <ProductItem className={`default-style ${barMode}`} imageUrl={product.productImageUrl}>
       <div>
         <a className="product__href" href={product.url} title={product.productName} data-cupid-product-id={product.productId}>
         <LazyLoad height={200} offset={100}>

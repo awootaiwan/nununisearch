@@ -1,27 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import styled from 'styled-components';
 import { withTranslation } from 'react-i18next';
-
-const DisplayAmountContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-
-  > span {
-    margin: 0 10px 0 0;
-  }
-`;
-
-const selectorStyle = {
-  control: styles => ({
-    ...styles,
-    boxSizing: 'border-box',
-    width: '180px',
-    height: '35px',
-    borderRadius: '4px'
-  })
-}
 
 class DisplayAmount extends React.Component {
   constructor(props) {
@@ -41,15 +20,16 @@ class DisplayAmount extends React.Component {
     ]
 
     return  (
-      <DisplayAmountContainer>
+      <div className={'nununi-amount'}>
         <span>{this.props.t('controlSet.display')}</span>
         <Select
           options={sortOptions}
           value={sortOptions.filter(option => option.value === this.props.limit.toString())}
           onChange={this.onChange}
-          styles={selectorStyle}
+          className={'nununi-amount-select'}
+          classNamePrefix={'nununi-amount-select'}
         />
-      </DisplayAmountContainer>
+      </div>
     );
   }
 }

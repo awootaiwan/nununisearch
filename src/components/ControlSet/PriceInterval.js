@@ -1,38 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
 import { withTranslation } from 'react-i18next';
-
-const PriceInput = styled.input`
-  box-sizing: border-box;
-  margin: 0 10px;
-  padding: 5px;
-  width: 6em;
-  height: 35px;
-  border: 1px solid;
-  border-radius: 4px;
-  outline: none;
-
-  &:placeholder-shown {
-    color: ${props => props.theme.colorGrey};
-  }
-`;
-
-const PriceSubmitBtn = styled.button`
-  box-sizing: border-box;
-  padding: 5px 11px;
-  height: 35px;
-  cursor: pointer;
-  color: ${props => props.theme.colorWhite};
-  background-color: ${props => props.theme.colorGrey};
-  border: none;
-  border-radius: 4px;
-  outline: none;
-
-  &:hover {
-    color: ${props => props.theme.colorWhite};
-    background-color: ${props => props.theme.colorBlack};
-  }
-`;
 
 class PriceInterval extends React.Component {
   constructor(props) {
@@ -58,10 +25,22 @@ class PriceInterval extends React.Component {
     return  (
       <React.Fragment>
         <span>{this.props.t('controlSet.priceRange')}</span>
-        <PriceInput type='number' placeholder={this.props.t('controlSet.lowest')} value={this.props.minPrice} onChange={this.handleMinPriceChange} />
+        <input
+          type='number'
+          className={'nununi-priceinput'}
+          placeholder={this.props.t('controlSet.lowest')}
+          value={this.props.minPrice}
+          onChange={this.handleMinPriceChange}
+        />
         <span> - </span>
-        <PriceInput type='number' placeholder={this.props.t('controlSet.highest')} value={this.props.maxPrice} onChange={this.handleMaxPriceChange} />
-        <PriceSubmitBtn onClick={this.onSearch}>{this.props.t('controlSet.search')}</PriceSubmitBtn>
+        <input
+          type='number'
+          className={'nununi-priceinput'}
+          placeholder={this.props.t('controlSet.highest')}
+          value={this.props.maxPrice}
+          onChange={this.handleMaxPriceChange}
+        />
+        <button className={'nununi-pricesubmit'} onClick={this.onSearch}>{this.props.t('controlSet.search')}</button>
       </React.Fragment>
     );
   }
