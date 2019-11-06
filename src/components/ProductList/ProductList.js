@@ -28,8 +28,8 @@ const LoadingMask = styled.div`
   background-color: rgba(35, 24, 21, .4);
 `;
 
-function ProductList({data, urlInfo, isLoading, setSearchCondition, t}) {
-  const noData = (urlInfo.text !== '' && !isLoading) ? t('productList.noData') : '';
+function ProductList({data, urlInfo, isLoading, setSearchCondition, dataIsBack, t}) {
+  const noData = (dataIsBack && urlInfo.text !== '' && !isLoading) ? t('productList.noData') : '';
   const {items, paging, sorting} = data;
   const productBlocks = items.map(item =>
     <ProductBlock key={item.productId.toString()} product={item}></ProductBlock>

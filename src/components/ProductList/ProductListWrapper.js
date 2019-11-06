@@ -45,6 +45,7 @@ const ProductListWrapper = (props) => {
     }
   });
   const [isLoading, setLoadingState] = useState(false);
+  const [dataIsBack, setDataIsBack] = useState(false);
 
   // 修改 urlInfo 內的搜尋條件
   const setSearchCondition = (key, value) => {
@@ -54,6 +55,7 @@ const ProductListWrapper = (props) => {
     };
     setUrlInfo(conditions);
     setLoadingState(true);
+    setDataIsBack(false);
 
     const url = new URL(window.location.href);
     url.searchParams.set(`${key}`, value);
@@ -64,8 +66,11 @@ const ProductListWrapper = (props) => {
   useEffect(() => {
     (async () => {
       const res = await props.getProducts(urlInfo);
-      setResponse(res);
-      if (res) setLoadingState(false);
+      if (res) {
+        setResponse(res);
+        setLoadingState(false);
+        setDataIsBack(true);
+      }
 
       // for 價格區間input 顯示
       setMinPrice(getPrice(urlInfo.priceRange).minPrice);
@@ -86,6 +91,7 @@ const ProductListWrapper = (props) => {
     if (e.state) {
       setUrlInfo(e.state);
       setLoadingState(true);
+      setDataIsBack(false);
 
       // for 價格區間input 顯示
       setMinPrice(getPrice(e.state.priceRange).minPrice);
@@ -118,6 +124,7 @@ const ProductListWrapper = (props) => {
         urlInfo={urlInfo}
         isLoading={isLoading}
         setSearchCondition={setSearchCondition}
+        dataIsBack={dataIsBack}
       />
     </WrapperApp>
   );
