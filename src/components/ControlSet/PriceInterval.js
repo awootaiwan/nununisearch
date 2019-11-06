@@ -23,7 +23,7 @@ class PriceInterval extends React.Component {
 
   render() {
     return  (
-      <React.Fragment>
+      <>
         <span>{this.props.t('controlSet.priceRange')}</span>
         <input
           type='number'
@@ -41,7 +41,7 @@ class PriceInterval extends React.Component {
           onChange={this.handleMaxPriceChange}
         />
         <button className={'nununi-pricesubmit'} onClick={this.onSearch}>{this.props.t('controlSet.search')}</button>
-      </React.Fragment>
+      </>
     );
   }
 }
