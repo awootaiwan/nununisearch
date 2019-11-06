@@ -30,6 +30,7 @@ const BodyPagination = styled.div`
       font-size: 13px;
 
       > a {
+        box-sizing: border-box;
         display: block;
         width: 100%;
         height: 100%;
@@ -42,10 +43,16 @@ const BodyPagination = styled.div`
         text-decoration: none;
         transition: 0.3s;
         outline: none;
-      }
 
-      > a:hover {
-        color: ${props => props.theme.colorPaginationText_hover};
+        &.breakLink {
+          pointer-events: none;
+          border-bottom: none;
+          border-top: none;
+        }
+
+        &:hover {
+          color: ${props => props.theme.colorPaginationText_hover};
+        }
       }
 
       &.selected {
@@ -53,12 +60,11 @@ const BodyPagination = styled.div`
           background: ${props => props.theme.colorPaginationBg_active};
           border-color: ${props => props.theme.colorPaginationBg_active};
           color: ${props => props.theme.colorPaginationActiveText};
-        }
-      }
 
-      &.selected:hover {
-        > a {
-          color: ${props => props.theme.colorPaginationText_active};
+          &:hover {
+            color: ${props => props.theme.colorPaginationText_active};
+
+          }
         }
       }
 
@@ -84,7 +90,9 @@ function Pagination ({ paging, setSearchCondition }) {
         nextLabel={'>'}
         onPageChange={onPageChange}
         forcePage={paging.currentPage - 1}
+        containerClassName={'nununi-pagination'}
         disabledClassName={'disabledBtn'}
+        breakLinkClassName={'breakLink'}
       />
     </BodyPagination>
   )
