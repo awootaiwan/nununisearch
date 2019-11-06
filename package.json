@@ -20,8 +20,7 @@
     "react-paginate": "^6.3.2",
     "react-scripts": "3.2.0",
     "react-select": "^3.0.8",
-    "styled-components": "^4.4.0",
-    "types": "^0.1.1"
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "start": "parcel src/index.html --port 3000  --open",

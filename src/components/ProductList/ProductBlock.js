@@ -182,7 +182,7 @@ const ProductItem = styled.div`
 function ProductBlock({product, t}){
   const outOfStock = t('productBlock.outofStock');
   const backgroundProductImg = {
-    backgroundImage: 'url('+`${product.productImageUrl}`+')'
+    backgroundImage: `url('${product.productImageUrl}')`
   }
 
   return (
@@ -197,8 +197,6 @@ function ProductBlock({product, t}){
               <div className='outofStock'>{outOfStock}</div>:
               null
             }
-              {/* <img src={product.productImageUrl} alt={product.productName}></img> */}
-
           </div>
           </LazyLoad>
           <div className="product__detail">

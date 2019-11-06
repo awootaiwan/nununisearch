@@ -127,12 +127,8 @@ class nununiSDK {
     );
   }
 
-  getProductsId = (products) => {
-    return products.map((item) => item.productId);
-  }
-
-  renderClassify = (productsId) => {
-    cupidSDK.renderClassify(productsId);
+  renderClassify = () => {
+    cupidSDK.renderClassify();
   }
 
   async renderProductList() {
@@ -160,7 +156,6 @@ class nununiSDK {
       <ProductListWrapper
         initCondition={initCondition}
         getProducts={this.getProducts}
-        getProductsId={this.getProductsId}
         renderClassify={this.renderClassify}
       />,
       target

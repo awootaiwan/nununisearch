@@ -4,7 +4,6 @@ import ErrorAlert from '../ErrorAlert/ErrorAlert';
 import ProductList from './ProductList';
 import ControlSet from '../ControlSet/ControlSet';
 
-
 import theme from '../../theme/colors';
 const WrapperApp = props => (
   <ThemeProvider theme={theme}>
@@ -74,10 +73,8 @@ const ProductListWrapper = (props) => {
 
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
-        const productsId = props.getProductsId(res.result.items)
-
-        if (productsId.length !== 0) {
-          props.renderClassify(productsId);
+        if (res.result.items.length !== 0) {
+          props.renderClassify();
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
@@ -96,10 +93,8 @@ const ProductListWrapper = (props) => {
 
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
-        const productsId = props.getProductsId(response.result.items)
-
-        if (productsId.length !== 0) {
-          props.renderClassify(productsId);
+        if (response.result.items.length !== 0) {
+          props.renderClassify();
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
