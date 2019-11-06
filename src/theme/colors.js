@@ -21,6 +21,7 @@ const theme = {
   colorBtnBg: '#999',
   colorBtnBg_hover: '#000',
   colorBtnText: '#fff',
+  colorIcon: '#fff'
 }
 
 export default theme;

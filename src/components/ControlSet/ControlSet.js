@@ -50,7 +50,7 @@ const RightBlock = styled.div`
   }
 `;
 
-function ControlSet({ sorting, limit, setSearchCondition, setMinPrice, setMaxPrice, minPrice, maxPrice }) {
+function ControlSet({ sorting, limit, setSearchCondition, setMinPrice, setMaxPrice, minPrice, maxPrice, setBarMode }) {
   return  (
     <Container>
       <LeftBlock>
@@ -64,9 +64,17 @@ function ControlSet({ sorting, limit, setSearchCondition, setMinPrice, setMaxPri
       </LeftBlock>
 
       <RightBlock>
-        <Sorting sorting={sorting} setSearchCondition={setSearchCondition} />
-        <DisplayMode />
-        <DisplayAmount limit={limit} setSearchCondition={setSearchCondition} />
+        <Sorting
+          sorting={sorting} 
+          setSearchCondition={setSearchCondition} 
+        />
+        <DisplayMode 
+          setBarMode={setBarMode}
+        />
+        <DisplayAmount
+          limit={limit} 
+          setSearchCondition={setSearchCondition} 
+        />
       </RightBlock>
     </Container>
   );

@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faThLarge } from "@fortawesome/free-solid-svg-icons";
 
 const DisplayModeContainer = styled.div`
   display: flex;
@@ -9,56 +7,69 @@ const DisplayModeContainer = styled.div`
   justify-content: flex-end;
 
   .icon-wrapper {
-    margin: 0 10px;
+    width: 40px;
+    height: 40px;
+    margin: 0 8px;
     opacity: .4;
     cursor: pointer;
-
     &:hover {
       opacity: 1;
     }
-
-    .svg-inline--fa {
-      width: 2em;
-      height: 2em;
-    }
-
-    @media(max-width: 600px) {
-      .svg-inline--fa {
-        width: 1.5em;
-        height: 1.5em;
+    .icon-b {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-item: center;
+      align-content: center;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      span {
+        display: block;
+        border-radius: 2px;
+        background-color: ${props => props.theme.colorBlack};
       }
+    }
+    .line {
+      width: 35px;
+      height: 5px;
+      margin: 3px auto;
+    }
+    .block {
+      width: 13px;
+      height: 13px;
+      margin: 2px;
     }
   }
 `;
 
-class DisplayMode extends React.Component{
-  state = {
-    barMode: false
+class DisplayMode extends React.Component {
+  constructor(props) {
+    super(props);
   }
-
+  changeToBarMode = () => {
+    this.props.setBarMode(' bar-style');
+  }
+  changeToBlockMode = () => {
+    this.props.setBarMode('');
+  }
   render() {
-    const itemBlockAll = document.querySelectorAll('.default-style');
-
-    const changeToBarMode = () => {
-        if (this.state.barMode === false){
-          itemBlockAll.forEach(item=>item.classList.add('bar-style'));
-        }
-        this.setState({barMode: true})
-      }
-    const changeToBlockMode = () => {
-        if (this.state.barMode === true){
-          itemBlockAll.forEach(item=>item.classList.remove('bar-style'));
-        }
-        this.setState({barMode: false})
-      }
-
     return  (
       <DisplayModeContainer>
-        <div className='icon-wrapper' onClick={changeToBlockMode}>
-          <FontAwesomeIcon icon={faThLarge} />
+        <div className='icon-wrapper' onClick={this.changeToBlockMode}>
+          <div class="icon-b">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </div>
         </div>
-        <div className='icon-wrapper' onClick={changeToBarMode}>
-          <FontAwesomeIcon icon={faBars} />
+        <div className='icon-wrapper' onClick={this.changeToBarMode}>
+          <div class="icon-b">
+            <span class="block"></span>
+            <span class="block"></span>
+            <span class="block"></span>
+            <span class="block"></span>
+          </div>
         </div>
       </DisplayModeContainer>
     );
