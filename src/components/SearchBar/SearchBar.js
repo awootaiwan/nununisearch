@@ -112,13 +112,13 @@ class SearchBar extends React.Component {
       value: '',
       suggestions: [],
       isLoading: false,
-      errorcode: 0,
+      errcode: 0,
       errmsg: 0
     };
   }
 
   checkError = () => {
-    if (this.state.errorcode != 0){
+    if (this.state.errcode !== 0){
       console.log(this.state.errmsg);
     }
   }
@@ -126,10 +126,10 @@ class SearchBar extends React.Component {
   // 呼叫 api
   getMatchingOptions = async (value) => {
     const escapedValue = value.trim();
-    const { errorcode, errmsg, result } = await this.props.getSuggestion(escapedValue);
+    const { errcode, errmsg, result } = await this.props.getSuggestion(escapedValue);
     const { suggest } = result;
 
-    this.setState({errorcode: errorcode, errmsg: errmsg});
+    this.setState({errcode, errmsg});
     this.checkError();
 
     if (escapedValue === '' || !suggest || suggest.length === 0 ) {
@@ -138,7 +138,7 @@ class SearchBar extends React.Component {
     } else if (suggest.length > 0) {
       const suggestArray = Array.from(suggest);
       this.setState({ isLoading: false });
-    return suggestArray;
+      return suggestArray;
     }
   }
   // input 的 onChange屬性
