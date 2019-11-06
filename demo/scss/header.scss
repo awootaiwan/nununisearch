@@ -39,39 +39,62 @@ footer {
     padding: 0 10px 10px;
   }
 }
-#nununi-productlist {
-  input:not([type]),
-  input[type=text]:not(.browser-default),
-  input[type=password]:not(.browser-default),
-  input[type=email]:not(.browser-default),
-  input[type=url]:not(.browser-default),
-  input[type=time]:not(.browser-default),
-  input[type=date]:not(.browser-default),
-  input[type=datetime]:not(.browser-default),
-  input[type=datetime-local]:not(.browser-default),
-  input[type=tel]:not(.browser-default),
-  input[type=number]:not(.browser-default),
-  input[type=search]:not(.browser-default),
-  textarea.materialize-textarea {
-    box-sizing: border-box;
-    width: 6em;
-    height: 35px;
-    margin: 0px 10px;
-    padding: 5px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: initial;
-    border-image: initial;
-    border-radius: 4px;
-    outline: none;
-    box-shadow: none;
-  }
-}
-#nununi-searchbar input {
-  width: 300px;
-  margin: 0;
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea {
+  box-sizing: border-box;
+  margin: 0px 10px;
+  padding: 5px;
+  height: unset;
+  width: unset;
+  border-width: 1px;
+  border-style: solid;
+  border-color: initial;
+  border-image: initial;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: none;
+
 }
 
-#siteSearch input[type=text]:not(.browser-default):focus:not([readonly]){
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]) {
   box-shadow: none;
+  border-bottom: 1px solid #999;
+}
+
+input:focus {
+  border-bottom: unset;
+  box-shadow: unset;
+}
+
+#nununi-searchbar {
+  padding: 20px 0;
+  input {
+    width: 300px;
+    margin: 0;
+  }
+}
+
+#nununi-productlist {
+  input[id^="react-select"] {
+    height: unset;
+  }
+  .nununi_controlset-priceinput {
+    width: 80px;
+  }
+} 
+
+.nununi_controlset-price-submitbtn {
+  width: 60px;
 }
