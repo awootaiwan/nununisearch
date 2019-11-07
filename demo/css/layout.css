@@ -1,7 +1,10 @@
 header .header-nav {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px 20px;
   width: 100%;
   max-width: 100%;
-  height: 64px;
+  height: 84px;
 }
 header .brand-logo {
   height: 64px;

@@ -96,6 +96,11 @@ input:focus {
   background-color: #ddd;
   border-radius: 4px;
 }
+@media (max-width: 480px) {
+  #nununi-productlist .nununi-display {
+    margin: 0;
+  }
+}
 #nununi-productlist .nununi-display-icon {
   margin: 0 3px;
   -webkit-transform: scale(0.8, 0.8);
