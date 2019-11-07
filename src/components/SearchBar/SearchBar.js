@@ -1,7 +1,5 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled, { keyframes } from 'styled-components';
 import { withTranslation } from 'react-i18next';
 
@@ -32,22 +30,60 @@ const SearchInput = styled.div`
       border-color: ${props => props.theme.colorBtnBg_hover};
     }
 
-    div {
+    .spinner {
       position: absolute;
-      top: calc(100% - 32px);
-      text-align: center;
-    }
+      top: 50%;
+      left: 50%;
+      margin: -11px 0 0 -11px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50px;
+      border: 3px dotted  ${props => props.theme.colorIcon};
+      z-index: 1;
+      animation: ${rotate} 1.2s linear infinite;
 
-    .spinner-wrapper {
-      color: ${props => props.theme.colorBtnText};
-      animation: ${rotate} 1s linear infinite;
-      right: 10px;
+
+      &-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        color: ${props => props.theme.colorIcon};
+      }
+
     }
-    .search-wrapper {
-      color: ${props => props.theme.colorBtnText};
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
+    .search {
+      position: relative;
+      text-align: center;
+
+      &-wrapper {
+        position: relative;
+        color: ${props => props.theme.colorIcon};
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+    
+      &-circle {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        width: 13px;
+        height: 13px;
+        border: 3px solid ${props => props.theme.colorIcon};
+        border-radius: 100px;
+      }
+    
+      &-stick {
+        position: absolute;
+        right: 5px;
+        bottom: -29px;
+        width: 12px;
+        height: 4px;
+        transform: rotate(45deg);
+        background-color: ${props => props.theme.colorIcon};
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
     }
   }
 `;
@@ -58,6 +94,7 @@ const theme = {
     position: 'relative',
   },
   input: {
+    boxSizing: 'content-box',
     maxWidth: '300px',
     height: '20px',
     padding: '10px 20px',
@@ -203,14 +240,17 @@ class SearchBar extends React.Component {
           <div className='icon-wrapper'>
             {isLoading ? (
               <div className="spinner-wrapper">
-                <FontAwesomeIcon icon={faSpinner} />
+                <div className="spinner"></div>
               </div>
             ) : (
               <div className="search-wrapper">
-                <FontAwesomeIcon
-                  icon={faSearch}
+                <div 
+                  className="search"
                   onClick={() => this.onSearch(this.state.value)}
-                />
+                >
+                  <div className="search-circle"></div>
+                  <div className="search-stick"></div>
+                </div>
               </div>
             )}
           </div>

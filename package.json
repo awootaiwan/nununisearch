@@ -6,12 +6,8 @@
   "private": true,
   "dependencies": {
     "@awootaiwan/cupid-sdk-js": "latest",
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.7",
     "axios": "^0.19.0",
     "i18next": "^19.0.0",
-    "parcel-bundler": "^1.12.4",
     "react": "^16.10.2",
     "react-autosuggest": "^9.4.3",
     "react-dom": "^16.10.2",
@@ -48,12 +44,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "autoprefixer": "^9.6.5",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
     "sass": "^1.23.0"
   }
 }

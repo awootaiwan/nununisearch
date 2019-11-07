@@ -46,6 +46,7 @@ const ProductListWrapper = (props) => {
   });
   const [isLoading, setLoadingState] = useState(false);
   const [dataIsBack, setDataIsBack] = useState(false);
+  const [barMode, setBarMode] = useState('');
 
   // 修改 urlInfo 內的搜尋條件
   const setSearchCondition = (key, value) => {
@@ -111,6 +112,7 @@ const ProductListWrapper = (props) => {
   return (
     <WrapperApp errcode={response.errcode} errmsg={response.errmsg}>
       <ControlSet
+        setBarMode={setBarMode}
         sorting={urlInfo.sort}
         limit={urlInfo.limit}
         setSearchCondition={setSearchCondition}
@@ -120,6 +122,7 @@ const ProductListWrapper = (props) => {
         setMaxPrice={setMaxPrice}
       />
       <ProductList
+        barMode={barMode}
         data={response.result}
         urlInfo={urlInfo}
         isLoading={isLoading}
