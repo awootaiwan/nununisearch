@@ -257,15 +257,15 @@ function ProductList({data, urlInfo, isLoading, setSearchCondition, dataIsBack, 
     <>
       {
         (!items || items.length <= 0) ?
-          <ProductNoData className={'nununi-noproduct'}>{noData}</ProductNoData> :
-          <ProductWrapper className={'nununi-listwrapper'} sorting={sorting}>
-            {isLoading && <LoadingMask className={'nununi-listwrapper-loadingmask'} />}
+          <ProductNoData className="nununi-noproduct">{noData}</ProductNoData> :
+          <ProductWrapper className="nununi-listwrapper" sorting={sorting}>
+            {isLoading && <LoadingMask className="nununi-listwrapper-loadingmask" />}
             {productBlocks}
           </ProductWrapper>
       }
       {
         (items && items.length > 0 ?
-          <PaginationWrapper className={'nununi-pagination'}>
+          <PaginationWrapper className="nununi-pagination">
             <Pagination paging={paging} setSearchCondition={setSearchCondition} />
           </PaginationWrapper> :
           ''

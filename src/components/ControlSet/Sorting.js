@@ -20,14 +20,14 @@ class Sorting extends React.Component {
     ]
 
     return  (
-      <div className={'nununi-sorting'}>
+      <div className="nununi-sorting">
         <span>{this.props.t('controlSet.sort')}</span>
         <Select
           options={sortOptions}
           value={sortOptions.filter(option => option.value === this.props.sorting.toString())}
           onChange={this.onChange}
-          className={'nununi-sorting-select'}
-          classNamePrefix={'nununi-sorting-select'}
+          className="nununi-sorting-select"
+          classNamePrefix="nununi-sorting-select"
         />
       </div>
     );

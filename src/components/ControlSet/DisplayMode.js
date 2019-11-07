@@ -9,14 +9,14 @@ const DisplayMode = (props) => {
     props.setBarMode('');
   }
     return  (
-      <div className={'nununi-display'}>
-        <div className='nununi-display-icon' onClick={changeToBlockMode}>
+      <div className="nununi-display">
+        <div className="nununi-display-icon" onClick={changeToBlockMode}>
           <span className="block"></span>
           <span className="block"></span>
           <span className="block"></span>
           <span className="block"></span>
         </div>
-        <div className='nununi-display-icon' onClick={changeToBarMode}>
+        <div className="nununi-display-icon" onClick={changeToBarMode}>
           <span className="line"></span>
           <span className="line"></span>
           <span className="line"></span>

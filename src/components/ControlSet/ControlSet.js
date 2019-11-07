@@ -143,8 +143,8 @@ const Container = styled.div`
 
 function ControlSet({ sorting, limit, setSearchCondition, setMinPrice, setMaxPrice, minPrice, maxPrice, setBarMode }) {
   return  (
-    <Container className={'nununi-controlset'}>
-      <div className={'nununi-controlset-leftblock'}>
+    <Container className="nununi-controlset">
+      <div className="nununi-controlset-leftblock">
         <PriceInterval
           setSearchCondition={setSearchCondition}
           setMinPrice={setMinPrice}
@@ -154,7 +154,7 @@ function ControlSet({ sorting, limit, setSearchCondition, setMinPrice, setMaxPri
         />
       </div>
 
-      <div className={'nununi-controlset-rightblock'}>
+      <div className="nununi-controlset-rightblock">
         <Sorting
           sorting={sorting}
           setSearchCondition={setSearchCondition}

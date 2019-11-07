@@ -27,7 +27,7 @@ class PriceInterval extends React.Component {
         <span>{this.props.t('controlSet.priceRange')}</span>
         <input
           type='number'
-          className={'nununi-priceinput'}
+          className="nununi-priceinput"
           placeholder={this.props.t('controlSet.lowest')}
           value={this.props.minPrice}
           onChange={this.handleMinPriceChange}
@@ -35,12 +35,12 @@ class PriceInterval extends React.Component {
         <span> - </span>
         <input
           type='number'
-          className={'nununi-priceinput'}
+          className="nununi-priceinput"
           placeholder={this.props.t('controlSet.highest')}
           value={this.props.maxPrice}
           onChange={this.handleMaxPriceChange}
         />
-        <button className={'nununi-pricesubmit'} onClick={this.onSearch}>{this.props.t('controlSet.search')}</button>
+        <button className="nununi-pricesubmit" onClick={this.onSearch}>{this.props.t('controlSet.search')}</button>
       </>
     );
   }

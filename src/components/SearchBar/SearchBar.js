@@ -219,9 +219,9 @@ class SearchBar extends React.Component {
     };
 
     return (
-      <SearchInput className={'nununi-searchbar-wrapper'}>
-        <div className={'nununi-searchbar-container'}>
-          <div className='nununi-searchbar-iconwrapper'>
+      <SearchInput className="nununi-searchbar-wrapper">
+        <div className="nununi-searchbar-container">
+          <div className="nununi-searchbar-iconwrapper">
             {isLoading ? (
               <div className="spinner"></div>
             ) : (

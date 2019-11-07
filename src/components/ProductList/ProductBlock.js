@@ -15,7 +15,7 @@ function ProductBlock({product, t, barMode}){
           <div className="nununi-productblock-img" style={backgroundProductImg}>
             {
               !product.productAvailability ?
-              <div className='outofStock'>{outOfStock}</div> :
+              <div className="outofStock">{outOfStock}</div> :
               ''
             }
           </div>

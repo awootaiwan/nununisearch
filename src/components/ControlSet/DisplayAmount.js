@@ -20,14 +20,14 @@ class DisplayAmount extends React.Component {
     ]
 
     return  (
-      <div className={'nununi-amount'}>
+      <div className="nununi-amount">
         <span>{this.props.t('controlSet.display')}</span>
         <Select
           options={sortOptions}
           value={sortOptions.filter(option => option.value === this.props.limit.toString())}
           onChange={this.onChange}
-          className={'nununi-amount-select'}
-          classNamePrefix={'nununi-amount-select'}
+          className="nununi-amount-select"
+          classNamePrefix="nununi-amount-select"
         />
       </div>
     );
