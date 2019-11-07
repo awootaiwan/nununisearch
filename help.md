@@ -102,16 +102,121 @@ nununi.setCupidClassify(true);
 ```
 
 ## 樣式覆寫
-### how to overwite css
+以下是原生樣式：
+![img](https://i.imgur.com/cwJI4rQ.png)
+
+只要加上 id 選擇器的權重，就可輕鬆覆蓋原生樣式。
+
+#### search bar 修改範例
+```css
+#nununi-searchbar .nununi-searchbar-iconwrapper {
+// 請加入欲修改的樣式
+  background-color: #dda0dd;
+}
+```
+#### product list 修改範例
+```css
+#nununi-productlist .nununi-productblock-name {
+// 請加入欲修改的樣式
+  color: #2f4f4f;
+  font-size: 18px;
+}
+```
+#### classify 修改範例
+```css
+#cupid-classify {
+// 請加入欲修改的樣式
+  background-color:#e2e2e2;
+  padding:20px;
+}
+#cupid-classify .cupid-tag{
+// 請加入欲修改的樣式
+  display: inline-block
+  font-size: 14px;
+  background: #d4aaaa;
+  border: 1px solid #ccc;
+}
+```
 
 ## 錯誤處理
 ### App.js 內的throw error 排解教學
 ### Api error 排解
 
-## nununi api 方法說明
-input and output
-### getSuggestions:
-### getProduct
+## nununi API 方法說明
+
+```javascript
+nununiSDK.getSuggestions("女 長裙")
+nununiSDK.getProducts("text=%E5%A5%B3+%E9%95%B7%E8%A3%99priceRange=&page=1&limit=32&sort=2")
+```
+### getSuggestions()
+`query`
+Field	|Type	|Description
+--------|-------|------------
+keyword	|string	|輸入 input 要查找的關鍵字
+`response`
+```jsonld
+{
+    "errcode": 0,
+    "errmsg": "ACK",
+    "result": {
+        "suggest": [
+            "浴室 清潔",
+            "浴室 去漬",
+        ]
+    }
+}
+```
+
+### getProducts()
+`query`
+Field	|Type	|Description
+--------|-------|----------------------
+text `不可為空`	|字串	| 要查找的關鍵字
+priceRange	|字串	|要查找的價格範圍
+page	|字串	|頁碼，起始為1
+limit	|整數	|每頁商品數量
+sort	|整數	|預設為1。1($低到高) or 2($高到低) or 11(最新上架)
+
+
+`response` 會回傳商品以及分頁資料
+```jsonld
+{
+  "errcode": 0,
+  "errmsg": "ACK",
+  "result": {
+    "items": [
+      {
+        "productId": "xxxxxxxxxx",
+        "productName": "xxxxxxxxxx",
+        "url": "https://xxx.xxx.xxx/xxx",
+        "productImageUrl": "https://xxx.xxx.xxx/xxx.xxx",
+        "productPrice": 600,
+        "productPriceCurrency": "TWD",
+        "productSalePrice": 500,
+        "productSalePriceCurrency": "TWD",
+        "productAvailability": true
+      }
+    ],
+    "paging": {
+      "limit": 10,
+      "currentPage": 1,
+      "totalPages": 10,
+      "first": "/search/v1/5556667777/products?text=xxx&priceRange=500-1000&page=1&limit=10&sort=1",
+      "previous": null,
+      "next": "/search/v1/5556667777/products?text=xxx&priceRange=500-1000&page=2&limit=10&sort=1",
+      "last": "/search/v1/5556667777/products?text=xxx&priceRange=500-1000&page=10&limit=10&sort=1"
+    },
+    "sorting": {
+      "currentType": 1,
+      "availableTypes": [
+        1,
+        2,
+        11
+      ]
+    }
+  }
+}
+```
 
 
 ###### tags: `nununi`
