@@ -150,9 +150,11 @@ nununiSDK.getProducts("text=%E5%A5%B3+%E9%95%B7%E8%A3%99priceRange=&page=1&limit
 ```
 ### getSuggestions()
 `query`
+
 Field	|Type	|Description
---------|-------|------------
+---|---|---
 keyword	|string	|輸入 input 要查找的關鍵字
+
 `response`
 ```jsonld
 {
@@ -169,14 +171,14 @@ keyword	|string	|輸入 input 要查找的關鍵字
 
 ### getProducts()
 `query`
+
 Field	|Type	|Description
---------|-------|----------------------
+---|---|---
 text `不可為空`	|字串	| 要查找的關鍵字
 priceRange	|字串	|要查找的價格範圍
 page	|字串	|頁碼，起始為1
 limit	|整數	|每頁商品數量
 sort	|整數	|預設為1。1($低到高) or 2($高到低) or 11(最新上架)
-
 
 `response` 會回傳商品以及分頁資料
 ```jsonld
