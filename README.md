@@ -18,10 +18,12 @@
    /* cupid classify 標籤開關 */
     nununi.setCupidClassify(true);
 
-    /*頁面商品顯示數量設定*/
+    /*頁面商品顯示數量設定
+     32 or 64 or 80 */
     nununi.setLimit(64);
     
-    /*頁面商品排序設定*/
+    /*頁面商品排序設定
+     1($低到高) or 2($高到低) or 11(最新上架) */
     nununi.setSort(2);
 
     /*頁面渲染*/
@@ -49,7 +51,7 @@ $ yarn add @awootaiwan/nununisearch
 ```javascript
 import nununiSDK from "@awootaiwan/nununisearch";
 
-const cupidSDK = new nununiSDK("id");
+const nununiSDK = new nununiSDK("id");
 (async () => {
   console.log(await nununi.getSuggestions('女 短褲'));
 })();
