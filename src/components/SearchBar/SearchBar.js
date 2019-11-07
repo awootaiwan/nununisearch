@@ -13,134 +13,119 @@ const SearchInput = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
-  position: relative;
 
-  .icon-wrapper {
-    box-sizing: border-box;
-    position: absolute;
-    width: 40px;
-    height: 100%;
-    border: 1px solid ${props => props.theme.colorBorder};
-    border-radius: 0 5px 5px 0;
-    background-color: ${props => props.theme.colorBtnBg};
-    z-index: 2;
-
-    &:hover {
-      background-color: ${props => props.theme.colorBtnBg_hover};
-      border-color: ${props => props.theme.colorBtnBg_hover};
-    }
-
-    .spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -11px 0 0 -11px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50px;
-      border: 3px dotted  ${props => props.theme.colorIcon};
-      z-index: 1;
-      animation: ${rotate} 1.2s linear infinite;
-
-
-      &-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        color: ${props => props.theme.colorIcon};
-      }
-
-    }
-    .search {
+  .nununi-searchbar {
+    &-container {
       position: relative;
-      text-align: center;
+    }
 
-      &-wrapper {
-        position: relative;
-        color: ${props => props.theme.colorIcon};
-        cursor: pointer;
+    &-iconwrapper {
+      box-sizing: border-box;
+      position: absolute;
+      right: 0;
+      width: 40px;
+      height: 100%;
+      border: 1px solid ${props => props.theme.colorBorder};
+      border-radius: 0 5px 5px 0;
+      background-color: ${props => props.theme.colorBtnBg};
+      z-index: 2;
+
+      .search {
         width: 100%;
         height: 100%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: ${props => props.theme.colorBtnBg_hover};
+          border-color: ${props => props.theme.colorBtnBg_hover};
+        }
+
+        &-circle {
+          position: absolute;
+          top: calc(50% - 13px);
+          left: calc(50% - 13px);
+          width: 13px;
+          height: 13px;
+          border: 3px solid ${props => props.theme.colorIcon};
+          border-radius: 100px;
+        }
+
+        &-stick {
+          position: absolute;
+          left: 50%;
+          top: calc(50% + 4px);
+          width: 12px;
+          height: 4px;
+          transform: rotate(45deg);
+          background-color: ${props => props.theme.colorIcon};
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
       }
-    
-      &-circle {
+
+      .spinner {
         position: absolute;
-        top: 8px;
-        right: 10px;
-        width: 13px;
-        height: 13px;
-        border: 3px solid ${props => props.theme.colorIcon};
-        border-radius: 100px;
+        top: calc(50% - 11px);
+        left: calc(50% - 11px);
+        width: 18px;
+        height: 18px;
+        border-radius: 50px;
+        border: 3px dotted  ${props => props.theme.colorIcon};
+        animation: ${rotate} 1.2s linear infinite;
       }
-    
-      &-stick {
-        position: absolute;
-        right: 5px;
-        bottom: -29px;
-        width: 12px;
-        height: 4px;
-        transform: rotate(45deg);
-        background-color: ${props => props.theme.colorIcon};
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+    }
+  }
+
+  .react-autosuggest {
+    &__container {
+      position: relative;
+    }
+
+    &__input {
+      box-sizing: content-box;
+      padding: 10px 20px;
+      font-family: 'Helvetica, sans-serif';
+      font-weight: 300;
+      font-size: 14px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    &__suggestions {
+      &-container {
+        &--open {
+          position: absolute;
+          top: 100%;
+          width: 100%;
+          border: 1px solid #999;
+          background-color: #fff;
+          font-family: 'Helvetica, sans-serif';
+          font-weight: 300;
+          font-size: 16px;
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
+          z-index: 2;
+        }
+      }
+
+      &-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+    }
+
+    &__suggestion {
+      padding: 10px 20px;
+      cursor: pointer;
+
+      &--highlighted {
+        background-color: #ddd;
       }
     }
   }
 `;
-
-// Autosuggest 樣式
-const theme = {
-  container: {
-    position: 'relative',
-  },
-  input: {
-    boxSizing: 'content-box',
-    maxWidth: '300px',
-    height: '20px',
-    padding: '10px 20px',
-    fontFamily: 'Helvetica, sans-serif',
-    fontWeight: 300,
-    fontSize: '16px',
-    border: '1px solid #999',
-    borderRadius: '4px',
-  },
-  inputFocused: {
-    outline: 'none',
-  },
-  suggestionsContainer: {
-    display: 'none',
-  },
-  suggestionsContainerOpen: {
-    display: 'block',
-    position: 'absolute',
-    top: '100%',
-    width: '100%',
-    border: '1px solid #999',
-    backgroundColor: '#fff',
-    fontFamily: 'Helvetica, sans-serif',
-    fontWeight: 300,
-    fontSize: '16px',
-    borderBottomLeftRadius: '4px',
-    borderBottomRightRadius: '4px',
-    zIndex: 2,
-  },
-  suggestion: {
-    cursor: 'pointer',
-    padding: '0',
-  },
-  suggestionHighlighted: {
-    backgroundColor: '#ddd',
-  },
-  suggestionsList: {
-    margin: 0,
-    padding: 0,
-    listStyleType: 'none',
-  },
-};
-
-const suggestInlineStyle = {
-  padding: '10px 20px'
-}
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -187,18 +172,17 @@ class SearchBar extends React.Component {
   };
 
   onSearch = (text) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('text', text);
-    url.searchParams.set('page', 1);
-    url.searchParams.set('priceRange', '');
-    window.location = url.href;
+    if (text !== '') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('text', text);
+      url.searchParams.set('page', 1);
+      url.searchParams.set('priceRange', '');
+      window.location = url.href;
+    }
   }
 
   // 渲染 suggestions
-  renderSuggestion = (suggestion) => <div
-                                        style={suggestInlineStyle}
-                                        onClick={(event) => this.onSearch(event.target.textContent)}
-                                      >
+  renderSuggestion = (suggestion) => <div onClick={(event) => this.onSearch(event.target.textContent)}>
                                         {suggestion}
                                       </div>;
 
@@ -235,22 +219,18 @@ class SearchBar extends React.Component {
     };
 
     return (
-      <React.Fragment>
-        <SearchInput>
-          <div className='icon-wrapper'>
+      <SearchInput className="nununi-searchbar-wrapper">
+        <div className="nununi-searchbar-container">
+          <div className="nununi-searchbar-iconwrapper">
             {isLoading ? (
-              <div className="spinner-wrapper">
-                <div className="spinner"></div>
-              </div>
+              <div className="spinner"></div>
             ) : (
-              <div className="search-wrapper">
-                <div 
-                  className="search"
-                  onClick={() => this.onSearch(this.state.value)}
-                >
-                  <div className="search-circle"></div>
-                  <div className="search-stick"></div>
-                </div>
+              <div
+                className="search"
+                onClick={() => this.onSearch(this.state.value)}
+              >
+                <div className="search-circle"></div>
+                <div className="search-stick"></div>
               </div>
             )}
           </div>
@@ -264,10 +244,9 @@ class SearchBar extends React.Component {
             renderSuggestion={this.renderSuggestion}
             inputProps={inputProps}
             highlightFirstSuggestion={true}
-            theme={theme}
           />
-        </SearchInput>
-      </React.Fragment>
+        </div>
+      </SearchInput>
     );
   }
 }
