@@ -103,30 +103,22 @@ const Container = styled.div`
       display: flex;
 
       &-icon {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-item: center;
+        align-content: center;
+        box-sizing: border-box;
         margin: 0 10px;
         width: 40px;
         height: 40px;
         opacity: .4;
         cursor: pointer;
 
-        &:hover {
-          opacity: 1;
-        }
-
-        .icon-block {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-item: center;
-          align-content: center;
-          width: 100%;
-          height: 100%;
-          box-sizing: border-box;
-          span {
-            display: block;
-            border-radius: 2px;
-            background-color: ${props => props.theme.colorBlack};
-          }
+        span {
+          display: block;
+          border-radius: 2px;
+          background-color: ${props => props.theme.colorBlack};
         }
 
         .line {
@@ -139,6 +131,10 @@ const Container = styled.div`
           width: 13px;
           height: 13px;
           margin: 2px;
+        }
+
+        &:hover {
+          opacity: 1;
         }
       }
     }
