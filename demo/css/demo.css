@@ -111,6 +111,10 @@ input:focus {
 #nununi-productlist .nununi-listwrapper {
   margin: 30px 0 0 0;
 }
+#nununi-productlist .nununi-productblock-href:hover {
+  -webkit-box-shadow: #cccccc 4px 4px 3px;
+          box-shadow: #cccccc 4px 4px 3px;
+}
 #nununi-productlist .nununi-pagination-page {
   width: 3rem;
   height: 2rem;
@@ -129,5 +133,3 @@ input:focus {
   border-radius: 4px;
   font-size: 16px;
 }
-
-/*# sourceMappingURL=/demo.css.map */
