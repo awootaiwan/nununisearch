@@ -19,60 +19,59 @@ const SearchInput = styled.div`
       position: relative;
     }
 
-    .spinner {
+    &-iconwrapper {
+      box-sizing: border-box;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -11px 0 0 -11px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50px;
-      border: 3px dotted  ${props => props.theme.colorIcon};
-      z-index: 1;
-      animation: ${rotate} 1.2s linear infinite;
+      right: 0;
+      width: 40px;
+      height: 100%;
+      border: 1px solid ${props => props.theme.colorBorder};
+      border-radius: 0 5px 5px 0;
+      background-color: ${props => props.theme.colorBtnBg};
+      z-index: 2;
 
-
-      &-wrapper {
-        position: relative;
+      .search {
         width: 100%;
         height: 100%;
-        color: ${props => props.theme.colorIcon};
-      }
-
-    }
-
-    .search {
-      position: relative;
-      text-align: center;
-
-      &-wrapper {
-        position: relative;
-        color: ${props => props.theme.colorIcon};
         cursor: pointer;
-        width: 100%;
-        height: 100%;
+
+        &:hover {
+          background-color: ${props => props.theme.colorBtnBg_hover};
+          border-color: ${props => props.theme.colorBtnBg_hover};
+        }
+
+        &-circle {
+          position: absolute;
+          top: calc(50% - 13px);
+          left: calc(50% - 13px);
+          width: 13px;
+          height: 13px;
+          border: 3px solid ${props => props.theme.colorIcon};
+          border-radius: 100px;
+        }
+
+        &-stick {
+          position: absolute;
+          left: 50%;
+          top: calc(50% + 4px);
+          width: 12px;
+          height: 4px;
+          transform: rotate(45deg);
+          background-color: ${props => props.theme.colorIcon};
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
       }
 
-      &-circle {
+      .spinner {
         position: absolute;
-        top: 8px;
-        right: 10px;
-        width: 13px;
-        height: 13px;
-        border: 3px solid ${props => props.theme.colorIcon};
-        border-radius: 100px;
-      }
-
-      &-stick {
-        position: absolute;
-        right: 5px;
-        bottom: -29px;
-        width: 12px;
-        height: 4px;
-        transform: rotate(45deg);
-        background-color: ${props => props.theme.colorIcon};
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        top: calc(50% - 11px);
+        left: calc(50% - 11px);
+        width: 18px;
+        height: 18px;
+        border-radius: 50px;
+        border: 3px dotted  ${props => props.theme.colorIcon};
+        animation: ${rotate} 1.2s linear infinite;
       }
     }
   }
@@ -224,18 +223,14 @@ class SearchBar extends React.Component {
         <div className={'nununi-searchbar-container'}>
           <div className='nununi-searchbar-iconwrapper'>
             {isLoading ? (
-              <div className="spinner-wrapper">
-                <div className="spinner"></div>
-              </div>
+              <div className="spinner"></div>
             ) : (
-              <div className="search-wrapper">
-                <div
-                  className="search"
-                  onClick={() => this.onSearch(this.state.value)}
-                >
-                  <div className="search-circle"></div>
-                  <div className="search-stick"></div>
-                </div>
+              <div
+                className="search"
+                onClick={() => this.onSearch(this.state.value)}
+              >
+                <div className="search-circle"></div>
+                <div className="search-stick"></div>
               </div>
             )}
           </div>
