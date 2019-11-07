@@ -50,8 +50,8 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "autoprefixer": "^9.6.5",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-bundle-visualiser": "^1.2.0",
-    "sass": "^1.23.0",
-    "parcel-bundler": "^1.12.4"
+    "sass": "^1.23.0"
   }
 }

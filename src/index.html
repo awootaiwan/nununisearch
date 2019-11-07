@@ -15,7 +15,6 @@
 
     <script src="./App.js"></script>
     <!--  Uncomment the following line for seeing API outputs in console.-->
-    <!--  <script src="tests/api.js"></script>-->
 
     <script>
       // window.nununi={init:function(t){var e,n,o;document.getElementById("cupid-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/cupid-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
@@ -37,9 +36,9 @@
         /*頁面渲染範例*/
         nununi.renderSearchBar();
         nununi.renderProductList();
-
         /*資料存取範例*/
         (async() => {
+          console.log(await nununi.getSuggestions('女 短褲'));
         })();
       // });
     </script>

@@ -47,7 +47,6 @@ const ProductListWrapper = (props) => {
   const [isLoading, setLoadingState] = useState(false);
   const [dataIsBack, setDataIsBack] = useState(false);
   const [barMode, setBarMode] = useState('');
-  console.log('warapper:' + barMode);
 
   // 修改 urlInfo 內的搜尋條件
   const setSearchCondition = (key, value) => {

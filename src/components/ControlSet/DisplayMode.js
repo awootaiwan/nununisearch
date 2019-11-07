@@ -15,7 +15,7 @@ const DisplayModeContainer = styled.div`
     &:hover {
       opacity: 1;
     }
-    .icon-b {
+    .icon-block {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -43,37 +43,33 @@ const DisplayModeContainer = styled.div`
   }
 `;
 
-class DisplayMode extends React.Component {
-  constructor(props) {
-    super(props);
+const DisplayMode = (props) => {
+
+  const changeToBarMode = () => {
+    props.setBarMode(' bar-style');
   }
-  changeToBarMode = () => {
-    this.props.setBarMode(' bar-style');
+  const changeToBlockMode = () => {
+    props.setBarMode('');
   }
-  changeToBlockMode = () => {
-    this.props.setBarMode('');
-  }
-  render() {
     return  (
       <DisplayModeContainer>
-        <div className='icon-wrapper' onClick={this.changeToBlockMode}>
-          <div class="icon-b">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
+        <div className='icon-wrapper' onClick={changeToBlockMode}>
+          <div className="icon-block">
+            <span className="block"></span>
+            <span className="block"></span>
+            <span className="block"></span>
+            <span className="block"></span>
           </div>
         </div>
-        <div className='icon-wrapper' onClick={this.changeToBarMode}>
-          <div class="icon-b">
-            <span class="block"></span>
-            <span class="block"></span>
-            <span class="block"></span>
-            <span class="block"></span>
+        <div className='icon-wrapper' onClick={changeToBarMode}>
+          <div className="icon-block">
+            <span className="line"></span>
+            <span className="line"></span>
+            <span className="line"></span>
           </div>
         </div>
       </DisplayModeContainer>
     );
-  }
 }
 
 export default DisplayMode;

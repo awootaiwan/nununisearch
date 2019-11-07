@@ -184,7 +184,6 @@ function ProductBlock({product, t, barMode}){
   const backgroundProductImg = {
     backgroundImage: `url('${product.productImageUrl}')`
   }
-  console.log('ProductBlock:' + barMode);
 
   return (
     <ProductItem className={'default-style' + `${barMode}`} imageUrl={product.productImageUrl}>

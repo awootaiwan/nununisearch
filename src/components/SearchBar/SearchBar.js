@@ -31,13 +31,14 @@ const SearchInput = styled.div`
     }
 
     .spinner {
-      width: 20px;
-      height: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -11px 0 0 -11px;
+      width: 18px;
+      height: 18px;
       border-radius: 50px;
       border: 3px dotted  ${props => props.theme.colorIcon};
-      position: absolute;
-      top: 6px;
-      right: 5px;
       z-index: 1;
       animation: ${rotate} 1.2s linear infinite;
 
@@ -64,18 +65,18 @@ const SearchInput = styled.div`
     
       &-circle {
         position: absolute;
-        top: 6px;
-        right: 9px;
-        width: 17px;
-        height: 17px;
+        top: 8px;
+        right: 10px;
+        width: 13px;
+        height: 13px;
         border: 3px solid ${props => props.theme.colorIcon};
         border-radius: 100px;
       }
     
       &-stick {
         position: absolute;
-        right: 4px;
-        bottom: -30px;
+        right: 5px;
+        bottom: -29px;
         width: 12px;
         height: 4px;
         transform: rotate(45deg);
