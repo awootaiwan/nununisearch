@@ -22,22 +22,22 @@ nununiSDK 由兩個主要服務構成：
   window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
   nununi.init(() => {
-    const nununi = new nununiSDK('你的nununi ID');
+    const nununiSDK = new NununiSDK('nununi ID');
 
     /*Products API版本設定 default: latest */
-    nununi.setProductsAPIVersion('v1');
-    nununi.setSuggestionAPIVersion('v1');
+    nununiSDK.setProductsAPIVersion('v1');
+    nununiSDK.setSuggestionAPIVersion('v1');
 
     /* cupid classify 標籤開關 */
-    nununi.setCupidClassify(true);
+    nununiSDK.setCupidClassify(true);
 
     /*頁面商品顯示數量設定
      32 or 64 or 80 */
-    nununi.setLimit(64);
+    nununiSDK.setLimit(64);
 
     /*頁面商品排序設定
      1(價格由低到高) or 2(價格由高到低) or 11(最新上架) */
-    nununi.setSort(2);
+    nununiSDK.setSort(2);
   });
 </script>
 ```
@@ -50,8 +50,8 @@ $ yarn add @awootaiwan/nununisearch
 ```
 
 ```javascript
-import nununiSDK from "@awootaiwan/nununisearch";
-const nununi = new nununiSDK("id");
+import NununiSDK from "@awootaiwan/nununisearch";
+const nununi = new NununiSDK("id");
 ```
 
 ## 如何使用
@@ -90,15 +90,15 @@ nununi.setCupidClassify(true);
       window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
       nununi.init(() => {
-        const nununi = new nununiSDK('你的nununi ID');
+        const nununiSDK = new NununiSDK('nununi ID');
 
-        nununi.setProductsAPIVersion('v1');
-        nununi.setSuggestionAPIVersion('v1');
-        nununi.setCupidClassify(true);
-        nununi.setLimit(32);
-        nununi.setSort(2);
-        nununi.renderSearchBar();
-        nununi.renderProductList();
+        nununiSDK.setProductsAPIVersion('v1');
+        nununiSDK.setSuggestionAPIVersion('v1');
+        nununiSDK.setCupidClassify(true);
+        nununiSDK.setLimit(32);
+        nununiSDK.setSort(2);
+        nununiSDK.renderSearchBar();
+        nununiSDK.renderProductList();
       });
     </script>
 </body>
@@ -172,13 +172,13 @@ nununi.setCupidClassify(true);
 ## nununi API 方法說明
 
 ```javascript
-const nununi = new nununiSDK('你的nununi ID');
+const nununiSDK = new NununiSDK('nununi ID');
 
 // init setting ...
 
 (async() => {
   // 取得 AI 推薦的建議搜尋字
-  console.log(await nununi.getSuggestions('女 短褲'));
+  console.log(await nununiSDK.getSuggestions('女 短褲'));
 
   // 根據搜尋條件取得產品
   const conditions = {
@@ -188,7 +188,7 @@ const nununi = new nununiSDK('你的nununi ID');
     limit: 32,
     sort: 2,
   };
-  console.log(await nununi.getProducts(conditions));
+  console.log(await nununiSDK.getProducts(conditions));
 })();
 ```
 ### getSuggestions()
