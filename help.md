@@ -7,7 +7,7 @@ nununi-search 手冊
 
 ## 安裝
 ## 產品介紹
-nununiSDK 由兩個主要服務構成： 
+nununiSDK 由兩個主要服務構成：
 * suggestion: 依照客戶輸入的關鍵字，給出AI推薦的搜尋建議。
 * site-search: 依照搜尋字，去查找相關的商品，並產出商品列表。此功能可以選擇開啟 cupid classify 標籤功能。
 
@@ -71,7 +71,7 @@ nununi.renderProductList();
 ```javascript
 /* cupid classify 標籤開關 */
 nununi.setCupidClassify(true);
-``` 
+```
 ### 範例程式碼 HTML
 ```javascript=
 <body>
@@ -82,7 +82,7 @@ nununi.setCupidClassify(true);
       <div id="cupid-classify"></div>
       <div id="nununi-productlist"></div>
     </div>
-    
+
     <script>
     window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
@@ -140,7 +140,44 @@ nununi.setCupidClassify(true);
 
 ## 錯誤處理
 ### App.js 內的throw error 排解教學
+沒有畫面，空白一片，請查看 console 的錯誤顯示，有以下的情況：
+
+1. ID 未填入時，console 會出現以下 Message：
+   ![](https://i.imgur.com/TD3EpzZ.png)
+
+2. 未在 html 內放置 cupid-product-list、cupid-suggestion-tag、cupid-product-tag、cupid-classify 區塊，console 會出現以下 Message：
+   ![](https://i.imgur.com/CBXTZ0f.png)
+
+3. 執行 Prodruct tags 時，若頁面上的第一個 data-cupid-product-id 的數值為空，console 會出現會出現 `404 not found訊息`。
+
+4. 執行 Prodruct tags、Product classify 時如果沒有將商品 id 代入程式，頁面元素也沒有 data-cupid-product-id，console 會出現以下 Message：
+   ![](https://imgur.com/3PyWjuF.png)
+
+5. Product classify 時，若代入的值是空值，，console 會出現以下 Message：  
+   `執行Error: 傳入商品id陣列為空陣列`
 ### Api error 排解
+當 API 出現 Error 時，畫面呈現：
+![](https://i.imgur.com/5hLc4yv.png)
+
+當請求 cupid API 失敗時
+
+```jsonld=
+{
+  "errcode": 10000
+  "errmsg": "Request to cupid API failed."
+  "result": ""
+}
+```
+
+當沒有傳入 tags 參數時
+
+```jsonld=
+{
+  "errcode": 10001
+  "errmsg": "No tags provided."
+  "result": ""
+}
+```
 
 ## nununi API 方法說明
 
