@@ -1,17 +1,15 @@
 header {
   .header-nav {
+    box-sizing: border-box;
+    padding: 10px 20px;
     width: 100%;
     max-width: 100%;
-    height: 64px;
+    height: 84px;
   }
 
   .brand-logo {
     height: 64px;
   }
-}
-
-#siteSearch {
-  min-height: 800px;
 }
 
 footer {
