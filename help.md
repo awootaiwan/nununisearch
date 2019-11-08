@@ -219,7 +219,7 @@ keyword	|string	|輸入 input 要查找的關鍵字
 Field	|Type	|Description
 ---|---|---
 text `不可為空`	|字串	| 要查找的關鍵字
-priceRange	|字串	|要查找的價格範圍，以 `-` 隔開價格，若該價格為空則不填入。<br>ex: `"0-100"`、`"0-"`、`"-100"`、`""`
+priceRange	|字串	|要查找的價格範圍，以 `-` 隔開價格，若該價格為空則不填入。<br>ex: `"0-100"` 代表價格為 0 ~100<br>`"0-"` 代表價格為 0 ~ 無設限<br>`"-100"` 代表價格為 無設限 ~ 100<br>`""` 代表價格不設限
 page	|整數	|頁碼，起始為1
 limit	|整數	|每頁商品數量。32 or 64 or 80
 sort	|整數	|預設為1。1(價格由低到高) or 2(價格由高到低) or 11(最新上架)
@@ -248,10 +248,10 @@ sort	|整數	|預設為1。1(價格由低到高) or 2(價格由高到低) or 11(
       "limit": 32,
       "currentPage": 1,
       "totalPages": 1,
-      "first": "/search/v1/1177060613/products?text=%E5%A4%96%E5%A5%97&priceRange=300-500&page=1&limit=32&sort=2,
+      "first": "/search/v1/5556667777/products?text=%E5%A4%96%E5%A5%97&priceRange=300-500&page=1&limit=32&sort=2,
       "previous": null,
       "next": null,
-      "last": "/search/v1/1177060613/products?text=%E5%A4%96%E5%A5%97&priceRange=300-500&page=1&limit=32&sort=2"
+      "last": "/search/v1/5556667777/products?text=%E5%A4%96%E5%A5%97&priceRange=300-500&page=1&limit=32&sort=2"
     },
     "sorting": {
       "currentType": 2,
