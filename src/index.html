@@ -13,17 +13,11 @@
       <div id="nununi-productlist"></div>
     </div>
 
-    <script src="./App.js"></script>
-    <!--  Uncomment the following line for seeing API outputs in console.-->
-
     <script>
+      window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
-      // window.nununi={init:function(t){var e,n,o;document.getElementById("cupid-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/cupid-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
-      // window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="127.0.0.1:3000/production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
-
-      // nununi.init(() => {
+      nununi.init(() => {
         const nununiSDK = new NununiSDK();
-
 
         /*Products API版本設定 default: latest */
         nununiSDK.setProductsAPIVersion('v1');
@@ -38,6 +32,7 @@
         /*頁面渲染範例*/
         nununiSDK.renderSearchBar();
         nununiSDK.renderProductList();
+
         /*資料存取範例*/
         (async() => {
           // 取得 AI 推薦的建議搜尋字
@@ -53,7 +48,7 @@
           };
           console.log(await nununiSDK.getProducts(conditions));
         })();
-      // });
+      });
     </script>
   </body>
 </html>
