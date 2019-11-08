@@ -24,7 +24,6 @@
     "serve:demo": "parcel demo/index.html --port 1111 --open",
     "watch": "parcel watch src/index.html",
     "watch:app": "parcel watch src/App.js",
-    "watch:demo:style": "parcel watch demo/scss/*.scss --out-dir demo/css",
     "build:style": "parcel build demo/scss/*.scss --no-source-maps --out-dir demo/css",
     "build:app": "parcel build src/App.js --out-dir production --out-file nununi-sdk-latest.min.js --no-source-maps"
   },
@@ -52,7 +51,6 @@
     "@babel/preset-react": "^7.6.3",
     "autoprefixer": "^9.6.5",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-bundle-visualiser": "^1.2.0",
     "sass": "^1.23.0"
   }
 }
