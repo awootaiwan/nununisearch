@@ -143,11 +143,11 @@ nununi.setCupidClassify(true);
 沒有畫面，空白一片，請查看 console 的錯誤顯示，有以下的情況：
 
 1. ID 未填入時，console 會出現以下 Message：  
-![](https://imgur.com/IYsPJEf)
+![](https://imgur.com/IYsPJEf.png)
 
 2. 未在 html 內放置 nununi-searchbar、nununi-productlist 區塊，console 會出現以下 Message：  
-![](https://imgur.com/Z1ugYlO)  
-![](https://imgur.com/4vPRzNx)
+![](https://imgur.com/Z1ugYlO.png)  
+![](https://imgur.com/4vPRzNx.png)
 
 3. 開啟 cupid-classify 功能但未在html 內放置 cupid-classify 區塊，console 會出現以下 Message：  
 ![](https://i.imgur.com/CBXTZ0f.png)
