@@ -4,12 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>site-search-sdk-javascript develop page</title>
+    <title>Develop page</title>
   </head>
   <body>
-    <h1>hi</h1>
+    <div id="siteSearch">
+      <div id="nununi-searchbar"></div>
+      <div id="cupid-classify"></div>
+      <div id="nununi-productlist"></div>
+    </div>
     <script src="./app.js"></script>
-    <!--  Uncomment the following line for seeing API outputs in console.-->
-    <!--  <script src="tests/api.js"></script>-->
+    <script>
+      const nununiSDK = new NununiSDK('id');
+
+      /*Products API版本設定 default: latest */
+      nununiSDK.setProductsAPIVersion('v1');
+      nununiSDK.setSuggestionAPIVersion('v1');
+      nununiSDK.setCupidClassify(true);
+
+      /*頁面商品顯示數量設定*/
+      nununiSDK.setLimit(64);
+      /*頁面商品排序設定*/
+      nununiSDK.setSort(2);
+
+      /*頁面渲染範例*/
+      nununiSDK.renderSearchBar();
+      nununiSDK.renderProductList();
+
+      /*資料存取範例*/
+      (async() => {
+        // 取得 AI 推薦的建議搜尋字
+        console.log(await nununiSDK.getSuggestions('女 短褲'));
+
+        // 根據搜尋條件取得產品
+        const conditions = {
+          text: '外套',
+          priceRange: '300-500',
+          page: 1,
+          limit: 32,
+          sort: 2,
+        };
+        console.log(await nununiSDK.getProducts(conditions));
+      })();
+    </script>
   </body>
 </html>

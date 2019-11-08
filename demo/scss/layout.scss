@@ -1,0 +1,38 @@
+header {
+  .header-nav {
+    box-sizing: border-box;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 100%;
+    height: 84px;
+  }
+
+  .brand-logo {
+    height: 64px;
+  }
+}
+
+footer {
+  text-align: center;
+
+  > .container {
+    width: 100%;
+  }
+
+  .category {
+    font-weight: bold;
+  }
+
+  .link {
+    cursor: pointer;
+    transition: opacity .3s;
+
+    &:hover {
+      opacity: .4;
+    }
+  }
+
+  .contact {
+    padding: 0 10px 10px;
+  }
+}

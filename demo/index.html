@@ -3,135 +3,209 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/header.css">
-  <title>awoo Cupid SDK 範例</title>
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/demo.css">
+  <title>awoo siteSearch SDK 範例</title>
 </head>
 
 <body onDRAGSTART="window.event.returnValue=false">
   <header>
-    <div class="header-top">
-      <ul class="top-menu">
-        <li class="about-us">
-          <a href="">關於</a>
-        </li>
-        <li class="culture-value">
-          <a href="">客戶</a>
-        </li>
-        <li class="media-news">
-          <a href="">服務</a>
+    <nav class="header-nav nav-wrapper container">
+      <img src="../demo/images/awoo.png" class="brand-logo"></img>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="#">關於</a>
         </li>
         <li>
-          <a href="">肯定</a>
+          <a href="#">客戶</a>
         </li>
         <li>
-          <a href="">招募</a>
+          <a href="#">服務</a>
         </li>
         <li>
-          <a href="">粉絲</a>
+          <a href="#">肯定</a>
         </li>
         <li>
-          <a href="">智庫</a>
+          <a href="#">招募</a>
         </li>
         <li>
-          <a href="">活動</a>
+          <a href="#">粉絲</a>
         </li>
         <li>
-          <a href="">諮詢</a>
+          <a href="#">智庫</a>
+        </li>
+        <li>
+          <a href="#">活動</a>
+        </li>
+        <li>
+          <a href="#">諮詢</a>
         </li>
       </ul>
-    </div>
-    <div class="head">
-      <img src="../demo/images/awoo.png" class="awoo-headlogo" alt="">
-      <sapn class="logo-font">awoo cupid</sapn>
-      <span class="icon">
-        <a href=""><i class="fas fa-shopping-cart"></i></a>
-        <a href=""><i class="fas fa-user"></i></a>
-      </span>
-    </div>
-    <div class="search">
-      <input class="search-input" type="search"></input>
-      <button class="sure-button">搜尋</button>
-    </div>
+      <ul id="nav-mobile" class="sidenav">
+        <li>
+          <a href="#">關於</a>
+        </li>
+        <li>
+          <a href="#">客戶</a>
+        </li>
+        <li>
+          <a href="#">服務</a>
+        </li>
+        <li>
+          <a href="#">肯定</a>
+        </li>
+        <li>
+          <a href="#">招募</a>
+        </li>
+        <li>
+          <a href="#">粉絲</a>
+        </li>
+        <li>
+          <a href="#">智庫</a>
+        </li>
+        <li>
+          <a href="#">活動</a>
+        </li>
+        <li>
+          <a href="#">諮詢</a>
+        </li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+    </nav>
   </header>
 
-  <main>
-    <div id="cupid-suggestion-tag"></div>
-    <div id="cupid-product-list"></div>
-  </main>
-
-  <div class="page-nav">
-    <a href="indexProductTag.html">Product Tag</a>
-    <a href="indexClassify.html">Product Category</a>
+  <div id="siteSearch">
+    <div id="nununi-searchbar"></div>
+    <h6 style="padding: 0 20px;">您可能感興趣</h6>
+    <div id="cupid-classify"></div>
+    <div id="nununi-productlist"></div>
   </div>
-  <footer>
-    <div class="footer">
-      <span class="awoo-foottext1">SEO 搜尋引擎最佳化服務專線</span>
-      <div class="footer-nav">
-        <a href="">最新</a>
-        <span>|</span>
-        <a href="">公益</a>
-        <span>|</span>
-        <a href="">影音</a>
-        <span>|</span>
-        <a href="">部落格</a>
-        <span>|</span>
-        <a href="">隱私權政策</a>
-        <span>|</span>
-        <a href="">網路地圖</a>
-        <span>|</span>
-        <a href="">聯絡我們</a>
+
+  <footer class="page-footer grey lighten-2">
+    <div class="container">
+      <div class="row">
+        <div class="col l1 s6">
+          <h6 class="category grey-text text-darken-1">關於我們</h6>
+          <ul>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">官方網站</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">服務條款</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">加入我們</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col l3 s6">
+          <h6 class="category grey-text text-darken-1">關注awoo</h6>
+          <ul>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">awoo粉絲專頁</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">SEO網站優化</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">網頁數據分析研究中心</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col l3 s6">
+          <h6 class="category grey-text text-darken-1">相關網站</h6>
+          <ul>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">Tigerfly EDM發送工具</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">台灣成長駭客行銷年會</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">iSearch搜尋引擎行銷年會</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col l2 s6">
+          <h6 class="category grey-text text-darken-1">加入討論</h6>
+          <ul>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">iSearch電商會</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">awoo SEO工具會</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">GHST台灣成長駭客年會</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col l3 s6">
+          <h6 class="category grey-text text-darken-1">SEO成長駭客工具</h6>
+          <ul>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">天下無狗 關鍵字研究工具</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">球來就打 網頁評測工具</a>
+            </li>
+            <li>
+              <a class="link grey-text text-darken-1" href="#">綺夢 數據整合分析工具</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-info">
-        <span>電話: (02)8712-1128</span>
-        <span>傳真: (02)2596-1288 </span>
-        <span>統一編號: 43401309</span>
-      </div>
-      <div class="footer-address">
-        <span>104 台北市中山區中山北路二段96號14樓1412室</span>
-      </div>
-      <div class="footer-company">
-        <span>Copyright ©阿物股份有限公司 All rights reserved</span>
-      </div>
-      <div class="footer-service">
-        <span>舊址:</span>
-        <a href="">網路行銷顧問</a>
-        <span>|</span>
-        <a href="">甚麼是搜尋行銷</a>
-        <span>|</span>
-        <a href="">關鍵字廣告</a>
-        <span>|</span>
-        <a href="">搜尋引擎最佳化</a>
-        <span>|</span>
-        <a href="">Google Analytics</a>
-        <span class="awoo-foottext2">(02)8712-1128</span>
+    </div>
+    <hr>
+    <div class="contact container black-text">
+      <div>阿物股份有限公司</div>
+      <div>電話：(02)8712-1128 傳真：(02)2100-1105</div>
+      <div>統一編號：43401309</div>
+      <div>10461 台北市中山區中山北路二段96號14樓</div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright ©阿物股份有限公司 All rights reserved.
       </div>
     </div>
   </footer>
 </body>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-<script src="js/search.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./js/sidenav.js"></script>
+
 <script>
-  window.cupid={init:function(t){var e,n,o;document.getElementById("cupid-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/cupid-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
- 
-  cupid.init(() => {
-    const cupidSDK = new CupidSDK('id');
-    /*Content API版本設定 default: latest */
-    cupidSDK.setContentAPIVersion('v1.3');
+  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+
+  nununi.init(() => {
+    const nununiSDK = new NununiSDK('id');
+
     /*Products API版本設定 default: latest */
-    cupidSDK.setProductsAPIVersion('v2.3');
+    nununiSDK.setProductsAPIVersion('v1');
+    nununiSDK.setSuggestionAPIVersion('v1');
+    nununiSDK.setCupidClassify(true);
+
     /*頁面商品顯示數量設定*/
-    cupidSDK.setLimit(12);
+    nununiSDK.setLimit(32);
+    /*頁面商品排序設定*/
+    nununiSDK.setSort(2);
+
     /*頁面渲染範例*/
-    cupidSDK.renderSuggestionTag();
-    cupidSDK.renderProductList();
+    nununiSDK.renderSearchBar();
+    nununiSDK.renderProductList();
+
     /*資料存取範例*/
     (async() => {
-      console.log(await cupidSDK.getContentAll('日本,面膜'));
+      console.log(await nununiSDK.getSuggestions('女 短褲'));
     })();
   });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
