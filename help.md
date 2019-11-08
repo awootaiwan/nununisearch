@@ -170,6 +170,8 @@ nununi.setCupidClassify(true);
 ```javascript
 const nununi = new nununiSDK('你的nununi ID');
 
+// init setting ...
+
 (async() => {
   // 取得 AI 推薦的建議搜尋字
   console.log(await nununi.getSuggestions('女 短褲'));
