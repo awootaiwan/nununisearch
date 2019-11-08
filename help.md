@@ -139,11 +139,11 @@ nununi.setCupidClassify(true);
 ```
 
 ## 錯誤處理
-### App.js 內的throw error 排解教學
+### html file  問題排解
 沒有畫面，空白一片，請查看 console 的錯誤顯示，有以下的情況：
 
 1. ID 未填入時，console 會出現以下 Message：  
-![](https://imgur.com/IYsPJEf.png)
+![](https://i.imgur.com/kVJe9Q6.png)
 
 2. 未在 html 內放置 nununi-searchbar、nununi-productlist 區塊，console 會出現以下 Message：  
 ![](https://imgur.com/Z1ugYlO.png)  
