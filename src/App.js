@@ -7,11 +7,10 @@ import ProductListWrapper from './components/ProductList/ProductListWrapper';
 import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
 import i18next from 'i18next';
 import './i18n';
-
 import theme from './theme/colors';
-
 import CupidSDK from "@awootaiwan/cupid-sdk-js";
-const cupidSDK = new CupidSDK(process.env.NUNUNI_ID);
+
+let cupidSDK;
 
 const App = props => (
   <ThemeProvider theme={theme}>
@@ -38,6 +37,8 @@ class NununiSDK {
     this.page = 1;
     this.limit = 32; // could be set
     this.sort = 1; // could be set
+
+    cupidSDK = new CupidSDK(id); // 使用 nununi ID 設定 cupidSDK
   }
 
   setProductsAPIVersion(apiVer) {
