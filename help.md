@@ -156,7 +156,7 @@ nununi.setCupidClassify(true);
 當 API 出現 Error 時，畫面呈現：
 ![](https://i.imgur.com/5hLc4yv.png)
 
-當請求 cupid API 失敗時
+當請求 nununi API 失敗時
 
 ```jsonld=
 {
