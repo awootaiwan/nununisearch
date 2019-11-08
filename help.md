@@ -143,15 +143,14 @@ nununi.setCupidClassify(true);
 沒有畫面，空白一片，請查看 console 的錯誤顯示，有以下的情況：
 
 1. ID 未填入時，console 會出現以下 Message：  
-![](https://i.imgur.com/TD3EpzZ.png)
+![](https://imgur.com/IYsPJEf)
 
 2. 未在 html 內放置 nununi-searchbar、nununi-productlist 區塊，console 會出現以下 Message：  
-![](https://i.imgur.com/CBXTZ0f.png)
+![](https://imgur.com/Z1ugYlO)  
+![](https://imgur.com/4vPRzNx)
 
 3. 開啟 cupid-classify 功能但未在html 內放置 cupid-classify 區塊，console 會出現以下 Message：  
 ![](https://i.imgur.com/CBXTZ0f.png)
-
-4. 開啟 cupid-classify 功能時，若頁面上的第一個 data-cupid-product-id 的數值為空，console 會出現會出現 `404 not found訊息`。
 
 ### Api error 排解
 當 API 出現 Error 時，畫面呈現：
@@ -162,17 +161,7 @@ nununi.setCupidClassify(true);
 ```jsonld=
 {
   "errcode": 10000
-  "errmsg": "Request to cupid API failed."
-  "result": ""
-}
-```
-
-當沒有傳入 tags 參數時
-
-```jsonld=
-{
-  "errcode": 10001
-  "errmsg": "No tags provided."
+  "errmsg": "Request to nununi API failed."
   "result": ""
 }
 ```
