@@ -51,7 +51,7 @@ $ yarn add @awootaiwan/nununisearch
 
 ```javascript
 import NununiSDK from "@awootaiwan/nununisearch";
-const nununi = new NununiSDK("id");
+const nununiSDK = new NununiSDK("id");
 ```
 
 ## 如何使用
@@ -61,19 +61,19 @@ const nununi = new NununiSDK("id");
 1. 在HTML檔案內加入 `<div id="nununi-searchbar"></div>`
 2. 下方的`設定區塊`內加入以下代碼，畫面會渲染出搜尋列。
 ```javascript
-nununi.renderSearchBar();
+nununiSDK.renderSearchBar();
 ```
 ### 使用 product-list 元件 ＋ site-search 功能 + classify 功能
 1. 在HTML檔案內加入 `<div id="nununi-productlist"></div>`
 2. 在HTML檔案內加入 `<div id="cupid-classify"></div>`
 3. 下方的`設定區塊`內加入以下代碼，畫面會渲染出操作元件;在搜尋列內送出搜尋字，商品列表會渲染搜尋結果。
 ```javascript
-nununi.renderProductList();
+nununiSDK.renderProductList();
 ```
 4. `classify` 標籤預設為 <font color="#006600">開啟</font>，若要 <font color="#dd0000">關閉</font>，請改成 `false`
 ```javascript
 /* cupid classify 標籤開關 */
-nununi.setCupidClassify(true);
+nununiSDK.setCupidClassify(true);
 ```
 ### 範例程式碼 HTML
 ```javascript=
@@ -219,7 +219,7 @@ keyword	|string	|輸入 input 要查找的關鍵字
 Field	|Type	|Description
 ---|---|---
 text `不可為空`	|字串	| 要查找的關鍵字
-priceRange	|字串	|要查找的價格範圍，以 `-` 隔開價格，若該價格為空則不填入。<br>ex: `"0-100"` 代表價格為 0 ~100<br>`"0-"` 代表價格為 0 ~ 無設限<br>`"-100"` 代表價格為 無設限 ~ 100<br>`""` 代表價格不設限
+priceRange	|字串	|要查找的價格範圍，以 `-` 隔開價格，若該價格為空則不填入。<br>ex: `"0-100"` 代表價格為 0 ~ 100<br>`"0-"` 代表價格為 0 ~ 無設限<br>`"-100"` 代表價格為 無設限 ~ 100<br>`""` 代表價格不設限
 page	|整數	|頁碼，起始為1
 limit	|整數	|每頁商品數量。32 or 64 or 80
 sort	|整數	|預設為1。1(價格由低到高) or 2(價格由高到低) or 11(最新上架)
