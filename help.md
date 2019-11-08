@@ -15,27 +15,26 @@ nununiSDK 由兩個主要服務構成：
 若在HTML檔案內安裝，請在 `<body>` 標籤最末端插入以下`設定區塊`，即完成初始設定：
 ```javascript
 <script>
-    window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
-      nununi.init(() => {
-        const nununi = new nununiSDK('你的nununi ID');
+  nununi.init(() => {
+    const nununi = new nununiSDK('你的nununi ID');
 
-       /*Products API版本設定 default: latest */
-        nununi.setProductsAPIVersion('v1');
-        nununi.setSuggestionAPIVersion('v1');
+    /*Products API版本設定 default: latest */
+    nununi.setProductsAPIVersion('v1');
+    nununi.setSuggestionAPIVersion('v1');
 
-       /* cupid classify 標籤開關 */
-        nununi.setCupidClassify(true);
+    /* cupid classify 標籤開關 */
+    nununi.setCupidClassify(true);
 
-        /*頁面商品顯示數量設定
-         32 or 64 or 80 */
-        nununi.setLimit(64);
+    /*頁面商品顯示數量設定
+     32 or 64 or 80 */
+    nununi.setLimit(64);
 
-        /*頁面商品排序設定
-         1($低到高) or 2($高到低) or 11(最新上架) */
-        nununi.setSort(2);
-
-      });
+    /*頁面商品排序設定
+     1(價格由低到高) or 2(價格由高到低) or 11(最新上架) */
+    nununi.setSort(2);
+  });
 </script>
 ```
 若使用 npm or yarn 安裝，請在JavaScript 檔案內引用
@@ -84,7 +83,7 @@ nununi.setCupidClassify(true);
     </div>
 
     <script>
-    window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+      window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
       nununi.init(() => {
         const nununi = new nununiSDK('你的nununi ID');
@@ -149,7 +148,7 @@ nununi.setCupidClassify(true);
 ![](https://imgur.com/Z1ugYlO.png)  
 ![](https://imgur.com/4vPRzNx.png)
 
-3. 開啟 cupid-classify 功能但未在html 內放置 cupid-classify 區塊，console 會出現以下 Message：  
+3. 開啟 cupid-classify 功能但未在 html 內放置 cupid-classify 區塊，console 會出現以下 Message：  
 ![](https://i.imgur.com/CBXTZ0f.png)
 
 ### Api error 排解
@@ -169,11 +168,25 @@ nununi.setCupidClassify(true);
 ## nununi API 方法說明
 
 ```javascript
-nununiSDK.getSuggestions("女 長裙")
-nununiSDK.getProducts("text=%E5%A5%B3+%E9%95%B7%E8%A3%99priceRange=&page=1&limit=32&sort=2")
+const nununi = new nununiSDK('你的nununi ID');
+
+(async() => {
+  // 取得 AI 推薦的建議搜尋字
+  console.log(await nununi.getSuggestions('女 短褲'));
+
+  // 根據搜尋條件取得產品
+  const conditions = {
+    text: '外套',
+    priceRange: '300-500',
+    page: 1,
+    limit: 32,
+    sort: 2,
+  };
+  console.log(await nununi.getProducts(conditions));
+})();
 ```
 ### getSuggestions()
-`query`
+`params`
 
 Field	|Type	|Description
 ---|---|---
@@ -182,27 +195,28 @@ keyword	|string	|輸入 input 要查找的關鍵字
 `response`
 ```jsonld
 {
-    "errcode": 0,
-    "errmsg": "ACK",
-    "result": {
-        "suggest": [
-            "浴室 清潔",
-            "浴室 去漬",
-        ]
-    }
+  "errcode": 0,
+  "errmsg": "ACK",
+  "result": {
+    "suggest": [
+      "牛仔 短褲 女",
+      "襯衫 短褲 女",
+      ...
+    ]
+  }
 }
 ```
 
 ### getProducts()
-`query`
+`params`
 
 Field	|Type	|Description
 ---|---|---
 text `不可為空`	|字串	| 要查找的關鍵字
-priceRange	|字串	|要查找的價格範圍
-page	|字串	|頁碼，起始為1
-limit	|整數	|每頁商品數量
-sort	|整數	|預設為1。1($低到高) or 2($高到低) or 11(最新上架)
+priceRange	|字串	|要查找的價格範圍，以 `-` 隔開價格，若該價格為空則不填入。<br>ex: `"0-100"`、`"0-"`、`"-100"`、`""`
+page	|整數	|頁碼，起始為1
+limit	|整數	|每頁商品數量。32 or 64 or 80
+sort	|整數	|預設為1。1(價格由低到高) or 2(價格由高到低) or 11(最新上架)
 
 `response` 會回傳商品以及分頁資料
 ```jsonld
@@ -221,19 +235,20 @@ sort	|整數	|預設為1。1($低到高) or 2($高到低) or 11(最新上架)
         "productSalePrice": 500,
         "productSalePriceCurrency": "TWD",
         "productAvailability": true
-      }
+      },
+      ...
     ],
     "paging": {
-      "limit": 10,
+      "limit": 32,
       "currentPage": 1,
-      "totalPages": 10,
-      "first": "/search/v1/5556667777/products?text=xxx&priceRange=500-1000&page=1&limit=10&sort=1",
+      "totalPages": 1,
+      "first": "/search/v1/1177060613/products?text=%E5%A4%96%E5%A5%97&priceRange=300-500&page=1&limit=32&sort=2,
       "previous": null,
-      "next": "/search/v1/5556667777/products?text=xxx&priceRange=500-1000&page=2&limit=10&sort=1",
-      "last": "/search/v1/5556667777/products?text=xxx&priceRange=500-1000&page=10&limit=10&sort=1"
+      "next": null,
+      "last": "/search/v1/1177060613/products?text=%E5%A4%96%E5%A5%97&priceRange=300-500&page=1&limit=32&sort=2"
     },
     "sorting": {
-      "currentType": 1,
+      "currentType": 2,
       "availableTypes": [
         1,
         2,
