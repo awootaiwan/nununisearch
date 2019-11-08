@@ -23,7 +23,7 @@ const App = props => (
   </ThemeProvider>
 );
 
-class nununiSDK {
+class NununiSDK {
   constructor(id = process.env.NUNUNI_ID) {
     if (!id || id.length < 1) {
       throw new Error(i18next.t('nununiError.id'));
@@ -174,4 +174,4 @@ const freeSelf =
 /** Used as a reference to the global object. */
 const root = freeGlobal || freeSelf || Function('return this')();
 
-module.exports = root.nununiSDK = nununiSDK;
+module.exports = root.NununiSDK = NununiSDK;

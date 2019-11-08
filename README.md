@@ -9,7 +9,7 @@
   window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
   nununi.init(() => {
-    const nununi = new nununiSDK('id');
+    const nununi = new NununiSDK('id');
 
    /*Products API版本設定 default: latest */
     nununi.setProductsAPIVersion('v1');
@@ -49,11 +49,11 @@ $ yarn add @awootaiwan/nununisearch
 #### Node Example
 
 ```javascript
-import nununiSDK from "@awootaiwan/nununisearch";
+import NununiSDK from "@awootaiwan/nununisearch";
 
-const nununiSDK = new nununiSDK("id");
+const nununiSDK = new NununiSDK("nununi Id");
 (async () => {
-  console.log(await nununi.getSuggestions('女 短褲'));
+  console.log(await nununiSDK.getSuggestions('女 短褲'));
 })();
 ```
 
