@@ -182,14 +182,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="./js/sidenav.js"></script>
 
-<!-- TODO: 未來 sdk 上到機器要修改成 line 189 寫法 -->
-<script src="../production/nununi-sdk-latest.min.js"></script>
-
 <script>
-  //window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
-  // nununi.init(() => {
-    const nununiSDK = new NununiSDK();
+  nununi.init(() => {
+    const nununiSDK = new NununiSDK(1177060613);
 
     /*Products API版本設定 default: latest */
     nununiSDK.setProductsAPIVersion('v1');
@@ -204,10 +201,11 @@
     /*頁面渲染範例*/
     nununiSDK.renderSearchBar();
     nununiSDK.renderProductList();
+
     /*資料存取範例*/
     (async() => {
       console.log(await nununiSDK.getSuggestions('女 短褲'));
     })();
-  // });
+  });
 </script>
 </html>
