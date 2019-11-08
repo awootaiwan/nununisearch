@@ -9,30 +9,30 @@
   window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
   nununi.init(() => {
-    const nununi = new NununiSDK('id');
+    const nununiSDK = new NununiSDK('id');
 
    /*Products API版本設定 default: latest */
-    nununi.setProductsAPIVersion('v1');
-    nununi.setSuggestionAPIVersion('v1');
+    nununiSDK.setProductsAPIVersion('v1');
+    nununiSDK.setSuggestionAPIVersion('v1');
     
    /* cupid classify 標籤開關 */
-    nununi.setCupidClassify(true);
+    nununiSDK.setCupidClassify(true);
 
     /*頁面商品顯示數量設定
      32 or 64 or 80 */
-    nununi.setLimit(64);
+    nununiSDK.setLimit(64);
     
     /*頁面商品排序設定
      1($低到高) or 2($高到低) or 11(最新上架) */
-    nununi.setSort(2);
+    nununiSDK.setSort(2);
 
     /*頁面渲染*/
-    nununi.renderSearchBar();
-    nununi.renderProductList();
+    nununiSDK.renderSearchBar();
+    nununiSDK.renderProductList();
 
     /*資料存取範例*/
     (async() => {
-      console.log(await nununi.getSuggestions('女 短褲'));
+      console.log(await nununiSDK.getSuggestions('女 短褲'));
     })();
   });
 </script>
