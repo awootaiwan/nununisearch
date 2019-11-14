@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import ErrorAlert from '../ErrorAlert/ErrorAlert';
 import ProductList from './ProductList';
 import ControlSet from '../ControlSet/ControlSet';
 
@@ -10,7 +9,7 @@ const WrapperApp = props => (
     {props.errcode === 0 ? (
       props.children
     ) : (
-      <ErrorAlert errmsg={props.errmsg} />
+      console.log(props.errmsg)
     )}
   </ThemeProvider>
 );
@@ -63,6 +62,19 @@ const ProductListWrapper = (props) => {
     window.history.pushState(conditions, null, url.search);
   }
 
+  const checkClassify = async(res) => {
+    if (res.result.items < 1) return
+    const idForTest = [];
+    idForTest.push(res.result.items[0].productId);
+    const data = await props.getClassify(idForTest);
+    const { errcode, errmsg } = data;
+    if (!errcode || errcode !== '0'){
+      console.log(errmsg);
+      return
+    }
+    props.renderClassify();
+  };
+
   // 監聽值改變時重新抓取商品
   useEffect(() => {
     (async () => {
@@ -79,8 +91,9 @@ const ProductListWrapper = (props) => {
 
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
-        if (res.result.items.length !== 0) {
-          props.renderClassify();
+        if (res.result.items.length > 0) {
+          checkClassify(res);
+          // props.renderClassify();
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
