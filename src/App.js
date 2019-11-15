@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
-import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import SearchBar from './components/SearchBar/SearchBar';
 import ProductListWrapper from './components/ProductList/ProductListWrapper';
 import { getSiteSearchApiData, getSuggestionApiData } from '/api/base';
@@ -17,7 +16,7 @@ const App = props => (
     {props.errcode === 0 ? (
       props.children
     ) : (
-      <ErrorAlert errmsg={props.errmsg} />
+      console.log(props.errmsg)
     )}
   </ThemeProvider>
 );
@@ -128,6 +127,10 @@ class NununiSDK {
     );
   }
 
+  getClassify = (res) => {
+    return cupidSDK.getClassify(res);
+  }
+
   renderClassify = () => {
     cupidSDK.renderClassify();
   }
@@ -158,6 +161,7 @@ class NununiSDK {
         initCondition={initCondition}
         getProducts={this.getProducts}
         renderClassify={this.renderClassify}
+        getClassify={this.getClassify}
       />,
       target
     );

@@ -104,7 +104,6 @@ const ProductWrapper = styled.div`
 
       @media(max-width: 600px) {
         height: 48px;
-        word-wrap: nowrap;
         text-overflow: ellipsis;
       }
     }
@@ -141,6 +140,7 @@ const ProductWrapper = styled.div`
         &-detail {
           position: relative;
           display: inline-block;
+          width: calc(100% - 150px);
           height: 100%;
           padding-left: 20px;
           vertical-align: top;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import ErrorAlert from '../ErrorAlert/ErrorAlert';
 import ProductList from './ProductList';
 import ControlSet from '../ControlSet/ControlSet';
 
@@ -10,7 +9,7 @@ const WrapperApp = props => (
     {props.errcode === 0 ? (
       props.children
     ) : (
-      <ErrorAlert errmsg={props.errmsg} />
+      console.log(props.errmsg)
     )}
   </ThemeProvider>
 );
@@ -63,6 +62,16 @@ const ProductListWrapper = (props) => {
     window.history.pushState(conditions, null, url.search);
   }
 
+  const checkClassify = async(items) => {
+    const data = await props.getClassify(items[0].productId);
+    const { errcode, errmsg } = data;
+    if (errcode !== 0){
+      console.log(errmsg);
+      return
+    }
+    props.renderClassify();
+  };
+
   // 監聽值改變時重新抓取商品
   useEffect(() => {
     (async () => {
@@ -79,14 +88,14 @@ const ProductListWrapper = (props) => {
 
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
-        if (res.result.items.length !== 0) {
-          props.renderClassify();
+        if (res.result.items.length > 0) {
+          checkClassify(res.result.items);
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
       }
     })();
-  }, [props, urlInfo]); // 監聽值
+  }, [props, urlInfo]); // eslint-disable-line
 
   window.onpopstate = (e) => {
     if (e.state) {
@@ -101,7 +110,7 @@ const ProductListWrapper = (props) => {
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
         if (response.result.items.length !== 0) {
-          props.renderClassify();
+          checkClassify(response.result.items);
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
