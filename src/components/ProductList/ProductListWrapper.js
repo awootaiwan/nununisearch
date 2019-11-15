@@ -62,13 +62,10 @@ const ProductListWrapper = (props) => {
     window.history.pushState(conditions, null, url.search);
   }
 
-  const checkClassify = async(res) => {
-    if (res.result.items < 1) return
-    const idForTest = [];
-    idForTest.push(res.result.items[0].productId);
-    const data = await props.getClassify(idForTest);
+  const checkClassify = async(items) => {
+    const data = await props.getClassify(items[0].productId);
     const { errcode, errmsg } = data;
-    if (!errcode || errcode !== '0'){
+    if (errcode !== 0){
       console.log(errmsg);
       return
     }
@@ -92,14 +89,13 @@ const ProductListWrapper = (props) => {
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
         if (res.result.items.length > 0) {
-          checkClassify(res);
-          // props.renderClassify();
+          checkClassify(res.result.items);
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
       }
     })();
-  }, [props, urlInfo]); // 監聽值
+  }, [props, urlInfo]); // eslint-disable-line
 
   window.onpopstate = (e) => {
     if (e.state) {

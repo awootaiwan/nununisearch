@@ -33,8 +33,6 @@
       (async() => {
         // 取得 AI 推薦的建議搜尋字
         // console.log(await nununiSDK.getSuggestions('女 短褲'));
-      nununiSDK.renderProductList();
-        
 
         // 根據搜尋條件取得產品
         const conditions = {
@@ -44,7 +42,7 @@
           limit: 32,
           sort: 2,
         };
-        // console.log(await nununiSDK.getProducts(conditions));
+        console.log(await nununiSDK.getProducts(conditions));
       })();
     </script>
   </body>

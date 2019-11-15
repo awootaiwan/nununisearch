@@ -128,7 +128,7 @@ class NununiSDK {
   }
 
   getClassify = (res) => {
-    cupidSDK.getClassify(res);
+    return cupidSDK.getClassify(res);
   }
 
   renderClassify = () => {
