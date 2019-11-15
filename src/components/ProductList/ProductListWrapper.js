@@ -110,7 +110,7 @@ const ProductListWrapper = (props) => {
       // render Cupid Classify
       if (props.initCondition.hasCupidClassify) {
         if (response.result.items.length !== 0) {
-          props.renderClassify();
+          checkClassify(response.result.items);
         } else {
           document.getElementById('cupid-classify').innerHTML = '';
         }
