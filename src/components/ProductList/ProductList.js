@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import ProductTotalText from './ProductTotalText';
 import ProductBlock from './ProductBlock';
 import Pagination from "./Pagination";
 import { withTranslation } from 'react-i18next';
@@ -31,6 +32,17 @@ const ProductWrapper = styled.div`
     }
 
     .outofStock {
+      position: absolute;
+      padding: 3px;
+      width: 60px;
+      border-radius: 5px;
+      text-align: center;
+      color: ${props => props.theme.colorBadgeText};
+      background-color: ${props => props.theme.colorBadgeBg};
+      z-index: 1;
+    }
+
+    .preOrder {
       position: absolute;
       padding: 3px;
       width: 60px;
@@ -73,7 +85,7 @@ const ProductWrapper = styled.div`
         }
       }
 
-      .on-sale {
+      .origin-price {
         text-decoration: line-through;
       }
 
@@ -260,6 +272,7 @@ function ProductList({data, urlInfo, isLoading, setSearchCondition, dataIsBack, 
           <ProductNoData className="nununi-noproduct">{noData}</ProductNoData> :
           <ProductWrapper className="nununi-listwrapper" sorting={sorting}>
             {isLoading && <LoadingMask className="nununi-listwrapper-loadingmask" />}
+            <ProductTotalText paging={paging}></ProductTotalText>
             {productBlocks}
           </ProductWrapper>
       }

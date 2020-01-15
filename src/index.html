@@ -14,6 +14,7 @@
     </div>
     <script src="./app.js"></script>
     <script>
+
       const nununiSDK = new NununiSDK('id');
 
       /*Products API版本設定 default: latest */
@@ -21,7 +22,7 @@
       nununiSDK.setSuggestionAPIVersion('v1');
       nununiSDK.setCupidClassify(true);
       /*頁面商品顯示數量設定*/
-      nununiSDK.setLimit(64);
+      nununiSDK.setLimit(80);
       /*頁面商品排序設定*/
       nununiSDK.setSort(2);
 
@@ -39,7 +40,7 @@
           text: '外套',
           priceRange: '300-500',
           page: 1,
-          limit: 32,
+          limit: 30,
           sort: 2,
         };
         console.log(await nununiSDK.getProducts(conditions));

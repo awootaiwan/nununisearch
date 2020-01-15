@@ -12,12 +12,18 @@
     "noData": "查無資料"
   },
   "productBlock": {
-    "outofStock": "缺貨中"
+    "outofStock": "缺貨中",
+    "preOrder": "預購中"
+  },
+  "productTotal": {
+    "relateItem": "相關商品", 
+    "total":"共 ",
+    "unit":" 件"
   },
   "controlSet": {
     "sort": "排序",
-    "sort32": "一頁32個商品",
-    "sort64": "一頁64個商品",
+    "sort30": "一頁30個商品",
+    "sort60": "一頁60個商品",
     "sort80": "一頁80個商品",
     "sortPriceToHigh": "價格由低到高",
     "sortPriceToLow": "價格由高到低",

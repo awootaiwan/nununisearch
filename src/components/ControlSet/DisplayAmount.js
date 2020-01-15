@@ -14,8 +14,8 @@ class DisplayAmount extends React.Component {
 
   render() {
     const sortOptions = [
-      { value: '32', label: this.props.t('controlSet.sort32') },
-      { value: '64', label: this.props.t('controlSet.sort64') },
+      { value: '30', label: this.props.t('controlSet.sort30') },
+      { value: '60', label: this.props.t('controlSet.sort60') },
       { value: '80', label: this.props.t('controlSet.sort80') }
     ]
 
