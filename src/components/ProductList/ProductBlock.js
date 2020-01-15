@@ -4,9 +4,14 @@ import { withTranslation } from 'react-i18next';
 
 function ProductBlock({product, t, barMode}){
   const outOfStock = t('productBlock.outofStock');
+  const preOrder = t('productBlock.preOrder');
+
   const backgroundProductImg = {
     backgroundImage: `url('${product.productImageUrl}')`
   }
+
+  const originPrice = product.productPrice.toLocaleString('en-US');
+  const salePrice = product.productSalePrice.toLocaleString('en-US');
 
   return (
     <div className={`default-style ${barMode} nununi-productblock`}>
@@ -14,8 +19,13 @@ function ProductBlock({product, t, barMode}){
         <LazyLoad height={200} offset={100}>
           <div className="nununi-productblock-img" style={backgroundProductImg}>
             {
-              !product.productAvailability ?
+              (product.productAvailability ===  'out of stock') ?
               <div className="outofStock">{outOfStock}</div> :
+              ''
+            }
+            {
+              (product.productAvailability ===  'preorder') ?
+              <div className="preOrder">{preOrder}</div> :
               ''
             }
           </div>
@@ -24,15 +34,11 @@ function ProductBlock({product, t, barMode}){
           <div className="nununi-productblock-name">{product.productName}</div>
           <div className="nununi-productblock-price">
             {
-              product.productSalePrice ?
-              <div className="on-sale">{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div> :
-              <div>{product.productPriceCurrency} {product.productPrice.toLocaleString('en-US')}</div>
+              (originPrice === salePrice) ?
+              <div className="origin-price"></div> :
+              <div className="origin-price">{product.productPriceCurrency} {originPrice}</div>
             }
-            {
-              product.productSalePrice ?
-              <div className="sale-price">{product.productSalePriceCurrency} {product.productSalePrice.toLocaleString('en-US')}</div> :
-              ''
-            }
+            <div className="sale-price">{product.productSalePriceCurrency} {salePrice}</div>
           </div>
         </div>
       </a>

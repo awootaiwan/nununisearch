@@ -34,7 +34,7 @@ class NununiSDK {
     this.text = '';
     this.priceRange = '';
     this.page = 1;
-    this.limit = 32; // could be set
+    this.limit = 30; // could be set
     this.sort = 1; // could be set
 
     cupidSDK = new CupidSDK(id); // 使用 nununi ID 設定 cupidSDK
