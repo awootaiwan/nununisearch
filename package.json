@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@awootaiwan/cupid-sdk-js": "latest",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "i18next": "^19.0.0",
     "react": "^16.10.2",
     "react-autosuggest": "^9.4.3",
