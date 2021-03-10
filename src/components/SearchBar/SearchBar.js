@@ -25,9 +25,9 @@ const SearchInput = styled.div`
       right: 0;
       width: 40px;
       height: 100%;
-      border: 1px solid ${props => props.theme.colorBorder};
+      border: 1px solid ${(props) => props.theme.colorBorder};
       border-radius: 0 5px 5px 0;
-      background-color: ${props => props.theme.colorBtnBg};
+      background-color: ${(props) => props.theme.colorBtnBg};
       z-index: 2;
 
       .search {
@@ -36,8 +36,8 @@ const SearchInput = styled.div`
         cursor: pointer;
 
         &:hover {
-          background-color: ${props => props.theme.colorBtnBg_hover};
-          border-color: ${props => props.theme.colorBtnBg_hover};
+          background-color: ${(props) => props.theme.colorBtnBg_hover};
+          border-color: ${(props) => props.theme.colorBtnBg_hover};
         }
 
         &-circle {
@@ -46,7 +46,7 @@ const SearchInput = styled.div`
           left: calc(50% - 13px);
           width: 13px;
           height: 13px;
-          border: 3px solid ${props => props.theme.colorIcon};
+          border: 3px solid ${(props) => props.theme.colorIcon};
           border-radius: 100px;
         }
 
@@ -57,7 +57,7 @@ const SearchInput = styled.div`
           width: 12px;
           height: 4px;
           transform: rotate(45deg);
-          background-color: ${props => props.theme.colorIcon};
+          background-color: ${(props) => props.theme.colorIcon};
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
         }
@@ -70,7 +70,7 @@ const SearchInput = styled.div`
         width: 18px;
         height: 18px;
         border-radius: 50px;
-        border: 3px dotted  ${props => props.theme.colorIcon};
+        border: 3px dotted ${(props) => props.theme.colorIcon};
         animation: ${rotate} 1.2s linear infinite;
       }
     }
@@ -135,26 +135,28 @@ class SearchBar extends React.Component {
       suggestions: [],
       isLoading: false,
       errcode: 0,
-      errmsg: 0
+      errmsg: 0,
     };
   }
 
   checkError = () => {
-    if (this.state.errcode !== 0){
+    if (this.state.errcode !== 0) {
       console.log(this.state.errmsg);
     }
-  }
+  };
 
   // 呼叫 api
   getMatchingOptions = async (value) => {
     const escapedValue = value.trim();
-    const { errcode, errmsg, result } = await this.props.getSuggestion(escapedValue);
+    const { errcode, errmsg, result } = await this.props.getSuggestion(
+      escapedValue,
+    );
     const { suggest } = result;
 
-    this.setState({errcode, errmsg});
+    this.setState({ errcode, errmsg });
     this.checkError();
 
-    if (escapedValue === '' || !suggest || suggest.length === 0 ) {
+    if (escapedValue === '' || !suggest || suggest.length === 0) {
       this.setState({ isLoading: false });
       return [];
     } else if (suggest.length > 0) {
@@ -162,7 +164,7 @@ class SearchBar extends React.Component {
       this.setState({ isLoading: false });
       return suggestArray;
     }
-  }
+  };
   // input 的 onChange屬性
   onChange = (event, { newValue }) => {
     this.setState({
@@ -173,23 +175,31 @@ class SearchBar extends React.Component {
 
   onSearch = (text) => {
     if (text !== '') {
-      const url = new URL(window.location.href);
+      let url = null;
+      if (this.props.searchPage) {
+        url = new URL(this.props.searchPage);
+      } else {
+        url = new URL(window.location.href);
+      }
       url.searchParams.set('text', text);
       url.searchParams.set('page', 1);
       url.searchParams.set('priceRange', '');
+
       window.location = url.href;
     }
-  }
+  };
 
   // 渲染 suggestions
-  renderSuggestion = (suggestion) => <div onClick={(event) => this.onSearch(event.target.textContent)}>
-                                        {suggestion}
-                                      </div>;
+  renderSuggestion = (suggestion) => (
+    <div onClick={(event) => this.onSearch(event.target.textContent)}>
+      {suggestion}
+    </div>
+  );
 
   // 設定當suggestion 被點擊時, 什麼資料設為input value
   getSuggestionValue = (suggestion) => {
     this.setState({ isLoading: false });
-    return suggestion
+    return suggestion;
   };
 
   // 輸入內容後,找尋Suggestions
@@ -219,18 +229,18 @@ class SearchBar extends React.Component {
     };
 
     return (
-      <SearchInput className="nununi-searchbar-wrapper">
-        <div className="nununi-searchbar-container">
-          <div className="nununi-searchbar-iconwrapper">
+      <SearchInput className='nununi-searchbar-wrapper'>
+        <div className='nununi-searchbar-container'>
+          <div className='nununi-searchbar-iconwrapper'>
             {isLoading ? (
-              <div className="spinner"></div>
+              <div className='spinner'></div>
             ) : (
               <div
-                className="search"
+                className='search'
                 onClick={() => this.onSearch(this.state.value)}
               >
-                <div className="search-circle"></div>
-                <div className="search-stick"></div>
+                <div className='search-circle'></div>
+                <div className='search-stick'></div>
               </div>
             )}
           </div>

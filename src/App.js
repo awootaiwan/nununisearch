@@ -21,7 +21,7 @@ const App = props => (
   </ThemeProvider>
 );
 
-class NununiSDK {
+class NununiSiteSearchSDK {
   constructor(id = process.env.NUNUNI_ID) {
     if (!id || id.length < 1) {
       throw new Error(i18next.t('nununiError.id'));
@@ -30,6 +30,7 @@ class NununiSDK {
     this.productsApiVer = 'latest'; // could be set
     this.suggestionApiVer = 'latest'; // could be set
     this.hasCupidClassify = true;
+    this.searchPage = '';
 
     this.text = '';
     this.priceRange = '';
@@ -45,6 +46,10 @@ class NununiSDK {
   }
   setSuggestionAPIVersion(apiVer) {
     this.suggestionApiVer = apiVer;
+  }
+
+  setSearchPage(page) {
+    this.searchPage = page;
   }
 
   setLimit(limit) {
@@ -113,6 +118,7 @@ class NununiSDK {
       <App errcode={0} errmsg={0}>
         <SearchBar
           getSuggestion={this.getSuggestions}
+          searchPage={this.searchPage}
         />
       </App>,
       target
@@ -179,4 +185,4 @@ const freeSelf =
 /** Used as a reference to the global object. */
 const root = freeGlobal || freeSelf || Function('return this')();
 
-module.exports = root.NununiSDK = NununiSDK;
+module.exports = root.NununiSiteSearchSDK = NununiSiteSearchSDK;

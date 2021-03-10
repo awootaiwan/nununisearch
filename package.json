@@ -25,7 +25,7 @@
     "watch": "parcel watch src/index.html",
     "watch:app": "parcel watch src/App.js",
     "build:style": "parcel build demo/scss/*.scss --no-source-maps --out-dir demo/css",
-    "build:app": "parcel build src/App.js --out-dir production --out-file nununi-sdk-latest.min.js --no-source-maps"
+    "build:app": "parcel build src/App.js --out-dir production --out-file nununi-sitesearch-sdk-latest.min.js --no-source-maps"
   },
   "eslintConfig": {
     "extends": "react-app"

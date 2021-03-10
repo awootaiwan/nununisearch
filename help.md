@@ -19,10 +19,10 @@ nununiSDK 由兩個主要服務構成：
 若在HTML檔案內安裝，請在 `<body>` 標籤最末端插入以下`設定區塊`，即完成初始設定：
 ```javascript
 <script>
-  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="nununi-js",e.async=!0,e.src="../production/nununi-sitesearch-sdk-latest.min",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
   nununi.init(() => {
-    const nununiSDK = new NununiSDK('nununi ID');
+    const nununiSDK = new NununiSiteSearchSDK('nununi ID');
 
     /*Products API版本設定 default: latest */
     nununiSDK.setProductsAPIVersion('v1');
@@ -50,8 +50,8 @@ $ yarn add @awootaiwan/nununisearch
 ```
 
 ```javascript
-import NununiSDK from "@awootaiwan/nununisearch";
-const nununiSDK = new NununiSDK("id");
+import NununiSiteSearchSDK from "@awootaiwan/nununisearch";
+const nununiSDK = new NununiSiteSearchSDK("id");
 ```
 
 ## 如何使用
@@ -63,6 +63,7 @@ const nununiSDK = new NununiSDK("id");
 ```javascript
 nununiSDK.renderSearchBar();
 ```
+3. `setSearchPage('設定搜尋結果頁面網址');`搜尋按鈕按下後頁面轉導的頁面，預設為當前頁面
 ### 使用 product-list 元件 ＋ site-search 功能 + classify 功能
 1. 在HTML檔案內加入 `<div id="nununi-productlist"></div>`
 2. 在HTML檔案內加入 `<div id="cupid-classify"></div>`
@@ -172,7 +173,7 @@ nununiSDK.setCupidClassify(true);
 ## nununi API 方法說明
 
 ```javascript
-const nununiSDK = new NununiSDK('nununi ID');
+const nununiSDK = new NununiSiteSearchSDK('nununi ID');
 
 // init setting ...
 

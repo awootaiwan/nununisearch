@@ -6,10 +6,10 @@
 
 ```javascript
 <script>
-  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/nununi-sdk-latest.min.js",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
+  window.nununi={init:function(t){var e,n,o;document.getElementById("nununi-js")||((e=document.createElement("script")).type="text/javascript",e.id="cupid-js",e.async=!0,e.src=("https:"===document.location.protocol?"https://":"http://")+"api.awoo.org/libs/nununi-sitesearch-sdk-latest.min",(o=document.getElementsByTagName("script")[0]).parentNode.insertBefore(e,o)),n=window.onload,window.onload=function(){return n&&n(),t()}}};
 
   nununi.init(() => {
-    const nununiSDK = new NununiSDK('id');
+    const nununiSDK = new NununiSiteSearchSDK('id');
 
    /*Products API版本設定 default: latest */
     nununiSDK.setProductsAPIVersion('v1');
@@ -49,9 +49,9 @@ $ yarn add @awootaiwan/nununisearch
 #### Node Example
 
 ```javascript
-import NununiSDK from "@awootaiwan/nununisearch";
+import NununiSiteSearchSDK from "@awootaiwan/nununisearch";
 
-const nununiSDK = new NununiSDK("nununi Id");
+const nununiSDK = new NununiSiteSearchSDK("nununi Id");
 (async () => {
   console.log(await nununiSDK.getSuggestions('女 短褲'));
 })();
